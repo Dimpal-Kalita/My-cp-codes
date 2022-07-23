@@ -1,0 +1,1 @@
+{"name":"Local: 1533B","url":"d:\\CP\\CodeForces\\1533B.cpp","tests":[{"id":1657002687917,"input":"6\nabcdef\ncdedcb\naaa\naaaaa\naab\nbaaa\nab\nb\nabcdef\nabcdef\nba\nbaa","output":"YES\nYES\nNO\nYES\nYES\nNO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CP\\CodeForces\\1533B.cpp","group":"local","local":true}

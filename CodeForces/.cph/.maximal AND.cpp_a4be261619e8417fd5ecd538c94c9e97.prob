@@ -1,0 +1,1 @@
+{"name":"Local: maximal AND","url":"d:\\CP\\CodeForces\\maximal AND.cpp","tests":[{"id":1656769824743,"input":"4\n3 2\n2 1 1\n7 0\n4 6 6 28 6 6 12\n1 30\n0\n4 4\n3 1 3 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CP\\CodeForces\\maximal AND.cpp","group":"local","local":true}

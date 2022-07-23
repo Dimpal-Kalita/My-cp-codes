@@ -1,0 +1,42 @@
+Good questions
+  bhoyonkor TLE:->>> https://www.codechef.com/problems/ODDSUM
+  https://www.codechef.com/START38B/problems/GOODPAIRS
+  http://www.usaco.org/index.php?page=viewproblem2&cpid=594
+  https://codeforces.com/problemset/problem/1095/C
+  https://cses.fi/problemset/task/1620
+  https://cses.fi/problemset/task/1085
+  https://codeforces.com/contest/782/problem/B  
+Questions to be reviewed
+  https://codeforces.com/problemset/problem/1486/C1
+  https://codeforces.com/problemset/problem/1583/D
+  https://codeforces.com/problemset/problem/1095/C
+
+
+Satisfaction
+
+
+
+Number Theory
+  https://codeforces.com/problemset/problem/1603/B
+  https://codeforces.com/problemset/problem/1458/A
+  https://atcoder.jp/contests/abc142/tasks/abc142_d
+  https://codeforces.com/problemset/problem/576/A
+  https://codeforces.com/contest/1305/problem/C
+  https://codeforces.com/contest/1228/problem/C
+  https://codeforces.com/problemset/problem/1349/A
+  https://codeforces.com/problemset/problem/1165/D
+  https://cses.fi/problemset/task/1716
+  https://codeforces.com/problemset/problem/582/A
+  https://codeforces.com/problemset/problem/495/B
+  https://www.codechef.com/problems/NUMGAME
+  https://codeforces.com/problemset/problem/75/C
+  https://codeforces.com/problemset/problem/154/B
+  https://codeforces.com/problemset/problem/630/K
+  https://codeforces.com/problemset/problem/621/C
+
+  number theory and dp->
+  https://codeforces.com/problemset/problem/1061/C
+
+Some importent sites
+  https://www.eddiejaoude.io/portal?r_done=1
+  // i will update github profile using this
