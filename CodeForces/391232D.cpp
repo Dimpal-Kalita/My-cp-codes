@@ -76,18 +76,33 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	int n;
+    ll n;
     cin>>n;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            for(int k=0;j<n;j++){
-                if(i+j+k==n){
-                    cout<<i<<" "<<j<<" "<<k<<endl;
-                    return;
-                }
-            }
-        }
+    map<ll,ll> mp;
+    fr(i,n){
+        ll x;
+        cin>>x;
+        mp[x]++;
     }
+    ll ans=0;
+    for(auto it: mp){
+        ll x= it.S%2;
+        if(x==1){
+            ans++;
+            it.S--;
+        }
+        ll k=it.S;
+        mp[k*it.F]++;
+        it.S=0;
+    }
+    for(auto it: mp){
+        if(it.S%2){
+            it.S--;
+            ans++;
+        }
+        if(it.S>0) ans++;
+    }
+    cout<<ans<<endl;
    return;
 }
 

@@ -76,18 +76,25 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	int n;
-    cin>>n;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            for(int k=0;j<n;j++){
-                if(i+j+k==n){
-                    cout<<i<<" "<<j<<" "<<k<<endl;
-                    return;
-                }
-            }
-        }
-    }
+	ll n;
+	cin>>n;
+	vector<ll> v(n);
+	inp(v);
+	ll ans=0;
+	vector<ll> freq(1e3, 0);
+	for(auto it:v) freq[log2(it)]++;
+
+	for(ll i=0;i<1e3;i++){
+		ll x= freq[i];
+		ll y= x%2, z= x/2;
+		freq[i+1]+=z;
+		freq[i]=y;
+	}
+	for(auto it: freq){
+		if(it>0) ans++;
+	}
+
+	cout<<ans<<endl;
    return;
 }
 

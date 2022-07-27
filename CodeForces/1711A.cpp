@@ -76,18 +76,21 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	int n;
-    cin>>n;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            for(int k=0;j<n;j++){
-                if(i+j+k==n){
-                    cout<<i<<" "<<j<<" "<<k<<endl;
-                    return;
-                }
-            }
-        }
-    }
+   
+ 		ll n;
+ 		cin>>n;
+ 		vector<ll> v(n);
+ 		v[0]=n;
+
+ 		for(ll i=1;i<n;i++) v[i]=i;
+
+ 		for(auto it: v){
+ 			cout<<it<<" ";
+ 		}
+
+ 		cout<<endl;
+
+  
    return;
 }
 

@@ -65,7 +65,7 @@ ll mminvprime(ll a, ll b) {return expo(a, b - 2, b);}
 bool revsort(ll a, ll b) {return a > b;}
 ll combination(ll n, ll r, ll m, ll *fact, ll *ifact) {ll val1 = fact[n]; ll val2 = ifact[n - r]; ll val3 = ifact[r]; return (((val1 * val2) % m) * val3) % m;}
 void google(int t) {cout << "Case #" << t << ": ";}
-vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
+vector<ll> sieve(ll n) {ll*arr = new ll[n + 1](); vector<ll> vect; for (ll i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (ll j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
 ll mod_add(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
 ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
 ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
@@ -73,21 +73,49 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
+bool is_prime(ll n){
+    ll i;
+    if (n == 0 || n==1) {
+     return 0;
+  }
 
-
-void dk(){
-	int n;
-    cin>>n;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            for(int k=0;j<n;j++){
-                if(i+j+k==n){
-                    cout<<i<<" "<<j<<" "<<k<<endl;
-                    return;
-                }
-            }
-        }
+  for (i = 2; i <= sqrt(n); ++i) {
+    if (n % i == 0) {
+      return 0;
     }
+  }
+  return 1;
+}
+ll findnextPrime(ll n)
+{
+    ll nextPrime = n;
+    while (1)
+    {
+        nextPrime++;
+        if(is_prime(nextPrime)) break;
+    }
+
+    return nextPrime;
+}
+ll findPrevPrime(ll n)
+{
+    ll nextPrime = n;
+    while (1)
+    {   if(nextPrime==1) return 1;
+        if(is_prime(nextPrime)) break;
+        nextPrime--;
+    }
+
+    return nextPrime;
+}
+void dk(){
+	ll n;
+	cin>>n;
+    ll prev=1, next=1;
+    next= findnextPrime(n);
+    prev= findPrevPrime(n);
+    //cout<<prev<<" "<<next<<endl;
+	cout<<next-prev <<endl;
    return;
 }
 
@@ -102,7 +130,7 @@ int main()
     #endif
     //USACO
     int n=1;
-    cin>>n;
+    //cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

@@ -77,33 +77,35 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 void dk(){
    
- 		ll n,c,k;
- 		cin>>n>>c>>k;
+ 		ll n,c,q;
+ 		cin>>n>>c>>q;
  		string s;
  		cin>>s;
- 		
- 		map<ll,ll> mp;
-      ll q=c;
-      ll length= 1;
- 		while(q--){
- 			ll l,r;
-         cin>>l>>r;
- 		   mp[length]= l;
-         length+= r-l+1;
- 		}
-      debug(mp);
- 		q=k;
- 		while(q--){
- 			ll ind;
- 			cin>>ind;
- 			while(ind>n){
-            auto x=mp.upper_bound(ind);
-            x--;
-            ind= x.S-x.F+1;
-         }
 
- 		}
-      cout<<s[ind]<<endl;
+            vector<ll> left(c+1), right(c+1), diff(c+1);
+            left[0]=1;
+            right[0]=n;
+
+            for(ll i=1;i<=c;i++){
+                  ll l,r;
+                  cin>>l>>r; l--, r--;
+
+                  left[i]= right[i-1];
+                  right[i]= left[i]+ (r-l+1);
+                  diff[i]= left[i]-l;
+            }
+             debug(diff)
+             while(q--){
+                   ll k; cin >> k;
+                   k--;
+                  for(int i=c; i>=1; i--){
+                        if(k < left[i]) continue;
+                        else k -= diff[i];
+                  }
+                  cout << s[k] << "\n";
+              }
+
+
 
   
    return;
