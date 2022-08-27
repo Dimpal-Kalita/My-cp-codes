@@ -14,7 +14,7 @@ using namespace std;
 #define inp(v)              for(auto &x: v) cin>>x   
 #define all(x)              (x).begin(), (x).end()        
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define file_io             freopen("input.txt", "r+", stdin);freopen("output.txt", "w+", stdout);
+#define file_io             freopen("inp.txt", "r+", stdin);freopen("out.txt", "w+", stdout);
 #define USACO               freopen("lepus.in", "r", stdin); freopen("lepus.out", "w", stdout);
 
 
@@ -76,7 +76,9 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+   cout<<"hello world"<<endl;
+
+  
    return;
 }
 
@@ -86,14 +88,14 @@ int main()
 { 
     fast_io;
     #ifndef ONLINE_JUDGE
-    //file_io;
+    file_io;
     freopen("error.txt", "w+", stderr);
     #endif
     //USACO
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;

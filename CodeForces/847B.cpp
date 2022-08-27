@@ -76,8 +76,35 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
-   return;
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    inp(v);
+    vector<vector<ll>> ans;
+    ll prev=v[0];
+    for(ll i=0;i<n;i++){
+        ll l=0, r= ans.size();
+
+        while(l<r){
+            ll mid = l+ (r-l)/2;
+
+            if(v[i]>ans[mid].back()){
+                r=mid;
+            }
+            else l = mid+1;
+        }
+        if(r==ans.size()) ans.pb({v[i]});
+        else ans[r].pb(v[i]);
+        
+    }
+
+    for(auto ve: ans){
+        for(auto it:ve){
+            cout<<it<<" ";
+        }
+        cout<<endl;
+    }
+    return;
 }
 
 
@@ -91,7 +118,7 @@ int main()
     #endif
     //USACO
     int n=1;
-    cin>>n;
+    //cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

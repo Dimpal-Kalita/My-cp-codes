@@ -76,7 +76,18 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    // 2(a+b)+ ab=x; b= (x-2*a)/(2+a); x>2a ; a<x/2; 2+a<x; a<x-2;
+    ll x;
+    cin>>x;
+
+    for(ll a=1;a<min(100000ll,x/2);a++){
+        ll b= (x-2*a)/(2+a);
+        if(x==2*(a+b)+a*b){
+            cout<<"YES"<<endl;
+            return;
+        }
+    }
+    cout<<"NO"<<endl;
    return;
 }
 

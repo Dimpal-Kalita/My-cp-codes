@@ -74,9 +74,55 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
 
+void pushing(vector<pair<ll,ll>>&ct, ll val, ll count){
+    ll n= ct.size();
+    if(n==0){
+        ct.pb({val,count});
+        return;
+     }
+        
 
+    if(ct[n-1].F==val) ct[n-1].S+=count;
+    else ct.pb({val, count});
+
+
+    return;
+
+}
+
+
+
+vector<pair<ll,ll>> countv(vector<ll>v, ll m){
+    vector<pair<ll,ll>> ct;
+    for(auto it: v){
+        ll count=1, val=it;
+        while(val%m==0){
+            val/=m;
+            count*=m;
+        }
+        pushing(ct,val, count);
+
+    }
+
+    return ct; 
+
+}
 void dk(){
-	// can't solve this now
+    ll n,m;
+    cin>>n>>m;
+    vector<ll> v1(n);
+    inp(v1);
+    ll k;
+    cin>>k;
+    vector<ll> v2(k);
+    inp(v2);
+    
+    auto ans1= countv(v1, m);
+    auto ans2= countv(v2, m);
+    debug(ans1)
+    if(ans1==ans2) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
+
    return;
 }
 

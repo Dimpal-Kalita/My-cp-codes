@@ -76,7 +76,11 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n;
+    cin>>n;
+    if(n==1) {cout<<2<<endl;return;}
+    if(n%3==0) cout<<n/3<<endl;
+    if(n%3==1 || n%3==2) cout<<n/3+1<<endl;
    return;
 }
 

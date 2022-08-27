@@ -74,9 +74,47 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
 
-
 void dk(){
-	// can't solve this now
+    ll n,x,y;
+    cin>>n>>x>>y;
+    vector<ll> v(n);inp(v);
+    priority_queue<ll, vector<ll>,greater<ll>>pq;
+
+    for(ll i:v){
+        pq.push(i);
+    }
+    while(y>0){
+        ll xr= pq.top()^x;
+        if(xr>pq.top()){
+            pq.pop();
+            pq.push(xr);
+            y--;
+        }
+        else{
+           if(y%2){
+            pq.pop();
+            pq.push(xr);
+            y--;
+          }
+            break;
+        }
+    }
+
+    ll i=0;
+    while(!pq.empty()){
+        v[i]= pq.top();
+        // cout<<v[i]<<" ";
+        pq.pop();
+        i++;
+    }
+
+
+    for(auto it:v) cout<<it<<" ";
+
+    cout<<endl;
+
+    // cout<<endl;
+ 
    return;
 }
 

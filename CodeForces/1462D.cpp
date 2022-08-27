@@ -76,7 +76,32 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll  n;
+    cin>>n;
+    vector<ll> v(n), ps(n,0);
+    ll sum=0;
+    for(ll i=0;i<n;i++){
+        cin>>v[i];
+        sum+=v[i];
+        ps[i]=sum;
+    }
+    ll ans=n-1;
+    debug(ps)
+    for(ll i=0;i<n;i++){
+        ll sum=0, ct=1;
+        for(ll j=i+1; j<n;j++){
+            sum+=v[j];
+            if(sum==ps[i]){
+                ct++;
+                sum=0;
+            }
+            else if(sum>ps[i]) break;
+        }
+        if(!sum) ans= min(ans,n-ct);
+        debug(ans)
+
+    }
+    cout<<ans<<endl;
    return;
 }
 

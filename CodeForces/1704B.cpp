@@ -76,7 +76,32 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n , k ;
+    cin >> n >> k;
+    vector<ll> a(n);
+    inp(a);
+    pair<ll,ll> p;
+    p.first = a[0];
+    p.second = a[0];
+    ll cnt = 0 ;
+    ll diff = 2*k;
+    for(int i = 1 ; i < n ; i++){
+        if(a[i] < p.first){
+            p.first = a[i];
+            if(p.second - p.first > diff){
+                p.second = a[i];
+                cnt++;
+            }
+        }
+        if(a[i] > p.second){
+            p.second = a[i];
+            if(p.second - p.first > diff){
+                p.first = a[i];
+                cnt++;
+            }
+        }
+    }
+    cout << cnt << endl;
    return;
 }
 

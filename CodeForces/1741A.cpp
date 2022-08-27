@@ -76,7 +76,25 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+   ll n;
+   cin>>n;
+   ll  posx=0, posy=0, negx=0, negy=0;
+   fr(i,n){
+       ll l, r;
+       cin>>l>>r;
+       if(l==0){
+         if(r<=0) negy= min(r, negy);
+         else posy= max(posy, r);
+
+       }
+       if(r==0){
+          if(l<=0) negx= min(l, negx);
+         else posx= max(posx, l);
+       }
+
+   }
+
+   cout<<2*posx+ 2*posy + 2*abs(negx+negy)<<endl;
    return;
 }
 

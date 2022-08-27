@@ -73,10 +73,44 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
+bool all_equal(vector<ll> &v, ll n){
+    for(ll i=0;i<n-1;i++)
+        if(v[i]!=v[i+1]) return 0;
 
+
+    return 1;
+}
 
 void dk(){
-	// can't solve this now
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    bool has5=0;
+    for(auto &x:v){
+        cin>>x;
+        if(x%10==5) x+=x%5, has5=1;
+    }
+
+    if(all_equal(v, n)){
+        cout<<"YES"<<endl;
+        return;
+    }
+    if(has5) {cout<<"NO"<<endl; return;}
+
+    for(auto &x:v){
+        while(x%10!=2) x+=x%10;
+        x= x%20;
+    }
+    if(all_equal(v,n)){
+        cout<<"YES"<<endl;
+        return;
+    }
+
+    cout<<"NO"<<endl;
+
+
+
+
    return;
 }
 

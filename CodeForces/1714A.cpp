@@ -74,9 +74,28 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
 
-
 void dk(){
-	// can't solve this now
+    ll n,H,M;
+    cin>>n>>H>>M;
+    ll T= H*60+M;
+    ll ox=n;
+    ll ans= md;
+    while(ox--){
+        ll h,m;
+        cin>>h>>m;
+        ll t= h*60+m;
+        if(t>=T) ans= min(ans, t-T);
+        else{
+            ans= min(ans, 1440-T+t);
+        }
+
+    }
+    debug(ans);
+    cout<<ans/60<<" "<<ans%60<<endl;
+
+   
+
+
    return;
 }
 

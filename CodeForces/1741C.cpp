@@ -74,9 +74,29 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
 
+bool is_perfect(ll n){
+    ll x= sqrt(n);
+    return x*x==n;
+}
 
+void solve(ll x){
+     if (x==-1) return;
+    for (ll i=x; ; i++) {
+        if (is_perfect(i)) {
+            ll s=i-x;
+            solve(s-1);
+            for (ll j=x; j>=s; j--) {
+                cout << j << " ";
+            }
+            return;
+        }
+    }
+}
 void dk(){
-	// can't solve this now
+    ll  n;
+    cin>>n;
+    solve(n-1);
+    cout<<endl;
    return;
 }
 

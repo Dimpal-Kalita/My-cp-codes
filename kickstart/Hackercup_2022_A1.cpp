@@ -76,7 +76,35 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+
+    ll n, k;
+    cin>>n>>k;
+    vector<ll> v(n);
+    inp(v);
+    map<ll,ll> mp;
+    for(auto i:v) mp[i]++;
+
+    ll mx=0;
+    for(auto i:mp) mx=max(mx, i.S);
+
+    if(mx>2){
+        cout<<"NO"<<endl;
+        return;
+    }
+
+    if(k<(n+1)/2){
+        cout<<"NO"<<endl;
+        return;
+    }
+
+    cout<<"YES"<<endl;
+
+
+
+
+
+
+
    return;
 }
 
@@ -93,7 +121,7 @@ int main()
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;

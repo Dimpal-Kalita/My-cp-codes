@@ -76,8 +76,26 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n;
+    cin>>n;
+    string s="";
+    vector<bool> vis(10,0);
+    for(ll i=9;i>0;i--){
+        if(n<10 && vis[n]==0){
+            debug(n)
+            s+=n+'0';
+            break;
+        }
+        n-=i;
+        s+= i+'0';
+        vis[i]=1;
+    }
+    debug(vis)
+    reverse(all(s));
+    cout<<s<<endl;
+
    return;
+
 }
 
 

@@ -77,17 +77,30 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 void dk(){
 	string s;
+	cin>>s;
 	ll n= s.length();
-	int j=-1;
-	for(int i=0;i<n-2;i++){
-		if(s[i]=='1' && s[i+1]=='0' && s[i+2]=='1'){
-			ct++;
-			if(j==i){
-				
-			}
-			j=i+2;
-		}
+	vector<ll> ps_1(n,0), ps_0(n,0);
+	ps_0[n-1]= (s[n-1]=='0');
+	ps_1[n-1]= (s[n-1]=='1');
+
+	for(ll i=n-2;i>=0;i--){
+		ps_1[i]= ps_1[i+1]+ (s[i]=='1');
+		ps_0[i]= ps_0[i+1]+ (s[i]=='0');
 	}
+	ll ans=md;
+	debug(ps_1)
+	ans= min(ps_0[0], ps_1[0]);
+	ll ct_1=0;
+	ll ct_0=0;
+	for(ll i=0;i<n;i++){
+		ans= min(ans, ct_0+ ps_1[i]);
+		ans= min(ans, ct_1+ ps_0[i]);
+		ct_1+= s[i]=='1';
+		ct_0+= s[i]=='0';
+		// cout<<ans<<" ";
+	}
+
+	cout<<ans<<endl;
 
   
    return;

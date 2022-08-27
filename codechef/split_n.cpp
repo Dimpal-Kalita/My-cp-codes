@@ -76,7 +76,17 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n;;
+    cin>>n;
+    ll k=n;
+    ll ct=0;
+    while(k>0){
+        ll x= log2(k);
+        x= 1<<x;
+        k-=x;
+        if(k!=0)ct++;
+    }
+    cout<<ct<<endl;
    return;
 }
 

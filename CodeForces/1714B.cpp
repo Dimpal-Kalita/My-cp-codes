@@ -76,7 +76,26 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    map<ll,ll> mp;
+    for(auto &it:v){
+        cin>>it;
+        mp[it]++;
+    }
+
+    for(ll i=0;i<n;i++){
+        if(mp.size()<n-i){
+            mp[v[i]]--;
+            if(mp[v[i]]==0) mp.erase(v[i]);
+        }
+        else{
+            break;
+        }
+    }
+    debug(mp)
+    cout<<n-mp.size()<<endl;
    return;
 }
 

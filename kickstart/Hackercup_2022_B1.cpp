@@ -76,7 +76,53 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+   
+        ll n,m;
+        cin>>n>>m;
+        string s[n];
+        fr(i,n) cin>>s[i];
+        if(n==1){
+        for(ll j=0;j<m;j++){
+            if(s[0][j]=='^'){
+                cout<<"Impossible"<<endl;
+                return;
+             }
+            }
+        }
+        if(m==1){
+            for(ll i=0;i<n;i++){
+                if(s[i][0]=='^'){
+                    cout<<"Impossible"<<endl;
+                    return;
+                }
+            }
+        }
+        ll ct=0;
+        for(ll j=0;j<n;j++){
+        for(ll i=0;i<m;i++){
+                if(s[i][j]=='^'){
+                    ct++;
+                }
+            }
+        }
+
+        if(ct==0){
+        cout<<"Possible"<<endl;
+        for(ll i=0;i<n;i++){
+            for(ll j=0;j<m;j++) cout<<".";
+             cout<<endl;
+         }
+         return;
+
+        }
+
+        cout<<"Possible"<<endl;
+        for(ll i=0;i<n;i++){
+            for(ll j=0;j<m;j++) cout<<"^";
+             cout<<endl;
+         }
+
+  
    return;
 }
 
@@ -86,14 +132,14 @@ int main()
 { 
     fast_io;
     #ifndef ONLINE_JUDGE
-    //file_io;
+    file_io;
     freopen("error.txt", "w+", stderr);
     #endif
     //USACO
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;

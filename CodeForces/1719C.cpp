@@ -76,7 +76,46 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n,t;
+    cin>>n>>t;
+    vector<ll> v(n);
+    inp(v);
+    vector<ll> ct(n+1,0);
+    map<ll,ll> mp;
+    ll win=v[0];
+    ll mx= *max_element(all(v));
+    map<ll, vector<ll>> mv;
+    ll match=0;
+    for(ll i=1;i<=n;i++) mv[i].pb(0);
+    for(ll i=1;i<n;i++){
+        match++;
+        win=max(v[i], win);
+        mp[win]++;
+        mv[win].pb(match);
+        if(v[i]==mx) break;
+    }
+    //match++;
+    
+    while(t--){
+        ll i,k;
+        cin>>i>>k;
+        if(k>=n){
+            if(v[i-1]==mx)
+            cout<<mp[mx]+k-match<<endl;
+            else
+            cout<<mp[v[i-1]]<<endl;
+        }
+        else if(k<i-1){
+            cout<<0<<endl;
+        }
+        else{
+                ll ind= lower_bound(all(mv[win]), k)-mv[win].begin();
+               // debug(mv)
+                cout<<ind<<endl; 
+        }
+        
+    }
+
    return;
 }
 

@@ -76,7 +76,32 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+   
+         string s;
+         cin>>s;
+         ll n= s.length();
+         ll va=0;
+         map<ll,ll>mv, mc;
+         ll sumv=0, sumc=0;
+
+         for(auto it:s) {
+            if(it=='A' || it=='E' || it=='I' || it=='O' || it=='U'){
+               mv[it]++;
+               sumv++;
+            }
+            else mc[it]++, sumc++;
+         }
+
+         ll mxc=0, mxv=0;
+         for(auto it: mc) mxc= max(mxc, it.S);
+         for(auto it: mv) mxv= max(mxv, it.S);
+
+         ll ans1= 2*(sumv-mxv) + sumc;
+         ll ans2= 2*(sumc-mxc) + sumv;
+
+         cout<<min(ans1, ans2)<<endl;
+         
+  
    return;
 }
 
@@ -93,7 +118,7 @@ int main()
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;

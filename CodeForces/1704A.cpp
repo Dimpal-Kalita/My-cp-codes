@@ -76,7 +76,33 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n,m;
+    cin>>n>>m;
+    string a,b;
+    cin>>a>>b;
+    ll j=1;
+    for(ll i=n-m+1;i<n;i++){
+        //cout<<a[i]<<" ";
+        if(a[i]!=b[j]){
+            cout<<"NO"<<endl;
+            return;
+        }
+        j++;
+    }
+    int mx=-1, mn=2;
+    for(ll i=0;i<=n-m;i++){
+        mx= max(a[i]-'0', mx);
+        mn= min(a[i]-'0', mn);
+    }
+    //cout<<<<" ";
+    if(b[0]-'0'==mx || b[0]-'0'==mn){
+        cout<<"YES"<<endl;
+        return;
+    }
+    cout<<"NO"<<endl;
+
+
+
    return;
 }
 

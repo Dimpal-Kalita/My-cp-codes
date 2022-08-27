@@ -76,7 +76,43 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n,m;
+    cin>>n>>m;
+    vector<ll> inf(m);
+    for(ll i=0;i<m;i++){
+        cin>>inf[i];
+    }
+    sort(all(inf));
+    ll  ct=1;
+    vector<ll> gap;
+    ll j=0;
+    for(int i = 0; i  < m-1 ; i  ++){
+        gap.pb(inf[i+1]-inf[i]-1);
+    }
+    ll tmp1 = n - inf[m-1];
+    ll tmp2 = inf[0]-1;
+    gap.pb(tmp1+tmp2);
+    sort(all(gap), greater<ll>());
+    ll k= gap.size();
+    ll proc=0;
+    ll ninf=0;
+
+    for(ll i=0;i<k;i++){
+        if(gap[i] - 2*proc > 0){
+            if(gap[i]-2*proc <= 2){
+                proc++;
+                ninf++;
+            }else{
+                ninf += (gap[i]-2*proc-1);
+                proc+=2;
+            }
+
+        }
+    }
+
+
+    cout<<n-ninf<<endl;
+
    return;
 }
 

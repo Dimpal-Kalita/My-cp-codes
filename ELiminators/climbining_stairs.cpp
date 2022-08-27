@@ -76,7 +76,11 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+   
+         ll n,m;
+         cin>>n>>m;
+         ll ans= n/m + n%m;
+         cout<<ans<<endl;
    return;
 }
 

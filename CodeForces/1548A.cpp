@@ -76,7 +76,47 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+
+    ll n,m;
+    cin>>n>>m;
+    map<ll,ll> mp;
+
+    fr(i,m){
+        ll u,v;
+        cin>>u>>v;
+        if(u<v) mp[u]++;
+        else mp[v]++;
+    }
+    //ll strong= mp.size();
+    ll q;
+    cin>>q;
+    for(ll i=0;i<q;i++){
+        ll choice, u,v;
+        cin>>choice;
+        if(choice==3){
+            cout<<n-mp.size()<<endl;
+        }
+        else{
+            ll u,v;
+            cin>>u>>v;
+            if(choice==1){
+                if(u<v) mp[u]++;
+                else mp[v]++;
+            }
+            if(choice==2){
+                if(u<v){
+                    mp[u]--;
+                    if(mp[u]==0) mp.erase(u);
+                }
+                else{
+                    mp[v]--;
+                    if(mp[v]==0) mp.erase(v);
+                }
+            }
+
+        }
+        
+    }
    return;
 }
 
@@ -91,7 +131,7 @@ int main()
     #endif
     //USACO
     int n=1;
-    cin>>n;
+    //cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

@@ -76,7 +76,26 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    map<ll,ll> mp;
+    for(auto &x:v){
+        cin>>x; mp[x]++;
+    }
+    map<ll,ll> freq;
+
+    for(auto it: mp) freq[it.second]++;
+    
+    ll ans=0, missedcount=0;
+
+    for(ll i=0;i<=n;i++){
+        ll missed= mp.size()- missedcount;
+        ans= max(ans, i*missed);
+        missedcount+=freq[i];
+    }
+    cout<<n-ans<<endl;
+  
    return;
 }
 

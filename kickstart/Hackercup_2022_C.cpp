@@ -76,7 +76,10 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-	// can't solve this now
+   
+         
+
+  
    return;
 }
 
@@ -86,14 +89,14 @@ int main()
 { 
     fast_io;
     #ifndef ONLINE_JUDGE
-    //file_io;
+    file_io;
     freopen("error.txt", "w+", stderr);
     #endif
     //USACO
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;
