@@ -1,6 +1,7 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
+
 using namespace std;
 
 
@@ -14,8 +15,14 @@ using namespace std;
 #define inp(v)              for(auto &x: v) cin>>x   
 #define all(x)              (x).begin(), (x).end()        
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define file_io             freopen("input.txt", "r+", stdin);freopen("output.txt", "w+", stdout);
-#define USACO               freopen("lepus.in", "r", stdin); freopen("lepus.out", "w", stdout);
+#define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
+
+
+typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int,int>pii;
+typedef unsigned long long ull;
+typedef long double lld;
 
 
 
@@ -27,10 +34,6 @@ using namespace std;
 #define debug(x)
 #endif
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double lld;
- 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -72,70 +75,40 @@ ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) %
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
-bool solve(vector<ll>&v,ll target,ll ind, vector<vector<ll>>&dp){
-    if(target==0) return 1;
-    if(dp[ind][target]!=-1) return dp[ind][target];
-    if(ind==v.size()-1){
-        if(target- v[v.size()-1]==0) return 1;
-        return 0;
-    }
-
-    bool npick = solve(v, target, ind+1, dp);
-    bool pick = 0;
-    if(target- v[ind]>=0){
-        pick = solve(v, target- v[ind], ind+1, dp);
-    }
-
-    return dp[ind][target]=pick| npick;
-}
 
 
 
 void dk(){
-    ll n;
-    cin>>n;
-    vector<ll> v(n);
-    inp(v);
-    ll sum=0;
+    string s,t;
+    cin>>s>>t;
+
+    ll n= s.length();
+    bool ans=1;
     for(ll i=0;i<n;i++){
-        sum+=v[i];
+        ans&= s[i]==t[i];
     }
-    ll target= sum/2;
-    if(sum%2){
-        cout<<"No"<<endl;
-        return;
-    }
-    vector<vector<ll>>dp(n+1, vector<ll>(target+1,-1));
-    if(solve(v, target,0,dp)){
-        cout<<"Yes"<<endl;
-        return;
-    }
-    cout<<"No"<<endl;
 
-    return;
-}
-/*
-for(auto i: nums){
-    for(int j= targrt;j>=i;j--){
-    dp[j]= dp[j]| dp[j-i]; 
-    }
+    if(ans) cout<<"Yes"<<endl;
+    else cout<<"No"<<endl;
+   
+   
+
+   
+   return;
 }
 
-
-
-*/
 
 
 int main()
 { 
     fast_io;
     #ifndef ONLINE_JUDGE
-    //file_io;
-    freopen("error.txt", "w+", stderr);
+    file_io;
+    freopen("D:/cp/error.txt", "w+", stderr);
     #endif
     //USACO
-    ll n=1;
-    //cin>>n;
+    int n=1;
+   // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

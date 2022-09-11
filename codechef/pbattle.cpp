@@ -2,7 +2,11 @@
 //dimpal kalita
 #include<bits/stdc++.h>
 
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp> 
+
 using namespace std;
+using namespace __gnu_pbds;
 
 
 #define md                  1000000007
@@ -23,6 +27,8 @@ typedef pair<ll,ll> pll;
 typedef pair<int,int>pii;
 typedef unsigned long long ull;
 typedef long double lld;
+typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
+ 
 
 
 
@@ -79,8 +85,39 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
+   ll n;
+   cin>>n;
+   vector<ll> a(n),b(n);
+   inp(a); inp(b);
+   pbds B;
+
+   vector<pll> vp;
+
+   for(ll i=0;i<n;i++) vp.pb({a[i], b[i]});
+
+   sort(all(vp));
+
+   vector<ll> ans(n,0);
    
 
+
+   for(ll i=n-1;i>-1;i--){
+     ans[i]+=i;
+     B.insert(vp[i].S);
+     ll x= B.order_of_key(vp[i].S);
+     ans[i]+=x;
+
+   }
+
+   map<ll,ll>ct;
+   debug(ans)
+   for(auto &i:ans) ct[i]++;
+
+   ll mx=*max_element(all(ans));
+
+
+
+   cout<<ct[mx]<<endl;
    
    return;
 }

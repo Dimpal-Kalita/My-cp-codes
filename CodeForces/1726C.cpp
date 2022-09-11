@@ -75,16 +75,20 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-    ll n,m;
-    cin>>n>>m;
-    vector<vector<pair<ll,ll>>> adj(n+1);
-
-    for(ll i=0;i<m;i++){
-        ll u,v,w;
-        cin>>u>>v>>w;
-        adj[u].pb({v,w});
-        adj[v].pb({u,w});
+    ll n;
+    cin>>n;
+    string s;
+    cin>>s;
+    ll ct=0;
+    vector<vector<ll>> adj(n+1);
+    ll ct1=0;
+    for(ll i=0;i<2*n;i++){
+       
+        if(s[i]=='(' && s[i+1]==')') ct1++;
+        //cout<<ct1<<" ";
     }
+
+    cout<<n-ct1+1<<endl;
    
 
    
@@ -102,7 +106,7 @@ int main()
     #endif
     //USACO
     int n=1;
-   // cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

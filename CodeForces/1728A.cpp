@@ -1,7 +1,6 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
-
 using namespace std;
 
 
@@ -18,13 +17,6 @@ using namespace std;
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 
-typedef long long ll;
-typedef pair<ll,ll> pll;
-typedef pair<int,int>pii;
-typedef unsigned long long ull;
-typedef long double lld;
-
-
 
 
 /*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
@@ -34,6 +26,10 @@ typedef long double lld;
 #define debug(x)
 #endif
 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
+ 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -79,8 +75,16 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-   
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    inp(v);
 
+   ll mx= *max_element(all(v));
+ll ans=0;
+   for(ll i=0;i<n;i++) if(v[i]==mx) ans=i+1;
+
+   cout<<ans<<endl;
    
    return;
 }

@@ -79,8 +79,25 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-   
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    inp(v);
 
+    map<ll,ll> mp;
+    ll mx=0;
+    for(ll i=0;i<n;i++){
+        ll x= (v[i]-1-i+n)%n;
+        ll y= (v[i]+1-i+n)%n;
+        ll z= (v[i]-i+n)%n;
+        
+        mp[y]++; mp[x]++; mp[z]++;
+    }
+   
+    for(auto i:mp)  mx= max(mx, i.S);
+
+
+    cout<<mx<<endl;
    
    return;
 }
@@ -96,7 +113,7 @@ int main()
     #endif
     //USACO
     int n=1;
-    cin>>n;
+   // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

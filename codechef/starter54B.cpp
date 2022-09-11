@@ -1,7 +1,6 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
-
 using namespace std;
 
 
@@ -18,13 +17,6 @@ using namespace std;
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 
-typedef long long ll;
-typedef pair<ll,ll> pll;
-typedef pair<int,int>pii;
-typedef unsigned long long ull;
-typedef long double lld;
-
-
 
 
 /*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
@@ -34,28 +26,11 @@ typedef long double lld;
 #define debug(x)
 #endif
 
-void _print(ll t) {cerr << t;}
-void _print(int t) {cerr << t;}
-void _print(string t) {cerr << t;}
-void _print(char t) {cerr << t;}
-void _print(lld t) {cerr << t;}
-void _print(double t) {cerr << t;}
-void _print(ull t) {cerr << t;}
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
  
-template <class T, class V> void _print(pair <T, V> p);
-template <class T> void _print(vector <T> v);
-template <class T> void _print(set <T> v);
-template <class T, class V> void _print(map <T, V> v);
-template <class T> void _print(multiset <T> v);
-template <class T> void _print(stack<T> v);
-template <class T> void _print(list<T> v);
-template <class T> void _print(stack<T> v){cerr<< "[" ; while(!v.empty()){_print(v.top()); cerr<< " " ; v.pop();} cerr<< "]" ;}
-template <class T> void _print(list<T> v) {cerr << "["; for(auto i: v){_print(i);cerr << " " ;} cerr<< "]";}
-template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.first); cerr << ","; _print(p.second); cerr << "}";}
-template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+
 /*-----------------------------------------------Debug Ends--------------------------------------------------------------------*/
 
 
@@ -76,12 +51,109 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
-
-
+ll nCr(ll n, ll r)
+{
+    // base case
+    if (r > n)
+        return 0;
+ 
+    // C(n,r) = C(n,n-r) Complexity for
+    // this code is lesser for lower n-r
+    if (n - r > r)
+        r = n - r;
+ 
+    // list to smallest prime factor
+    // of each number from 1 to n
+    ll SPF[n + 1];
+ 
+    // set smallest prime factor of each
+    // number as itself
+    for (ll i = 1; i <= n; i++)
+        SPF[i] = i;
+ 
+    // set smallest prime factor of all
+    // even numbers as 2
+    for (ll i = 4; i <= n; i += 2)
+        SPF[i] = 2;
+ 
+    for (ll i = 3; i * i < n + 1; i += 2) {
+ 
+        // Check if i is prime
+        if (SPF[i] == i) {
+            // All multiples of i are
+            // composite (and divisible by
+            // i) so add i to their prime
+            // factorization getpow(j,i)
+            // times
+            for (ll j = i * i; j < n + 1; j += i)
+                if (SPF[j] == j) {
+                    SPF[j] = i;
+                }
+        }
+    }
+    // Hash Map to store power of
+    // each prime in C(n,r)
+    map<ll, ll> prime_pow;
+ 
+    // For numerator count frequency of each prime factor
+    for (ll i = r + 1; i < n + 1; i++) {
+ 
+        ll t = i;
+ 
+        // Recursive division to find
+        // prime factorization of i
+        while (t > 1) {
+            if (!prime_pow[SPF[t]]) {
+                prime_pow[SPF[t]] = 1;
+            }
+            else
+                prime_pow[SPF[t]]++;
+            // prime_pow.put(SPF[t],
+            // prime_pow.getOrDefault(SPF[t], 0)
+            // + 1);
+            t /= SPF[t];
+        }
+    }
+ 
+    // For denominator subtract the power of
+    // each prime factor
+    for (ll i = 1; i < n - r + 1; i++) {
+        ll t = i;
+ 
+        // Recursive division to find
+        // prime factorization of i
+        while (t > 1) {
+            prime_pow[SPF[t]]--;
+            // prime_pow.put(SPF[t],
+            // prime_pow.get(SPF[t]) - 1);
+            t /= SPF[t];
+        }
+    }
+ 
+    // long because mod is large and a%mod
+    // * b%mod can overflow int
+     ll ans = 1, mod = 1000000007;
+ 
+    // use (a*b)%mod = (a%mod * b%mod)%mod
+    for (auto it : prime_pow)
+ 
+        // pow(base,exp,mod) is used to
+        // find (base^exp)%mod fast
+        ans = (ans
+               * expo(it.first, prime_pow[it.first], mod))
+              % mod;
+    return ans;
+}
 void dk(){
-   
+   ll n,k;
+   cin>>n>>k;
+   string s;
+   cin>>s;
+   ll x= nCr(n,k)%md;
+   ll ans= expo(2, x, md)%md;
 
-   
+   cout<< ans<<endl; 
+
    return;
 }
 

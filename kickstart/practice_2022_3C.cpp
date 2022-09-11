@@ -1,7 +1,6 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
-
 using namespace std;
 
 
@@ -18,13 +17,6 @@ using namespace std;
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 
-typedef long long ll;
-typedef pair<ll,ll> pll;
-typedef pair<int,int>pii;
-typedef unsigned long long ull;
-typedef long double lld;
-
-
 
 
 /*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
@@ -34,6 +26,10 @@ typedef long double lld;
 #define debug(x)
 #endif
 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
+ 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -76,12 +72,53 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
-
+ll conv(int a, int b){
+    ll x= a*(1<<16)|b;
+    return x;
+}
 
 void dk(){
-   
+   ll n, r,c, sr, sc;
+   cin>>n>>r>>c>>sr>>sc;
+    string s;
+    cin>>s;
+   unordered_map<int,int> mv;
+    ll x=sr, y= sc;
+    mv[conv(sr,sc)]=1;
 
-   
+   for(auto i:s){
+
+        if(i=='N'){
+            x--;
+        }
+        else if(i=='E'){
+            y++;
+        }
+        else if(i=='W'){
+            y--;
+        }
+        else x++;
+
+        while(mv.count(conv(x,y))){
+        if(i=='N'){
+            x--;
+        }
+        else if(i=='E'){
+            y++;
+        }
+        else if(i=='W'){
+            y--;
+        }
+        else x++;
+       }
+       
+       mv[conv(x,y)]=1;
+     }
+     //debug(mv)
+
+      cout<<x<<" "<<y<<endl;
+
+
    return;
 }
 
@@ -98,7 +135,7 @@ int main()
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;

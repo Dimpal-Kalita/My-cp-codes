@@ -1,7 +1,6 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
-
 using namespace std;
 
 
@@ -18,13 +17,6 @@ using namespace std;
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 
-typedef long long ll;
-typedef pair<ll,ll> pll;
-typedef pair<int,int>pii;
-typedef unsigned long long ull;
-typedef long double lld;
-
-
 
 
 /*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
@@ -34,6 +26,10 @@ typedef long double lld;
 #define debug(x)
 #endif
 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
+ 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -79,6 +75,33 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
+    ll n,m;
+    cin>>n>>m;
+
+    if(m<n){
+        cout<<"NO"<<endl;
+        return;
+    }
+    if(n%2==0 && m%2==1){
+        cout<<"NO"<<endl;
+        return;
+
+    }
+    cout<<"YES"<<endl;
+    vector<ll> v(n,1);
+    if(n%2) {
+        v[n-1]= m- (n-1);
+    } 
+    else {
+        ll x= m-(n-2);
+
+        v[n-2]= x/2, v[n-1]=x/2;
+        
+        
+    }
+    for(auto i:v) cout<<i<<" ";
+
+    cout<<endl;
    
 
    

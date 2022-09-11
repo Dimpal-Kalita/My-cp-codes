@@ -1,7 +1,6 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
-
 using namespace std;
 
 
@@ -18,13 +17,6 @@ using namespace std;
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 
-typedef long long ll;
-typedef pair<ll,ll> pll;
-typedef pair<int,int>pii;
-typedef unsigned long long ull;
-typedef long double lld;
-
-
 
 
 /*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
@@ -34,6 +26,10 @@ typedef long double lld;
 #define debug(x)
 #endif
 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
+ 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -79,8 +75,59 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-   
+   ll  n;
+   cin>>n;
+   vector<ll> a(n),b(n);
+   inp(a);inp(b);
+   sort(all(a));
+   sort(all(b));
+   map<ll,ll> m1,m2;
+   for(ll i=0;i<n;i++){
+    m1[a[i]]++;
+    m2[b[i]]++;
+   }
 
+   ll ans=0;
+   vector<ll> v1, v2;
+
+   for(int i = n-1; i >= 0 ; i--){
+		if(m2[a[i]] == 0){
+			v1.pb(a[i]);
+		}else{
+			m2[a[i]]--;
+		}
+	}
+	for(int i = n-1; i >= 0 ; i--){
+		if(m1[b[i]] == 0){
+			v2.pb(b[i]);
+		}else{
+			m1[b[i]]--;
+		}
+	}
+   debug(v1)
+   debug(v2)
+   ll x= v1.size();
+   for(ll i=0;i<x;i++){
+     ll x= log10(v1[i]), y= log10(v2[i]);
+     x++; y++;
+     if(x>1) {
+        v1[i]=x;
+        ans++; 
+     }
+     if(y>1){
+        v2[i]=y;
+        ans++;
+     }
+   }
+   map<ll,ll> h1,h2;
+
+   for(ll i=0;i<x;i++) h1[v1[i]]++, h2[v2[i]]++;
+
+   for(ll i=2;i<10;i++){
+    ans+= abs(h1[i]- h2[i]);
+   }
+
+   cout<<ans<<endl;
    
    return;
 }

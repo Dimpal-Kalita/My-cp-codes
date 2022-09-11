@@ -79,11 +79,53 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-   
+    ll n,k;
+    cin>>n>>k;
+    vector<ll> a(n);
+    vector<ll> b(n);
 
-   
+    for(auto &i:a) cin>>i;
+    for(auto &i:b) cin>>i;
+    inp(b);
+
+    if(k==0 ){
+        if(a==b)
+        cout<<"YES"<<endl;
+        else 
+        cout<<"NO"<<endl;
+        return;
+    }
+
+    ll ind=0;
+    ll find=a[0];
+    
+
+    for(ll i=0;i<n;i++){
+        
+        if(b[i]==find) {
+            ind=i;
+            break; 
+        }
+
+    }
+    ll j=ind;
+
+    for(ll i=0;i<n;i++){
+     
+        if(a[i]!=b[j]){
+            cout<<"NO"<<endl;
+            return;
+        }
+        j++;
+        j%=n;
+    }
+
+    
+    
+   cout<<"YES"<<endl;
    return;
 }
+
 
 
 
@@ -98,7 +140,7 @@ int main()
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;

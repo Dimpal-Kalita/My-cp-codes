@@ -79,6 +79,14 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
+    ll a[6];
+    set<ll> st;
+    for(ll i=0;i<5;i++){
+        cin>>a[i];
+        st.insert(a[i]);
+    }
+    
+    cout<<st.size()<<endl;
    
 
    
@@ -96,7 +104,7 @@ int main()
     #endif
     //USACO
     int n=1;
-    cin>>n;
+   // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

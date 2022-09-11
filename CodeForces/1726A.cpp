@@ -1,7 +1,6 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
-
 using namespace std;
 
 
@@ -18,13 +17,6 @@ using namespace std;
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 
-typedef long long ll;
-typedef pair<ll,ll> pll;
-typedef pair<int,int>pii;
-typedef unsigned long long ull;
-typedef long double lld;
-
-
 
 
 /*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
@@ -34,6 +26,10 @@ typedef long double lld;
 #define debug(x)
 #endif
 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
+ 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -79,6 +75,27 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    inp(v);
+
+    ll mx=0,mn=md, ans=0;
+    for(ll i=1;i<n;i++){
+        mx= max(v[i],mx);
+    }
+    ans= max(ans, mx-v[0]);
+    for(ll i=0;i<n-1;i++) mn = min(mn, v[i]);
+    
+    ans= max(ans, v[n-1]-mn);
+
+    for(ll i=0;i<n;i++){
+        ll x;
+        if(i+1==n) x= v[n-1]-v[0];
+        else x= v[i] -v[i+1];
+        ans = max(ans, x);
+    }
+    cout<<ans<<endl;
    
 
    

@@ -1,7 +1,6 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
-
 using namespace std;
 
 
@@ -15,14 +14,8 @@ using namespace std;
 #define inp(v)              for(auto &x: v) cin>>x   
 #define all(x)              (x).begin(), (x).end()        
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
-
-
-typedef long long ll;
-typedef pair<ll,ll> pll;
-typedef pair<int,int>pii;
-typedef unsigned long long ull;
-typedef long double lld;
+#define file_io             freopen("input.txt", "r+", stdin);freopen("output.txt", "w+", stdout);
+#define USACO               freopen("lepus.in", "r", stdin); freopen("lepus.out", "w", stdout);
 
 
 
@@ -34,6 +27,10 @@ typedef long double lld;
 #define debug(x)
 #endif
 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
+ 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -79,9 +76,23 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-   
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    inp(v);
+    ll mx=-1, ans=0;
 
-   
+    for(int i=0;i<n;i++){
+        if(i==n-1 && v[i]>mx){
+            ans++; break;
+        }
+
+        if(v[i]>mx && v[i]>v[i+1]) ans++;
+        mx= max(mx, v[i]);
+    }
+
+    cout<<ans<<endl;
+        
    return;
 }
 
@@ -92,13 +103,13 @@ int main()
     fast_io;
     #ifndef ONLINE_JUDGE
     file_io;
-    freopen("D:/cp/error.txt", "w+", stderr);
+    freopen("error.txt", "w+", stderr);
     #endif
     //USACO
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;
