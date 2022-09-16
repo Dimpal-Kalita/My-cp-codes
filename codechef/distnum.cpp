@@ -82,9 +82,6 @@ void dk(){
     ll n,m;
     cout<<"not solved yet"<<endl;
     
-   
-
-   
    return;
 }
 

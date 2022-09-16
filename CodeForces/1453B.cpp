@@ -75,16 +75,23 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-    ll n,k;
-    cin>>n>>k;
-    vector<ll> v(n);
-    inp(v);
+   string s;
+   cin>>s;
+   ll n= s.length();
 
-    
-    for(auto i:v) cout<<i<<" ";
-    cout<<endl;
-   
-    
+   vector<ll> v(27,0);
+   ll cost=0;
+   vector<ll> ans;
+   for(ll i=0;i<n;i++){
+    v[s[i]-'a']++;
+   }
+
+   for(ll i=0;i<27;i++){
+      if(v[i]!=0){
+
+      }
+
+   }
    
    return;
 }

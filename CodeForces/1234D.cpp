@@ -1,7 +1,6 @@
 //2112048
 //dimpal kalita
 #include<bits/stdc++.h>
-
 #include <ext/pb_ds/assoc_container.hpp> 
 #include <ext/pb_ds/tree_policy.hpp> 
 
@@ -20,9 +19,15 @@ using namespace __gnu_pbds;
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
-typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
+
+typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int,int>pii;
+typedef unsigned long long ull;
+typedef long double lld;
 
 
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 /*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
 #ifndef ONLINE_JUDGE
@@ -31,10 +36,6 @@ typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics
 #define debug(x)
 #endif
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double lld;
- 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -80,32 +81,59 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-    ll n;
-    cin>>n;
-    vector<ll> a(n), b(n);
-    inp(a); inp(b);
-    vector<ll> ans(n,0);
-
-    for(auto i: a){
-        ll x= lower_bound(all(b), i)-b.begin();
-        cout<<b[x]-i<<" ";
-    }
-    cout<<endl;
-
-    multiset<ll> s;
-    for(ll i=0;i<n;i++){
-         s.insert(b[i]);
+    ll n,q;
+    string s;
+    cin>>s;
+    
+    map<ll,pbds> v;
+ 
+    for(ll i=0;i<s.length();i++){        
+     v[s[i]-'a'].insert(i);
     }
 
+    cin>>q;
 
-    for(ll i=n-1;i>=0;i--){
-            auto it=s.end();
-            it--;
-            ans[i]=*it-a[i];
-            s.erase(s.lower_bound(a[i]));
+    while(q--){
+    ll x;
+    cin>>x;
+    if(x==1){
+        ll pos;
+        char nw;
+       
+        cin>>pos>>nw;
+        
+        v[s[pos-1]-'a'].erase(pos-1);
+        v[nw-'a'].insert(pos-1);
+        s[pos-1]=nw;
+
     }
-    for(auto i:ans) cout<<i<<" ";
-    cout<<endl;
+
+
+
+    else{
+        ll l,r;
+        cin>>l>>r;
+        l--;
+        ll ans=0;
+        
+        for(ll i=0;i<26;i++){
+
+            ll ind1=  v[i].order_of_key(l);
+            ll ind2 = v[i].order_of_key(r);
+           // cout<<j.F<<" "<<ind1<<" "<<ind2<<" ";
+
+            ll dif= ind2- ind1;
+            if(dif>0) ans++;
+
+        }
+
+        cout<<ans<<endl;
+    }
+
+   
+
+
+    }
    
    return;
 }
@@ -121,7 +149,7 @@ int main()
     #endif
     //USACO
     int n=1;
-    cin>>n;
+    //cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

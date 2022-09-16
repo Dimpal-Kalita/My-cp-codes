@@ -2,11 +2,8 @@
 //dimpal kalita
 #include<bits/stdc++.h>
 
-#include <ext/pb_ds/assoc_container.hpp> 
-#include <ext/pb_ds/tree_policy.hpp> 
-
 using namespace std;
-using namespace __gnu_pbds;
+
 
 #define md                  1000000007
 #define pb                  push_back
@@ -20,7 +17,13 @@ using namespace __gnu_pbds;
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
-typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
+
+typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int,int>pii;
+typedef unsigned long long ull;
+typedef long double lld;
+
 
 
 
@@ -31,10 +34,6 @@ typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics
 #define debug(x)
 #endif
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double lld;
- 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -80,32 +79,49 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
+
     ll n;
+    string s;
     cin>>n;
-    vector<ll> a(n), b(n);
-    inp(a); inp(b);
-    vector<ll> ans(n,0);
+    cin>>s;
 
-    for(auto i: a){
-        ll x= lower_bound(all(b), i)-b.begin();
-        cout<<b[x]-i<<" ";
-    }
-    cout<<endl;
+    ll ct1=0, ct0=0;
 
-    multiset<ll> s;
-    for(ll i=0;i<n;i++){
-         s.insert(b[i]);
+
+    for(ll i=0;i<n;i++) ct1+= s[i]=='1',ct0+=s[i]=='0';
+
+    if(ct1==0 || ct0==0){
+        cout<<n<<" "<<0<<endl;
+        return;
     }
 
 
-    for(ll i=n-1;i>=0;i--){
-            auto it=s.end();
-            it--;
-            ans[i]=*it-a[i];
-            s.erase(s.lower_bound(a[i]));
+    char rep='0';
+    if(ct1>ct0) rep='1';
+    ll op= abs(ct1-ct0);
+
+    cout<<1<<" "<<op+1<<endl;
+    for(ll i=0;i<op;i++){
+        ll sz= s.length();
+        ll l=0,r=0;
+        for(ll j=0;j<sz-1;j++){
+            if(s[j]=='1' & s[j+1]=='0') {l=j, r=j+1; break;}
+            if(s[j]=='0' & s[j+1]=='1') {l=j, r=j+1; break;} 
+        }
+        cout<<l+1<<" "<<r+1<<" "<<rep<<endl;
+        string x="";
+        for(ll j=0;j<sz;j++){
+            if(j==l) continue;
+            if(j==r) x+=rep;
+            else x+=s[j];
+        }
+        s=x;
     }
-    for(auto i:ans) cout<<i<<" ";
-    cout<<endl;
+
+    cout<<1<<" "<<s.size()<<" "<<0<<endl;
+
+   
+
    
    return;
 }

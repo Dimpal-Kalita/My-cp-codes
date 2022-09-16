@@ -2,11 +2,8 @@
 //dimpal kalita
 #include<bits/stdc++.h>
 
-#include <ext/pb_ds/assoc_container.hpp> 
-#include <ext/pb_ds/tree_policy.hpp> 
-
 using namespace std;
-using namespace __gnu_pbds;
+
 
 #define md                  1000000007
 #define pb                  push_back
@@ -20,7 +17,13 @@ using namespace __gnu_pbds;
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
-typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
+
+typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int,int>pii;
+typedef unsigned long long ull;
+typedef long double lld;
+
 
 
 
@@ -31,10 +34,6 @@ typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics
 #define debug(x)
 #endif
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double lld;
- 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -79,33 +78,33 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 
-void dk(){
-    ll n;
-    cin>>n;
-    vector<ll> a(n), b(n);
-    inp(a); inp(b);
-    vector<ll> ans(n,0);
+void dk(){ 
+    vector<ll> a(3);
+    cin>>a[0]>>a[1]>>a[2];
+    ll b[3];
+    for(ll i=0;i<3;i++) b[i]=a[i];
+    ll ans=0;
+    if(a[0]>=1) ans++, a[0]--;
+    if(a[1]>=1) ans++, a[1]--; 
+    if(a[2]>=1) ans++, a[2]--; 
 
-    for(auto i: a){
-        ll x= lower_bound(all(b), i)-b.begin();
-        cout<<b[x]-i<<" ";
+    sort(all(a));
+    if(a[0]>1){
+        cout<<ans+3<<endl;
+        return;
     }
-    cout<<endl;
-
-    multiset<ll> s;
-    for(ll i=0;i<n;i++){
-         s.insert(b[i]);
+    if(a[0]==1){
+        if(a[2]==2){
+            cout<<ans+2<<endl;
+        }
+        else cout<<ans+1<<endl;
+        return;
     }
-
-
-    for(ll i=n-1;i>=0;i--){
-            auto it=s.end();
-            it--;
-            ans[i]=*it-a[i];
-            s.erase(s.lower_bound(a[i]));
+    else{
+        if(a[1]==0) cout<<ans<<endl;
+        else cout<<ans+1<<endl;
+        return;
     }
-    for(auto i:ans) cout<<i<<" ";
-    cout<<endl;
    
    return;
 }
