@@ -1,6 +1,6 @@
 {
     "C++ Snippet": {
-        "prefix": "cpsnippet",
+        "prefix": "hellosnippy",
         "body": [
 
 "#include<bits/stdc++.h>",

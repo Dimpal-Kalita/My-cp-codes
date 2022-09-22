@@ -1,8 +1,12 @@
-//2112048
-//dimpal kalita
 #include<bits/stdc++.h>
 
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+
 using namespace std;
+using namespace __gnu_pbds;
 
 
 #define md                  1000000007
@@ -12,8 +16,8 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define inp(v)              for(auto &x: v) cin>>x   
-#define all(x)              (x).begin(), (x).end()        
+#define inp(v)              for(auto &x: v) cin>>x  
+#define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
@@ -23,6 +27,7 @@ typedef pair<ll,ll> pll;
 typedef pair<int,int>pii;
 typedef unsigned long long ull;
 typedef long double lld;
+typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
 
@@ -34,6 +39,7 @@ typedef long double lld;
 #define debug(x)
 #endif
 
+
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -41,7 +47,8 @@ void _print(char t) {cerr << t;}
 void _print(lld t) {cerr << t;}
 void _print(double t) {cerr << t;}
 void _print(ull t) {cerr << t;}
- 
+
+
 template <class T, class V> void _print(pair <T, V> p);
 template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
@@ -57,6 +64,8 @@ template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i
 template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 /*-----------------------------------------------Debug Ends--------------------------------------------------------------------*/
+
+
 
 
 /*-----------------------------------------------Number theory Starts-----------------------------------------------------------*/
@@ -77,84 +86,63 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
 
+void dfs(vector<vector<ll>>&adj,vector<ll>&level,  ll node, ll par,ll x){
+    level[x]++;
+    for(auto i: adj[node]){
+        if(i==par) continue;
+        dfs(adj, level, i, node,x+1);
+    }
+    
+    
+}
+
 
 void dk(){
-    ll n,k;
-    cin>>n>>k;
-    vector<ll> a(n);
-    vector<ll> b(n);
+      ll n,q;
+      cin>>n>>q;
+      vector<vector<ll>> adj(n+1);
 
-    for(auto &i:a) cin>>i;
-    for(auto &i:b) cin>>i;
+      for(ll i=0;i<n-1;i++){
+        ll u,v;
+        cin>>u>>v;
+        adj[u].pb(v);
+        adj[v].pb(u);
+      }
 
-    if(k==0 ){
-        if(a==b)
-        cout<<"YES"<<endl;
-        else 
-        cout<<"NO"<<endl;
-        return;
-    }
-    if(a==b){
-    	if(k==1){
-        	cout<<"NO"<<endl;
-        	return;
-    	}
-    }
-    if(n==2){
+      vector<ll> level(n+1,0);
+      dfs(adj, level, 1, 0, 1);
 
-        if(a==b){
-            if(k%2==0){
-                cout<<"YES"<<endl;
-                
-            }
-            else 
-            cout<<"NO"<<endl;
-            return;
-        }
-        else{
-            if(k%2){
-                cout<<"YES"<<endl;
-                
-            }
-            else 
-            cout<<"NO"<<endl;
-            return;
 
-        }
+      vector<ll> ps(n,0);
+      ps[0]=level[1];
+      for(ll i=1;i<n;i++){
+        ps[i]=ps[i-1]+ level[i+1];
+      }
+      
+      ll sum=0;
+      while(q--){
+        ll x;
+        cin>>x;
+        sum+=1;
+      }
+
+      ll ind=0;
+
+       for(ll i=0;i<n;i++){
+
+        if(ps[i]>sum) break;
+        ind=i;
+
+       }
+       
+       cout<<ps[ind]<<endl;
 
 
 
+      
 
-    }
 
-    ll ind=0;
-    ll find=a[0];
-    
 
-    for(ll i=0;i<n;i++){
-        
-        if(b[i]==find) {
-            ind=i;
-            break; 
-        }
-
-    }
-    ll j=ind;
-
-    for(ll i=0;i<n;i++){
-     
-        if(a[i]!=b[j]){
-            cout<<"NO"<<endl;
-            return;
-        }
-        j++;
-        j%=n;
-    }
-
-    
-    
-   cout<<"YES"<<endl;
-   return;
 }
 
 
@@ -167,12 +155,11 @@ int main()
     file_io;
     freopen("D:/cp/error.txt", "w+", stderr);
     #endif
-    //USACO
-    int n=1;
+    int n;
     cin>>n;
     for(int i=0;i<n;i++){
     google(i+1);
     dk();
-    }
-return 0;
+   }
+  return 0;
 }

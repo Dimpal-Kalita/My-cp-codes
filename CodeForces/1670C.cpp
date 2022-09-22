@@ -78,85 +78,62 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 
-void dk(){
-    ll n,k;
-    cin>>n>>k;
-    vector<ll> a(n);
-    vector<ll> b(n);
 
-    for(auto &i:a) cin>>i;
-    for(auto &i:b) cin>>i;
+void dfs(ll node, ll par,vector<vector<ll>> &adj, vector<bool> &vis, vector<ll> &sz){
+    sz.pb(node);
+    vis[node]=1;
+    for(auto i:adj[node]){
+        if(i==par) continue;
+        if(!vis[i]){
 
-    if(k==0 ){
-        if(a==b)
-        cout<<"YES"<<endl;
-        else 
-        cout<<"NO"<<endl;
-        return;
-    }
-    if(a==b){
-    	if(k==1){
-        	cout<<"NO"<<endl;
-        	return;
-    	}
-    }
-    if(n==2){
-
-        if(a==b){
-            if(k%2==0){
-                cout<<"YES"<<endl;
-                
-            }
-            else 
-            cout<<"NO"<<endl;
-            return;
+             dfs(i, node, adj, vis,sz);
         }
-        else{
-            if(k%2){
-                cout<<"YES"<<endl;
-                
-            }
-            else 
-            cout<<"NO"<<endl;
-            return;
-
-        }
-
-
-
-
     }
-
-    ll ind=0;
-    ll find=a[0];
-    
-
-    for(ll i=0;i<n;i++){
-        
-        if(b[i]==find) {
-            ind=i;
-            break; 
-        }
-
-    }
-    ll j=ind;
-
-    for(ll i=0;i<n;i++){
-     
-        if(a[i]!=b[j]){
-            cout<<"NO"<<endl;
-            return;
-        }
-        j++;
-        j%=n;
-    }
-
-    
-    
-   cout<<"YES"<<endl;
-   return;
 }
 
+void dk(){
+    ll n;
+    cin>>n;
+    vector<ll> a(n), b(n), c(n);
+    vector<vector<ll>> adj(n+1, vector<ll>()) ;
+    inp(a); inp(b);
+    vector<bool> vis(n+1,0);
+    for(auto &i:c) {
+        cin>>i;  
+    }
+
+    for(ll i=0;i<n;i++){
+        if(a[i]==b[i]) continue;
+        adj[a[i]].pb(b[i]);
+        adj[b[i]].pb(a[i]);
+    }
+    
+    for(auto i:c){
+        vector<ll> sz;
+        vis[i]=1;
+        if(i!=0) dfs(i, 0, adj, vis, sz);
+    }
+
+
+    ll ans=0;
+
+    for(ll i=1;i<=n;i++){
+        if(!vis[i]){
+           // cout<<i<<" ";
+            vector<ll> sz;
+            dfs(i, 0, adj, vis, sz);
+            if(sz.size()>1) ans++;
+        }
+    }
+
+    ans = expo(2,ans,md);
+
+    cout<<ans%md<<endl;
+
+
+   
+   return;
+}
 
 
 
@@ -171,7 +148,7 @@ int main()
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-    google(i+1);
+    //google(i+1);
     dk();
     }
 return 0;

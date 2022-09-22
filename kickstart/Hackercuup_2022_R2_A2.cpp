@@ -127,33 +127,32 @@ void dk(){
 
     }
 
-    ll ind=0;
-    ll find=a[0];
-    
-
-    for(ll i=0;i<n;i++){
-        
-        if(b[i]==find) {
-            ind=i;
-            break; 
-        }
-
+   for(int i = 0 ; i <  n ; i ++){
+		a.pb(a[i]);
+	}
+    ll j = 0; vector<ll> ccnt(2*n);
+    ll cnt = 0 , ind = -1;
+    for(int i = 0 ; i  < 2*n ; i ++){
+    	if(a[i] == b[j]){
+    		cnt++;
+    		j++;
+    	}else{
+    		cnt = 0;
+    		j = 0;
+    	}
+    	ccnt[i] = cnt;
+    	if(cnt == n){
+    		ind = i;
+    		break;
+    	}
     }
-    ll j=ind;
-
-    for(ll i=0;i<n;i++){
-     
-        if(a[i]!=b[j]){
-            cout<<"NO"<<endl;
-            return;
-        }
-        j++;
-        j%=n;
+    
+    if(ind == -1){
+    	cout << "NO" << endl;
+    }else{
+    	cout << "YES" << endl;
     }
 
-    
-    
-   cout<<"YES"<<endl;
    return;
 }
 

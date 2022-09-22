@@ -5,6 +5,7 @@
 using namespace std;
 
 
+
 #define md                  1000000007
 #define pb                  push_back
 #define fr(i,n)             for(ll i=0;i<n;i++)
@@ -77,10 +78,8 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
 
-
 void dk(){
-   
-
+ 
    
    return;
 }
