@@ -1,7 +1,12 @@
-//2112048
-//dimpal kalita
 #include<bits/stdc++.h>
+
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+
 using namespace std;
+using namespace __gnu_pbds;
 
 
 #define md                  1000000007
@@ -11,10 +16,18 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define inp(v)              for(auto &x: v) cin>>x   
-#define all(x)              (x).begin(), (x).end()        
+#define inp(v)              for(auto &x: v) cin>>x  
+#define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
+
+
+typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int,int>pii;
+typedef unsigned long long ull;
+typedef long double lld;
+typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
 
@@ -26,10 +39,7 @@ using namespace std;
 #define debug(x)
 #endif
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double lld;
- 
+
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -37,7 +47,8 @@ void _print(char t) {cerr << t;}
 void _print(lld t) {cerr << t;}
 void _print(double t) {cerr << t;}
 void _print(ull t) {cerr << t;}
- 
+
+
 template <class T, class V> void _print(pair <T, V> p);
 template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
@@ -53,6 +64,8 @@ template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i
 template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 /*-----------------------------------------------Debug Ends--------------------------------------------------------------------*/
+
+
 
 
 /*-----------------------------------------------Number theory Starts-----------------------------------------------------------*/
@@ -74,37 +87,80 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 
-void dk(){
-    ll n;
-    cin>>n;
-    vector<ll> v(n); inp(v);
 
-    if(n<6){
-        cout<<n<<endl;
+void dk(){
+      ll n;
+      cin>>n;
+      
+      
+      vector<ll>a(n),b(n);
+      inp(a); inp(b);
+
+      vector<ll> vp1, vp2;
+
+      for(ll i=0;i<n;i++){
+
+          if(a[i]==0)  vp1.pb(b[i]);
+
+          if(a[i]==1) vp2.pb(b[i]);
+
+      }
+
+      sort(all(vp1), greater<int>());
+
+      sort(all(vp2), greater<int>());
+      sort(all(b));
+
+      if(vp1.size() == vp2.size()){
+        ll ans = 0;
+        ans+=b[0];
+        for(int i =1 ; i < n ; i ++){
+            ans += 2*b[i];
+        }
+        cout << ans << endl;
+
         return;
     }
-    map<ll,ll> mp;
-    vector<ll> given= {4,8,15,16,23,42 };
-    vector<ll> dp(6,0);
+
+    ll sz1=vp1.size(), sz2=vp2.size();
+
+
+   
+
+         ll ans= 0;
+        if(vp1.size() >vp2.size()){
+            ll tmp = sz1-sz2;
+            for(int i = sz1-1 ; i >= sz1-tmp ; i--){
+                ans += vp1[i];
+            }
+            for(int i = sz1-tmp-1 ; i>= 0 ; i--){
+                ans += 2*vp1[i];
+            }
+            for(int i = 0 ; i < sz2 ; i ++){
+                ans += 2*vp2[i];
+            }
+            cout << ans<< endl;
+            
+        }else{
+            ll tmp = sz2-sz1;
+            for(int i = sz2-1 ; i >= sz2-tmp ; i--){
+                ans += vp2[i];
+            }
+            for(int i = sz2-tmp-1 ; i>= 0 ; i--){
+                 ans += 2*vp2[i];
+            }
+            for(int i = 0 ; i < sz1 ; i ++){
+                ans += 2*vp1[i];
+            }
+            cout << ans << endl;
+        }
+
     
-    for(ll i=0;i<6;i++) mp[given[i]]=i;
 
-   
 
-    for(ll i=0;i<n;i++) v[i]= mp[v[i]];
 
-   
-    
-    for(auto i:v){
-        if(i==0) dp[i]++;
-        else if(dp[i-1]) dp[i-1]--, dp[i]++; 
-    }
-    debug(dp)
-    cout<<n- dp[5]*6<<endl;
-   
-
-   return;
 }
+
 
 
 
@@ -115,12 +171,11 @@ int main()
     file_io;
     freopen("D:/cp/error.txt", "w+", stderr);
     #endif
-    //USACO
     int n=1;
-    //cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();
-    }
-return 0;
+   }
+  return 0;
 }

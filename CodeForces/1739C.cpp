@@ -1,20 +1,33 @@
-//2112048
-//dimpal kalita
 #include<bits/stdc++.h>
+
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+
 using namespace std;
+using namespace __gnu_pbds;
 
 
-#define md                  1000000007
+#define md                  998244353
 #define pb                  push_back
 #define fr(i,n)             for(ll i=0;i<n;i++)
 #define fr1(i,k,n)          for(ll i=k;i<n;i++)
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define inp(v)              for(auto &x: v) cin>>x   
-#define all(x)              (x).begin(), (x).end()        
+#define inp(v)              for(auto &x: v) cin>>x  
+#define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
+
+
+typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int,int>pii;
+typedef unsigned long long ull;
+typedef long double lld;
+typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
 
@@ -26,10 +39,7 @@ using namespace std;
 #define debug(x)
 #endif
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double lld;
- 
+
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -37,7 +47,8 @@ void _print(char t) {cerr << t;}
 void _print(lld t) {cerr << t;}
 void _print(double t) {cerr << t;}
 void _print(ull t) {cerr << t;}
- 
+
+
 template <class T, class V> void _print(pair <T, V> p);
 template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
@@ -53,6 +64,8 @@ template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i
 template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 /*-----------------------------------------------Debug Ends--------------------------------------------------------------------*/
+
+
 
 
 /*-----------------------------------------------Number theory Starts-----------------------------------------------------------*/
@@ -73,38 +86,68 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
 
+ll fact[61];
+ll factorialNumInverse[61];
+ll naturalNumInverse[61];
+
+void pre(){
+    fact[0] = 1;
+
+    for (int i = 1; i <= 60; i++) {
+        fact[i] = (fact[i - 1] * i) % md;
+    }
+}
+void InverseofNumber(ll p)
+{
+    naturalNumInverse[0] = naturalNumInverse[1] = 1;
+    for (int i = 2; i <= 60; i++)
+        naturalNumInverse[i] = naturalNumInverse[p % i] * (p - p / i) % p;
+}
+
+void InverseofFactorial(ll p)
+{
+    factorialNumInverse[0] = factorialNumInverse[1] = 1;
+ 
+    for (int i = 2; i <= 60; i++)
+        factorialNumInverse[i] = (naturalNumInverse[i] * factorialNumInverse[i - 1]) % p;
+}
+
+
+
+
+void recur(ll n, vector<vector<ll>>&dp){
+
+    if(n==2) return;
+
+    recur(n-2,dp);
+
+
+    dp[n][0]= (combination(n-1,n/2,md, fact, factorialNumInverse) + dp[n-2][1])%md;
+    dp[n][1]= (combination(n-2,n/2,md, fact, factorialNumInverse) + dp[n-2][0])%md;
+    dp[n][2]= (dp[n-2][2])%md;
+
+}
+
+
 
 void dk(){
-    ll n;
-    cin>>n;
-    vector<ll> v(n); inp(v);
+      ll n;
+      cin>>n;
 
-    if(n<6){
-        cout<<n<<endl;
-        return;
-    }
-    map<ll,ll> mp;
-    vector<ll> given= {4,8,15,16,23,42 };
-    vector<ll> dp(6,0);
-    
-    for(ll i=0;i<6;i++) mp[given[i]]=i;
+      vector<vector<ll>> dp(n+1, vector<ll>(3,-1));
+      dp[2][0]=1;
+      dp[2][1]=0;
+      dp[2][2]=1;
 
-   
+      recur(n, dp);
 
-    for(ll i=0;i<n;i++) v[i]= mp[v[i]];
+      cout<<dp[n][0] <<" "<<dp[n][1] <<" "<<dp[n][2]<<endl;
 
-   
-    
-    for(auto i:v){
-        if(i==0) dp[i]++;
-        else if(dp[i-1]) dp[i-1]--, dp[i]++; 
-    }
-    debug(dp)
-    cout<<n- dp[5]*6<<endl;
-   
 
-   return;
+      return;
+
 }
+
 
 
 
@@ -115,12 +158,14 @@ int main()
     file_io;
     freopen("D:/cp/error.txt", "w+", stderr);
     #endif
-    //USACO
     int n=1;
-    //cin>>n;
+    cin>>n;
+    pre();
+    InverseofNumber(md);
+    InverseofFactorial(md);
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();
-    }
-return 0;
+   }
+  return 0;
 }

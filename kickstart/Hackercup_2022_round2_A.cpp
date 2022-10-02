@@ -75,33 +75,65 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 
 
 void dk(){
-    ll n;
-    cin>>n;
-    vector<ll> v(n); inp(v);
-
-    if(n<6){
-        cout<<n<<endl;
-        return;
+   string s; cin >> s;
+    ll n= s.length();
+    ll q; cin >> q;
+    vector<vector<ll>> cnt(n , vector<ll>(26 , 0));
+    vector<ll> tmp(26,0);
+    for(int i = 0 ; i < n  ; i ++){
+        tmp[s[i]-'a']++;
+        cnt[i] = tmp;
     }
-    map<ll,ll> mp;
-    vector<ll> given= {4,8,15,16,23,42 };
-    vector<ll> dp(6,0);
-    
-    for(ll i=0;i<6;i++) mp[given[i]]=i;
-
-   
-
-    for(ll i=0;i<n;i++) v[i]= mp[v[i]];
-
-   
-    
-    for(auto i:v){
-        if(i==0) dp[i]++;
-        else if(dp[i-1]) dp[i-1]--, dp[i]++; 
+    ll ans = 0;
+    for(int i =0 ; i < q ; i ++){
+        ll l ,r; cin >> l >> r;
+        int len = r-l+1;
+        if(len == 1){
+            ans++;
+            continue;
+        }
+        if((r-l)%2){
+            continue;
+        }
+        l--; r--;
+        vector<ll> tmp1(26) , tmp2(26);
+        ll odd1 = 0 , odd2 = 0;
+        if(l != 0){ 
+            ll mid = (l+r)/2;
+            for(int j = 0 ; j < 26 ; j++){
+                tmp1[j] = (cnt[mid][j] - cnt[l-1][j]) - (cnt[r][j] - cnt[mid][j]);
+                if(tmp1[j] == 1){
+                    odd1++;
+                }
+            }
+            for(int j = 0 ; j < 26 ; j++){
+                tmp2[j] = -(cnt[mid-1][j] - cnt[l-1][j]) + (cnt[r][j] - cnt[mid-1][j]);
+                if(tmp2[j] == 1){
+                    odd2++;
+                }
+            }
+        }else{
+            ll mid = (l+r)/2;
+            for(int j = 0 ; j < 26 ; j++){
+                tmp1[j] = (cnt[mid][j]) - (cnt[r][j] - cnt[mid][j]);
+                if(tmp1[j] == 1){
+                    odd1++;
+                }
+            }
+            for(int j = 0 ; j < 26 ; j++){
+                tmp2[j] = -(cnt[mid-1][j]) + (cnt[r][j] - cnt[mid-1][j]);
+                if(tmp2[j] == 1){
+                    odd2++;
+                }
+            }
+        }
+        //cout << odd1 << " " << odd2<< endl;
+        if(odd1 == 1 || odd2 == 1){
+            //cout << i << " ";
+            ans++;
+        }
     }
-    debug(dp)
-    cout<<n- dp[5]*6<<endl;
-   
+    cout << ans << endl;
 
    return;
 }
@@ -117,9 +149,9 @@ int main()
     #endif
     //USACO
     int n=1;
-    //cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
+    google(i+1);
     dk();
     }
 return 0;

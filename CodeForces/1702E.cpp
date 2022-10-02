@@ -1,5 +1,12 @@
 #include<bits/stdc++.h>
+
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+
 using namespace std;
+using namespace __gnu_pbds;
 
 
 #define md                  1000000007
@@ -9,11 +16,18 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define inp(v)              for(auto &x: v) cin>>x   
-#define all(x)              (x).begin(), (x).end()        
+#define inp(v)              for(auto &x: v) cin>>x  
+#define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define file_io             freopen("input.txt", "r+", stdin);freopen("output.txt", "w+", stdout);
-#define USACO               freopen("lepus.in", "r", stdin); freopen("lepus.out", "w", stdout);
+#define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
+
+
+typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int,int>pii;
+typedef unsigned long long ull;
+typedef long double lld;
+typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
 
@@ -25,10 +39,7 @@ using namespace std;
 #define debug(x)
 #endif
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double lld;
- 
+
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -36,7 +47,8 @@ void _print(char t) {cerr << t;}
 void _print(lld t) {cerr << t;}
 void _print(double t) {cerr << t;}
 void _print(ull t) {cerr << t;}
- 
+
+
 template <class T, class V> void _print(pair <T, V> p);
 template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
@@ -52,6 +64,8 @@ template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i
 template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 /*-----------------------------------------------Debug Ends--------------------------------------------------------------------*/
+
+
 
 
 /*-----------------------------------------------Number theory Starts-----------------------------------------------------------*/
@@ -71,34 +85,40 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
-bool dfs(ll node, ll par, vector<vector<ll>>&adj, vector<bool>&vis){
-		vis[node]=1;
-      bool flag=0;
-		for(auto it:adj[node]){
-			if(it==par) flag=1;
-			if(vis[it]) continue;
-         flag|=dfs(it,node,adj,vis);
-		}
 
-		return flag;
+ll dfs(ll node, ll par, unordered_map<ll,vector<ll>>&adj, vector<bool>&vis){
+
+		vis[node]=1;
+		
+		for(auto i:adj[node]){
+			if(!vis[i]){
+				
+				return dfs(i, node, adj, vis)+1;
+				
+			}
+		}
+		
+
+	return 1;
 }
 
 
 void dk(){
-
  		ll n;
  		cin>>n;
- 		vector<vector<ll>>adj(n+1, vector<ll>());
+ 		unordered_map<ll,vector<ll>>adj;
 
-      bool fl=0;
+        bool fl=0;
 
  		fr(i,n){
  			ll u,v;
  			cin>>u>>v;
- 			if(u==v){
- 				fl=1;
- 			}
+ 			
  			adj[u].pb(v);
+			adj[v].pb(u);
+			if(adj[u].size()>2|| adj[v].size()>2 || u==v){
+				fl=1;
+			}
 
  		}
 
@@ -108,41 +128,41 @@ void dk(){
  		}
 
  		vector<bool> vis(n+1, 0);
- 		ll ncycle=0;
- 		ll cycle=0;
+ 		
  		for(ll i=1;i<=n;i++){
  			if(!vis[i]){
- 				bool t=dfs(i,-1,adj,vis);
- 				if(t) cycle++;
- 				if(!t) ncycle++;
+ 				ll t=dfs(i,-1,adj,vis);
+
+				if(t%2){
+					cout<<"NO"<<endl;
+					return;
+				}
+ 				
  			}
  		}
 
 
- 		if(!(cycle%2)){
- 			cout<<"YES"<<endl;
- 			return;
- 		}
- 		cout<<"NO"<<endl;
+ 		cout<<"YES"<<endl;
 
    return;
 }
 
 
 
+
+
 int main()
 { 
-    fast_io;
-    #ifndef ONLINE_JUDGE
-    //file_io;
-    freopen("error.txt", "w+", stderr);
-    #endif
-    //USACO
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-    //google(i+1);
-    dk();
-    }
-return 0;
+	fast_io;
+	#ifndef ONLINE_JUDGE
+	file_io;
+	freopen("D:/cp/error.txt", "w+", stderr);
+	#endif
+	int n=1;
+	cin>>n;
+	for(int i=0;i<n;i++){
+	//google(i+1);
+	dk();
+   }
+  return 0;
 }

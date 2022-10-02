@@ -93,7 +93,6 @@ void dk(){
       cin>>n;
       vector<ll> v(n);
       inp(v);
-    
 
 
 }

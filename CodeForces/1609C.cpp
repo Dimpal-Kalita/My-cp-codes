@@ -14,7 +14,7 @@ using namespace std;
 #define inp(v)              for(auto &x: v) cin>>x   
 #define all(x)              (x).begin(), (x).end()        
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define file_io             freopen("input.txt", "r+", stdin);freopen("output.txt", "w+", stdout);
+#define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 #define USACO               freopen("lepus.in", "r", stdin); freopen("lepus.out", "w", stdout);
 
 
@@ -74,15 +74,45 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
 
-
+vector<ll> prime = sieve(1e7);
 void dk(){
     ll n,e;
     cin>>n>>e;
     vector<ll> v(n);
     inp(v);
+    vector<ll> dp(n+5,0), cones(n+5,0);
+
+    for(ll i=n;i>0;i--){
+        
+        if(v[i-1]==1){
+            cones[i]+=1;
+        }
+       
+
+        
+        if(v[i-1]==1 && i+e<=n){
+            cones[i]+= cones[i+e];
+        }
+
+        if(binary_search(all(prime), v[i-1]) && i+e<=n){
+            dp[i]= cones[i+e];
+        }
+        else if(v[i-1]==1 && i+e<=n){
+            if(binary_search(all(prime), v[i+e-1])){
+                    dp[i] = dp[i+e] + 1;
+            }
+            else if(v[i+e-1]==1 && dp[i+e]){
+                dp[i]=dp[i+e];
+            }
+        }
+
+    }
+    debug(dp)
 
     
-
+    ll ans=0;
+    for(auto i:dp) ans+=i;
+    cout<<ans<<endl;
     
 
   
@@ -95,8 +125,8 @@ int main()
 { 
     fast_io;
     #ifndef ONLINE_JUDGE
-    //file_io;
-    freopen("error.txt", "w+", stderr);
+    file_io;
+    freopen("D:/cp/error.txt", "w+", stderr);
     #endif
     //USACO
     int n=1;
