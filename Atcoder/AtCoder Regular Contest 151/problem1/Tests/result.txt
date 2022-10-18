@@ -1,0 +1,51 @@
+Test 1 Passed
+
+Input 1: 
+5
+00100
+10011
+
+
+Expected Output : 
+00001
+
+
+Obtained Output : 
+00001
+
+
+________________________________________________________
+
+Test 2 Passed
+
+Input 2: 
+1
+0
+1
+
+
+Expected Output : 
+-1
+
+Obtained Output : 
+-1
+
+
+________________________________________________________
+
+Test 3 Failed
+
+Input 3: 
+5
+10010
+10001
+
+Expected Output : 
+00001
+
+Obtained Output : 
+00000
+
+
+________________________________________________________
+

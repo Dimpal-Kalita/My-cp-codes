@@ -1,0 +1,1 @@
+Command failed: "d:/CP/CodeForces/Codeforces Round  828 Div. 3/F_MEX_vs_MED/Tests/a.exe" 1 < "d:/CP/CodeForces/Codeforces Round  828 Div. 3/F_MEX_vs_MED/Tests/input_1.txt" > "d:/CP/CodeForces/Codeforces Round  828 Div. 3/F_MEX_vs_MED/Tests/code_output_1.txt"

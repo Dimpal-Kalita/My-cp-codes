@@ -1,0 +1,1 @@
+Command failed: "d:/CP/Educational Codeforces Round 137 Rated for Div. 2/G_Antifibonacci_Cut/Tests/a.exe" 1 < "d:/CP/Educational Codeforces Round 137 Rated for Div. 2/G_Antifibonacci_Cut/Tests/input_2.txt" > "d:/CP/Educational Codeforces Round 137 Rated for Div. 2/G_Antifibonacci_Cut/Tests/code_output_2.txt"
