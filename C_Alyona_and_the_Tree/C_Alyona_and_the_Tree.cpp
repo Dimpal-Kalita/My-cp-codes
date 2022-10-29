@@ -69,7 +69,6 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 /*-----------------------------------------------Number theory Starts-----------------------------------------------------------*/
-ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
 ll expo(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
 void extendgcd(ll a, ll b, ll*v) {if (b == 0) {v[0] = 1; v[1] = 0; v[2] = a; return ;} extendgcd(b, a % b, v); ll x = v[1]; v[1] = v[0] - v[1] * (a / b); v[0] = x; return;} //pass an arry of size1 3
 ll mminv(ll a, ll b) {ll arr[3]; extendgcd(a, b, arr); return arr[0];} //for non prime b
@@ -85,32 +84,41 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
+const int N = 1e5 + 5;
+vector<ll> adj[N+1];
+
+
+
+// Alyona and the Tree
 
 
 
 void dk(){
   ll n;
   cin>>n;
-  vector<ll> v(n);
-  inp(v);
-  vector<vector<ll>> adj(n+1, vector<ll>());
+  
 
-  for(ll i=1;i<n;i++){
-    ll x,y;
-    cin>>x>>y;
-    adj[i+1].pb(x);
-    adj[x].pb(i+1);
+  for(ll i=0;i<n-1;i++){
+    ll u,v;
+    cin>>u>>v;
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+  }
+  
+  
+  queue<int> q;
+  q.push(1);
+
+  while(!q.empty()){
+
+    ll node = q.front();
+    q.pop();
+
+    for(auto i:adj[node]){  
+    }
   }
 
-  debug(adj);
-
-  queue<ll> q;
-
-  
-      
-      
-
-
+  return;
 }
 
 

@@ -1,0 +1,70 @@
+Test 1 Failed
+
+Input 1: 
+2 3
+
+
+Expected Output : 
+6
+
+
+Obtained Output : 
+1
+1
+
+
+________________________________________________________
+
+Test 2 Failed
+
+Input 2: 
+4 2
+
+
+Expected Output : 
+26
+
+
+Obtained Output : 
+1
+1
+1
+1
+
+
+________________________________________________________
+
+Test 3 Failed
+
+Input 3: 
+4 6
+
+
+Expected Output : 
+1494
+
+
+Obtained Output : 
+1
+1
+1
+1
+
+
+________________________________________________________
+
+Test 4 Run time error
+
+Input 4: 
+1337 424242424242
+
+
+Expected Output : 
+119112628
+
+
+Obtained Output : 
+
+
+________________________________________________________
+

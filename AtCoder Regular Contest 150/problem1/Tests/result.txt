@@ -1,0 +1,37 @@
+Test 1 Passed
+
+Input 1: 
+4
+3 2
+1??
+4 2
+?1?0
+6 3
+011?1?
+10 5
+00?1???10?
+
+
+Expected Output : 
+Yes
+No
+No
+Yes
+
+
+Obtained Output : 
+Yes
+No
+No
+Yes
+
+
+Standard Error : 
+ps0 [ 0 0 0 0 ]
+ps0 [ 0 0 0 0 1 ]
+ps0 [ 0 1 1 1 1 1 1 ]
+ps0 [ 0 1 2 2 2 2 2 2 2 3 3 ]
+
+
+________________________________________________________
+

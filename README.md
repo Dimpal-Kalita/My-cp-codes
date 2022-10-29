@@ -1,2 +1,4 @@
 # My-cp-codes
-posting my files used in cp 
+Storing solutions i have written during practicing and giving contests
+
+### Hehe haha

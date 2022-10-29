@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 
 
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
 
 
 using namespace std;
-using namespace __gnu_pbds;
+// using namespace __gnu_pbds;
 
 
 #define md                  998244353
@@ -27,43 +27,8 @@ typedef pair<ll,ll> pll;
 typedef pair<int,int>pii;
 typedef unsigned long long ull;
 typedef long double lld;
-typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
+// typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
-
-
-
-/*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
-#ifndef ONLINE_JUDGE
-#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
-#else
-#define debug(x)
-#endif
-
-
-void _print(ll t) {cerr << t;}
-void _print(int t) {cerr << t;}
-void _print(string t) {cerr << t;}
-void _print(char t) {cerr << t;}
-void _print(lld t) {cerr << t;}
-void _print(double t) {cerr << t;}
-void _print(ull t) {cerr << t;}
-
-
-template <class T, class V> void _print(pair <T, V> p);
-template <class T> void _print(vector <T> v);
-template <class T> void _print(set <T> v);
-template <class T, class V> void _print(map <T, V> v);
-template <class T> void _print(multiset <T> v);
-template <class T> void _print(stack<T> v);
-template <class T> void _print(list<T> v);
-template <class T> void _print(stack<T> v){cerr<< "[" ; while(!v.empty()){_print(v.top()); cerr<< " " ; v.pop();} cerr<< "]" ;}
-template <class T> void _print(list<T> v) {cerr << "["; for(auto i: v){_print(i);cerr << " " ;} cerr<< "]";}
-template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.first); cerr << ","; _print(p.second); cerr << "}";}
-template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
-/*-----------------------------------------------Debug Ends--------------------------------------------------------------------*/
 
 
 
@@ -85,44 +50,65 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*-----------------------------------------------Number theory Ends---------------------------------------------------------------*/
 
-vector<bool> vis;
-vector<vector<ll>> adj;
 
-void dfs(ll node, ll par){
-  vis[node]=1;
 
-  for(auto i:adj[node]) if(!vis[i]) dfs(i, node);
 
-}
+
+// disjoint set union
+struct DSU {
+    vector<ll> parent;
+    vector<ll> size;
+    void init(ll n) {
+        parent.resize(n);
+        size.resize(n);
+        for (ll i = 0; i < n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
+    ll get(ll a) {
+        if (parent[a] == a) {
+            return a;
+        }
+        return parent[a] = get(parent[a]);
+    }
+    void unite(ll a, ll b) {
+        a = get(a);
+        b = get(b);
+        if (a != b) {
+            if (size[a] < size[b]) {
+                swap(a, b);
+            }
+            parent[b] = a;
+            size[a] += size[b];
+        }
+    }
+};
+
+
 
 void dk(){
+    ll n,m;
+    cin>>n>>m;
+    vector<ll> v(n);
+    inp(v);
+    
+    DSU d;
+    d.init(n+1);
 
-        ll n,m;
-        cin>>n>>m;
-        adj.resize(n+1, vector<ll>());
-        vis.resize(n+1, 0);
+    for(ll i=1;i<=n;i++){
+      d.unite(i, v[i-1]);
+    }
 
-        for(ll _=1;_<=n;_++){
-          ll x;
-          cin>>x;
-          adj[x].pb(_);
-          adj[_].pb(x);
-        }
+    set<ll> st;
+    for(ll i=1;i<=n;i++){
+      ll x= d.get(i);
+      st.insert(x);
+    }
 
-        ll cn=0;
-        for(ll i=1;i<=n;i++){
-            if(!vis[i]){
-              cn++;
-              dfs(i, 0);
-            }
-        }
+    ll ans= expo(m,n,md)-expo(m, st.size(), md);
 
-        ll ans= expo(m, n, md)- expo(m, cn, md);
-
-        cout<<ans/2<<endl;
-  
-      
-
+    cout<<ans/2<<endl;
 
 }
 
