@@ -1,6 +1,5 @@
 // 2112048
 // Dimpal Kalita
-// CSE sec A
 
 #include<bits/stdc++.h>
 
