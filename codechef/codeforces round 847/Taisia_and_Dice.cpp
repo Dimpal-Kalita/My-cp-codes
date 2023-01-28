@@ -32,9 +32,20 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+     ll n, s, r;
+     cin>>n>>s>>r;
+     vector<ll> v(n, 1);
+     ll mx= s-r;
+     ll i=0;
 
+     while(accumulate(all(v), 0ll)!=s){
+        if(v[i]<mx) v[i]++;
+        else i++;
+     }
+     for(auto it:v){
+        cout<<it<<" ";
+     }
+     cout<<endl;
 
 }
 

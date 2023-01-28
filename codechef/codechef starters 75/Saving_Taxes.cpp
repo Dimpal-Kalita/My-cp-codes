@@ -1,5 +1,4 @@
-// 2112048
-// Dimpal Kalita
+
 
 #include<bits/stdc++.h>
 
@@ -32,10 +31,12 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
-
-
+    ll a[4];
+    for(int i=0;i<4;i++) cin>>a[i];
+    set<ll> st;
+    for(int i=a[0];i<=a[1];i++) st.insert(i);
+    for(int i=a[2];i<=a[3];i++) st.insert(i);
+    cout<<st.size()<<endl;
 }
 
 

@@ -30,12 +30,40 @@ typedef long double lld;
 
 
 
+ll aa, bb;
+bool calc(ll s, ll x){
+    ll a= (s-x)/2;
+    ll ansa=0, ansb=0;
+    for(ll i=0;i<30;i++){
+        ll xi= (x& (1<<i));
+        ll ai= (a& (1<<i));
+        if(xi==0 && ai==0) continue;
+        else if(xi==0 && ai!=0){
+            ansa+=(1<<i);
+            ansb+=(1<<i);
+        }
+        else if(xi!=0 && ai==0) ansa+= (1<<i);
+        else {
+            return 0;
+        }
+    }
+    aa=ansa, bb=ansb;
+    return 1;
+}
+
 
 void dk(){
-      
-      
-
-
+     ll n;
+     cin>>n;
+     if(calc(2*n,n) && (aa^bb)==(aa+bb)/2){
+        cout<<aa<<" "<<bb<<endl;
+        return;
+     }
+     if(calc(2*n+1, n) && (aa^bb)==(aa+bb)/2){
+        cout<<aa<<" "<<bb<<endl;
+        return;
+     }
+     cout<<-1<<endl;
 }
 
 

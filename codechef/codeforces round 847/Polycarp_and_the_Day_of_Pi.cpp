@@ -29,10 +29,17 @@ typedef long double lld;
 // typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
-
+string pis= "3141592653589793238462643383279";
 
 void dk(){
-      
+    string s;
+    cin>>s;
+    ll ans=0;
+    for(ll i=0;i<s.length();i++){
+        if(s[i]==pis[i]) ans++;
+        else break; 
+    }
+    cout<<ans<<endl;
       
 
 

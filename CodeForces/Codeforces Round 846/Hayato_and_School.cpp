@@ -32,7 +32,47 @@ typedef long double lld;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vector<ll> v(n);
+     inp(v);
+     ll o=0, e=0;
+     for(auto it:v){
+        if(it%2) o++;
+        else e++;
+     }
+
+     if(o>=3){
+        o=3;
+        cout<<"YES"<<endl;
+        ll ct=0;
+        for(int i=0;i<n;i++){
+            if(o>0 && v[i]%2){
+                cout<<i+1<<" ";
+                o--;
+            }
+        }
+        cout<<endl;
+        return;
+     }
+     if(e>=2 && o>=1){
+        e=2, o=1;
+        cout<<"YES"<<endl;
+        for(int i=0;i<n;i++){
+
+            if(e>0 && v[i]%2==0){
+                cout<<i+1<<" ";
+                e--;
+            }
+            if(o>0 && v[i]%2==1){
+                cout<<i+1<<" ";
+                o--;
+            }
+        }
+        cout<<endl;
+        return;
+     }
+     cout<<"NO"<<endl;
       
 
 

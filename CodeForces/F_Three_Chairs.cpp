@@ -32,10 +32,10 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
-
-
+     ll n;
+     cin >> n;
+     cout << ++n << endl;
+     cout << n++ << endl;
 }
 
 
@@ -46,7 +46,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

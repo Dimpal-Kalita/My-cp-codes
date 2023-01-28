@@ -1,5 +1,3 @@
-// 2112048
-// Dimpal Kalita
 
 #include<bits/stdc++.h>
 
@@ -32,9 +30,20 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
-
+      ll n;
+      cin>>n;
+      string s;
+      cin>>s;
+      ll ct= count(all(s), '1');
+      if(s=="1" || s=="0" || s=="10"){
+            cout<<"NO"<<endl;
+            return;
+      }
+      if(ct>3){
+        cout<<"NO"<<endl;
+        return;
+      }
+      cout<<"YES"<<endl;
 
 }
 

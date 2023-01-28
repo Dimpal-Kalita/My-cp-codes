@@ -32,8 +32,40 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+     int n;
+     cin>>n;
+
+     int arr[n][n-1];
+
+     for(int i=0;i<n;i++){
+        for(int j=0;j<n-1;j++) cin>>arr[i][j];
+     }
+
+     int cnt[n+1]={0};
+
+     for(int i=0;i<n;i++){
+        cnt[arr[i][0]]++;
+     }
+
+     for(int i=0;i<n;i++){
+        int x= arr[i][0];
+        if(cnt[x]!=1){
+            cout<<arr[i][0]<<" ";
+            break;
+        }
+     }
+     for(int i=0;i<n;i++){
+        int x= arr[i][0];
+        if(cnt[x]==1){
+            for(int j=0;j<n-1;j++){
+                cout<<arr[i][j]<<" ";
+            }
+            cout<<endl;
+            return;
+        }
+     }
+
+
 
 
 }

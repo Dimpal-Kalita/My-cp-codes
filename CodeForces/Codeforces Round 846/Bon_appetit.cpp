@@ -32,8 +32,34 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+     ll n,m;
+     cin>>n>>m;
+     vector<ll> v(n);
+     inp(v);
+     vector<ll> ch(m);
+     inp(ch);
+     map<int,int> mp;
+     for(auto it:v) mp[it]++;
+
+     priority_queue<ll> pq;
+
+     for(auto it:mp){
+        pq.push(it.S);
+     } 
+     sort(all(ch), greater<ll>());
+     ll ans=0;
+     for(int i=0;i<m;i++){
+       if(!pq.empty()){ 
+            ll x= pq.top();
+            pq.pop();
+            ll val= max(0ll, x-ch[i]);
+            ans+=x-val;
+            if(val>0){
+                pq.push(val);
+            }
+        }
+     }
+     cout<<ans<<endl;
 
 
 }

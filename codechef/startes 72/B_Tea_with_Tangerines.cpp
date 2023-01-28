@@ -33,15 +33,27 @@ typedef long double lld;
 // typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
-void dfs(int node){
-    
-}
 
 
 void dk(){
-    ll n, m;
-    cin>>n>>m;
-    vector<string, int> adj; 
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    inp(v);
+    ll mn= *min_element(all(v));
+
+    ll l= (mn+1)/2;
+    ll r= 2*mn-1;
+
+    ll ans=0;
+    for(ll i=0;i<n;i++){
+
+        ans+=v[i]/r;
+        if(v[i]%r==0) ans--;
+    
+    }
+    cout<<ans<<endl;
+
 }
 
 

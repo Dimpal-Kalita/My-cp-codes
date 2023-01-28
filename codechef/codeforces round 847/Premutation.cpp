@@ -31,10 +31,34 @@ typedef long double lld;
 
 
 
-void dk(){
-      
-      
 
+
+
+void dk(){
+     ll n;
+     cin>>n;
+     vector<vector<ll>> v(n, vector<ll>(n-1));
+     for(int i=0;i<n;i++) inp(v[i]);
+    
+     map<ll,ll>mp;
+     for(int i=0;i<n;i++){
+        mp[v[i][0]]++;
+     }
+     ll dif=0;
+     vector<ll> ans(n);
+     for(int i=0;i<n;i++){
+        if(mp[v[i][0]]==1){
+            for(int j=0;j<n-1;j++){
+                ans[j+1]=v[i][j];
+            }
+            break;
+        }
+     }
+     for(auto it: mp){
+        if(it.S>1) ans[0]=it.F;
+     }
+     for(auto it:ans) cout<<it<<" ";
+     cout<<endl;
 
 }
 

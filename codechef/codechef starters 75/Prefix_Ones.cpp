@@ -32,10 +32,30 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
-
-
+     ll n;
+     cin>>n;
+     string s;
+     cin>>s;
+     ll init=0;
+     ll i=0;
+     while(s[i]=='1'){
+        i++;
+        init++;
+     }
+     ll mx=0, ct=0;
+     for(;i<n;i++){
+            if(s[i]=='1'){
+                ct++;
+            }
+            else{
+                mx= max(mx, ct);
+                ct=0;
+            }
+     }
+     mx=max(mx,ct);
+     
+     cout<<init+mx<<endl;
+     return;
 }
 
 

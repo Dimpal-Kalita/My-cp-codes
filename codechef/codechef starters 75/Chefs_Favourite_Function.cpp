@@ -29,13 +29,37 @@ typedef long double lld;
 // typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
+ll f(ll x){
+    if(x==1) return 0;
+    if(x%2==0) return f(x/2)+1;
+    return f(x/2);
+}
+
+ll g(ll x){
+    if(x==1) return 1;
+    if(x%2==0) return 2*g(x/2)+1;
+    return 2*g(x/2);
+}
+
+
 
 
 void dk(){
-      
-      
+    ll l, r;
+    cin>>l>>r;
+    ll x= log2(r);
+    x= 1ll<<x;
+    // cout<<x<<" ";
+    if(x>=l && x<=r){
+        cout<<f(x)+g(x)<<endl;
+        return;
+    }
 
-
+    ll mx=0;
+    for(ll i=l;i<=l+20;i++){
+       mx= max(mx, f(i)+g(i));
+    }
+    cout<<mx<<endl;
 }
 
 

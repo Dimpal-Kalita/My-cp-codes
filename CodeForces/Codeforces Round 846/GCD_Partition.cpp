@@ -32,9 +32,19 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+     ll n;
+     cin>>n;
+     vector<ll> v(n);
+     inp(v);
+     ll sum= accumulate(all(v), 0ll);
 
+     ll s=0; 
+     ll ans=0;
+     for(int i=0;i<n-1;i++){
+        s+=v[i];
+        ans= max(ans, __gcd(s, sum));
+     }
+     cout<<max(ans, 1ll)<<endl;
 
 }
 

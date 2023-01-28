@@ -4,7 +4,8 @@
 #include<bits/stdc++.h>
 
 
-// #include <ext/pb_ds/detail/standard_policies.hpp>
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
 
 
 using namespace std;
@@ -13,12 +14,15 @@ using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
+#define fr(i,n)             for(ll i=0;i<n;i++)
+#define fr1(i,k,n)          for(ll i=k;i<n;i++)
 #define endl                "\n"
 #define F                   first
 #define S                   second
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 
 typedef long long ll;
@@ -32,9 +36,24 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+     ll n;
+     cin>>n;
+     vector<ll> v(2*n);
+     inp(v);
 
+     vector<ll> w1, w2;
+
+     for(ll i=0;i<n;i++){
+        if(v[i]>n) w1.pb(i);
+     }
+     for(ll i=n;i<2*n;i++){
+        if(v[i]<=n) w2.pb(i);
+     }
+     ll ans=0;
+     for(int i=0;i<w1.size();i++){
+        ans+= w2[i]-w1[i];
+     }
+     cout<<ans<<endl;
 
 }
 
@@ -44,7 +63,12 @@ void dk(){
 int main()
 { 
     fast_io;
-  
+    
+    //#ifndef ONLINE_JUDGE
+    //file_io;
+    //freopen("D:/cp/error.txt", "w+", stderr);
+    //#endif
+
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
