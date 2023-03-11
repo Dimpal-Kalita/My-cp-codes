@@ -14,7 +14,6 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -31,10 +30,30 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+     ll n;
+     cin>>n;
+     string s= bitset<34>(n).to_string(); 
+     ll a=0, b=0;
+     if(n==0){
+        cout<<3<<" "<<7<<" "<<8<<" "<<11<<endl;
+        return;
+     }
+    //  cout<<s<<endl;
+     for(int i=0;i<s.length();i++){
 
-
+        if(s[i]=='1'){
+            b+=(1ll<<(33-i));
+        }
+        else{
+            a+=(1ll<<(33-i));
+            b+=(1ll<<(33-i));
+        }
+        
+     }
+     ll c=3,d=4;
+     cout<<c<<" "<<d<<" "<<a<<" "<<b<<endl;
+    //  ll x= a^b;
+    //  cout<<x<<endl;
 }
 
 

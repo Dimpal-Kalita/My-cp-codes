@@ -14,7 +14,7 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
+#define size(x)             int((x).size());
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -31,10 +31,36 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+     string a, b;
+     cin>>a>>b;
 
+     int n=a.length(),m=b.length();
+     if(a[n-1]==b[m-1]){
+        cout<<"YES"<<endl;
+        cout<<"*"<<a[n-1]<<endl;    
+        return;
+     }
 
+     if(a[0]==b[0]){
+        cout<<"YES"<<endl;
+        cout<<a[0]<<"*"<<endl;
+        return;
+     }
+
+     for(int i=0;i<n-1;i++){
+        string t=a.substr(i,2);
+        for(int j=0;j<m-1;j++){
+            string s=b.substr(j,2);
+            if(t==s){
+                cout<<"YES"<<endl;
+                cout<<"*"<<s<<"*"<<endl;
+                return;
+            }
+        }
+     }
+
+     cout<<"NO"<<endl;
+     return;
 }
 
 

@@ -14,7 +14,6 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -29,12 +28,40 @@ typedef long double lld;
 
 
 
+vector<ll>A,B;
+map<ll,ll> mp;
+
+bool recur(ll X){
+
+    if(X==0) return 1;
+    if(mp.count(X)) return mp[X];
+    if(binary_search(all(B),X)) return 0;
+    bool ans=0;
+
+    for(auto it: A){
+        if(X-it>=0){
+            ans|=recur(X-it); 
+        }
+    }
+
+    return mp[X]=ans;
+}
+
+
+
 
 void dk(){
-      
-      
-
-
+    ll n,m;
+    cin>>n;
+    A.resize(n);
+    inp(A);
+    cin>>m;
+    B.resize(m);
+    inp(B);
+    sort(all(B));
+    ll X;
+    cin>>X;
+    cout<<(recur(X)?"Yes":"No")<<endl;
 }
 
 
@@ -45,7 +72,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

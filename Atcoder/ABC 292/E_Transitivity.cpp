@@ -14,7 +14,7 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
+#define sz(x)             int((x).size());
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -29,9 +29,57 @@ typedef long double lld;
 
 
 
+vector<vector<ll>> adj;
+vector<ll> vis;
+vector<pll> vp;
+void dfs(ll node, ll par, ll dist){
+  
+  if(vis[node]) return;
+  if(dist==1) vp.pb({par,node});
+
+  vis[node]=1;
+  for(auto it:adj[node]){
+    if(dist==1){
+      dfs(it, par, 1);
+    }
+    else{
+      dfs(it, par, dist+1);
+    }
+  }
+
+}
+
+
 
 void dk(){
-      
+     ll n, m;
+     cin>>n>>m;
+     adj.resize(n+1);
+     vis.resize(n+1);
+     map<pll,ll> mp;
+
+     for(int i=0;i<m;i++){
+        ll u, v;
+        cin>>u>>v;
+        mp[{u,v}]++;
+        adj[u].pb(v);
+     }
+
+     for(int i=1;i<=n;i++){
+        for(auto &it:vis) it=0;
+        dfs(i,i,0);
+     }
+
+    ll ans=0;
+    for(auto i:vp){
+        if(mp[i]==0){
+          ans++;
+          mp[i]++;
+        }
+    }
+    
+    cout<<ans<<endl;
+
       
 
 
@@ -45,7 +93,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

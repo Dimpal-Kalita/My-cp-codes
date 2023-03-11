@@ -3,7 +3,9 @@
 
 #include<bits/stdc++.h>
 
+
 // #include <ext/pb_ds/detail/standard_policies.hpp>
+
 
 using namespace std;
 // using namespace __gnu_pbds;
@@ -14,7 +16,6 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -31,10 +32,22 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
-
-
+     ll n, c;
+     cin>>n>>c;
+     vector<ll> v(n);
+     for(int i=0;i<n;i++){
+         cin>>v[i];
+         v[i]+=i+1;
+     } 
+     sort(all(v));
+     ll ans=0;
+     for(auto it: v){
+         if(c>=it){
+             ans++;
+             c-=it;
+         }
+     }
+     cout<<ans<<endl;
 }
 
 

@@ -3,7 +3,9 @@
 
 #include<bits/stdc++.h>
 
+
 // #include <ext/pb_ds/detail/standard_policies.hpp>
+
 
 using namespace std;
 // using namespace __gnu_pbds;
@@ -14,7 +16,6 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -28,16 +29,30 @@ typedef long double lld;
 // typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
+const int N=4e5+5;
+vector<vector<int>> adj(N+5,vector<int>());
+vector<int> vis(N+5);
+vector<int> v; 
 
-
-void dk(){
-      
-      
-
-
+void loop(int node){
+    if(vis[node]) return;
+    vis[node]=1;
+    for(auto it:adj[node]){
+        loop(it);
+    }
 }
 
+void dk(){
+     int n;
+     cin>>n;
+     v.resize(n);
+     inp(v);
 
+     for(int i=0;i<n;i++){
+        
+     }
+
+}
 
 
 int main()

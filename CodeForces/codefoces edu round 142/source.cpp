@@ -14,11 +14,10 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-
+#define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 typedef long long ll;
 typedef pair<ll,ll> pll;
@@ -30,11 +29,9 @@ typedef long double lld;
 
 
 
+
 void dk(){
       
-      
-
-
 }
 
 
@@ -43,7 +40,12 @@ void dk(){
 int main()
 { 
     fast_io;
-  
+    
+    #ifndef IGNOREME
+    file_io;
+    freopen("D:/cp/error.txt", "w+", stderr);
+    #endif
+    
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){

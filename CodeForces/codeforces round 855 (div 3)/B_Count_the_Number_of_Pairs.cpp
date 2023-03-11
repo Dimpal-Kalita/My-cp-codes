@@ -14,7 +14,7 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
+#define sz(x)             int((x).size());
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -31,10 +31,28 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
-
-
+     ll n, k;
+     cin>>n>>k;
+     map<char,ll> mp;
+     for(int i=0;i<n;i++){
+        char ch;
+        cin>>ch;
+        mp[ch]++;
+     }
+     vector<ll> dif;
+     ll ans=0;
+     for(char it='a';it<='z';it++){
+        ll val= min(mp[it],mp[toupper(it)]);
+        ans+=val;
+        dif.pb(abs(mp[it]-mp[toupper(it)]));
+     }
+    //  cout<<ans<<endl;
+     for(int i=0;i<dif.size();i++){
+        ll val= min(k, dif[i]/2);
+        k-=val;
+        ans+=val;
+     }
+     cout<<ans<<endl;
 }
 
 

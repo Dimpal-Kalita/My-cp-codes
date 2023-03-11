@@ -14,7 +14,6 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -30,11 +29,56 @@ typedef long double lld;
 
 
 
+
+
+
+
+
+bool checkeven(ll x,vector<ll> v){
+    ll one=(x+1)/2, two=x/2;
+    for(auto &it:v){
+        if(it%2==0){
+            it++;
+            one--;
+        }
+    }
+    if(one<0) return 0;
+    ll mx= *max_element(all(v));
+    ll sum=0;
+    for(auto it:v){
+        sum+=(mx-it);
+    }
+    return (one+2*two)>=sum;
+}
+bool checkodd(ll x, vector<ll> v){
+    ll one=(x+1)/2, two=x/2;
+    for(auto &it:v){
+        if(it%2==1){
+            it++;
+            one--;
+        }
+    }
+    if(one<0) return 0;
+    ll mx= *max_element(all(v));
+    ll sum=0;
+    for(auto it:v){
+        sum+=(mx-it);
+    }
+    return (one+2*two)>=sum;
+}
+
 void dk(){
-      
-      
-
-
+     ll n;
+     cin>>n;
+     vector<ll> v(n);
+     inp(v);
+     ll l=0, r=1e18;
+     while(l<r){
+         ll mid=(l+r)/2;
+         if(checkeven(mid,v) || checkodd(mid,v)) r=mid;
+         else l=mid+1;
+     }
+     cout<<r<<endl;
 }
 
 

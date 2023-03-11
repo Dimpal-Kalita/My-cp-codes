@@ -14,7 +14,6 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -31,10 +30,37 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+      ll n;
+      cin>>n;
 
+      if(n%2==0){
+        cout<<"No"<<endl;
+        return;
+      }
+      ll sum= 3*((n+1)/2);
+      vector<pll> ans(n);
+      ll l=1, r=n-(n/2-1);
 
+      for(int i=0;i<n;i++){
+        if(i%2==0){
+            ans[i].F= l;
+            l++;
+        }else{
+            ans[i].F=r;
+            r++;
+        }
+      }
+
+      for(int i=0;i<n;i++){
+        ans[i].S= sum- ans[i].F;
+        sum++;
+      }
+      cout<<"Yes"<<endl;
+      for(auto x: ans){
+        cout<<x.F<<" "<<x.S<<endl;
+      }
+
+      
 }
 
 

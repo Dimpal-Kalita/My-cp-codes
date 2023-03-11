@@ -14,7 +14,7 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
+#define sz(x)             int((x).size());
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -31,7 +31,28 @@ typedef long double lld;
 
 
 void dk(){
-      
+     ll n, q;
+     cin>>n>>q;
+     map<ll,ll> red, yellow;
+
+     while(q--){
+        ll ch,x;
+        cin>>ch>>x;
+        if(ch==1){
+            yellow[x]--;
+        }
+        if(ch==2){
+            red[x]--;
+        }
+
+        if(ch==3){
+            if(red[x]<=-1 || yellow[x]<=-2){
+                cout<<"Yes"<<endl;
+            }
+            else cout<<"No"<<endl;
+        }
+
+     } 
       
 
 
@@ -45,7 +66,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

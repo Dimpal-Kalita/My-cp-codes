@@ -14,7 +14,6 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -31,10 +30,41 @@ typedef long double lld;
 
 
 void dk(){
-      
-      
+      ll n;
+      cin>>n;
+      vector<ll> p(n), q(n);
+      inp(p);
+      inp(q);
 
+      map<ll,ll> mp1, mp2;
+      for(int i=0;i<n;i++){
+        mp1[p[i]]=i+1;
+      }
+      for(int i=0;i<n;i++){
+        mp2[q[i]]=i+1;
+     }
+     ll ans=0; ll x=min(mp1[1], mp2[1]), y=max(mp1[1], mp2[1]);
+     ll x1= mp1[1];
+     ll y1= mp2[1];
+     if(x1>y1) swap(x1,y1);
 
+     ans+= (x1*(x1-1))/2 + ((n-y1)*(n-y1+1))/2+ ((y1-x1)*(y1-x1-1))/2;
+     map<pair<ll,ll> ,ll> pp;
+     
+     //  pp[{x,y}]++;
+      cerr<<x<<" "<<y;
+     for(int i=1;i<=n;i++){
+        x= min(mp1[i],min(mp2[i], x));
+        y= max(mp2[i],max(y, mp1[i]));
+
+        if(pp.count({x,y})) continue;
+        
+        pp[{x,y}]++;
+        // cerr<<x<<" "<<y<<endl;
+        ans++;
+     }
+
+     cout<<ans<<endl;
 }
 
 
@@ -45,7 +75,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

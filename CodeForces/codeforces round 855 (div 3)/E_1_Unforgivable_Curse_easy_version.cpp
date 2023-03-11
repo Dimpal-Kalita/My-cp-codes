@@ -14,7 +14,7 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
+#define size(x)             int((x).size());
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -29,11 +29,46 @@ typedef long double lld;
 
 
 
+bool is_equal(string a, string b){
+    sort(all(a));
+    sort(all(b));
+    return a==b;
+}
+
 
 void dk(){
-      
-      
+     ll n, k;
+     cin>>n>>k;
+     string a, b;
+     cin>>a>>b; 
+     if(!is_equal(a, b)){
+        cout<<"NO"<<endl;
+        return;
+     }
 
+     if(n>=2*k){
+        cout<<"YES"<<endl;
+        return;
+     }
+
+
+     vector<ll> vis(n+1, 0);
+
+     for(int i=0;i<n;i++){
+        if(i+k<n) vis[i+k]++, vis[i]++;
+        if(i+k+1<n) vis[i+k+1]++, vis[i]++;
+     }
+
+     for(int i=0;i<n;i++){
+        if(!vis[i]){
+            if(a[i]!=b[i]){
+                cout<<"NO"<<endl;
+                return;
+            }
+        }
+     }
+
+     cout<<"YES"<<endl;
 
 }
 

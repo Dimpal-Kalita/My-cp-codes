@@ -3,3 +3,5 @@
 *codechef/garbage
 *.log
 *.conf
+*.cpl_files
+*.jnlp

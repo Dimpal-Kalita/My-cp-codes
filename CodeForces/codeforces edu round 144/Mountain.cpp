@@ -14,7 +14,7 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
+#define sz(x)             int((x).size());
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -30,10 +30,37 @@ typedef long double lld;
 
 
 
-void dk(){
-      
-      
 
+
+
+void dk(){
+    ll n,m,q;
+    cin>>n>>m>>q;
+    // cout<<q;
+    while(q--){
+        ll x;
+        cin>>x;
+        ll sum=0;
+        int i=0;
+        vector<ll> ans;
+        for(;i<n;i++){
+            sum+= (i+1)*m;
+            // cout<<sum<<" ";
+            ans.pb(m);
+            if(sum>=x) break;
+        }
+
+        for(int j=i;j>=0;j--){
+            if(sum<=x) break;
+            ll dif= sum-x;
+            ll val= min(dif/(j+1),m);
+            sum-= (j+1)*val;
+            ans[j]-=val;
+        }
+        cout<<1<<" "<<ans.size()<<endl;
+        for(auto x: ans) cout<<x<<" ";
+        cout<<endl;
+    }
 
 }
 
@@ -43,9 +70,9 @@ void dk(){
 int main()
 { 
     fast_io;
-  
+
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     //google(i+1);
     dk();

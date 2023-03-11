@@ -14,11 +14,10 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-
+#define file_io             freopen("input.txt", "r+", stdin);freopen("output.txt", "w+", stdout);
 
 typedef long long ll;
 typedef pair<ll,ll> pll;
@@ -31,8 +30,16 @@ typedef long double lld;
 
 
 void dk(){
+      vector<ll> v(3);
+      inp(v);
+      sort(all(v));
+      ll o=v[2]-v[1], e=v[1]-v[0];
       
-      
+      if(o%2 || e%2){
+      	cout<<-1<<endl;
+      	return;
+      }
+      cout<<e+o/2<<endl;
 
 
 }
@@ -43,7 +50,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
+    // #ifndef ONLINE_JUDGE
+    // file_io;
+    // freopen("error.txt", "w+", stderr);
+    // #endif
+    
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){

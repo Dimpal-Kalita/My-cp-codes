@@ -3,7 +3,9 @@
 
 #include<bits/stdc++.h>
 
+
 // #include <ext/pb_ds/detail/standard_policies.hpp>
+
 
 using namespace std;
 // using namespace __gnu_pbds;
@@ -14,7 +16,6 @@ using namespace std;
 #define endl                "\n"
 #define F                   first
 #define S                   second
-#define sz(x)               ((long long)((x).size()));
 #define inp(v)              for(auto &x: v) cin>>x  
 #define all(x)              (x).begin(), (x).end() 
 #define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -31,7 +32,14 @@ typedef long double lld;
 
 
 void dk(){
-      
+     string  s= "codeforces";
+     char a;
+     cin>>a;
+     sort(all(s));
+     if(binary_search(all(s), a)){
+        cout<<"YES"<<endl;
+     } 
+     else cout<<"NO"<<endl;
       
 
 
