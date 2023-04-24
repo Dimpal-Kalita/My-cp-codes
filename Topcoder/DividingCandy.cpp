@@ -82,19 +82,25 @@ class DividingCandy {
         return C - q * L;
       }
       ll ans = -1;
-      for(int i=1;i<=MAX;i++) {
+      for(int i=1;i<MAX;i++) {
         ll rem = C - i * L;
         if (rem <= 0) continue;
         ll j = min(rem / D, (ll) i - 1);
         if (j > 0) {
           ll pans = rem - j * D;
           if (ans == -1 || ans > pans) ans = pans;
-        } 
+        }        
       }
       return ans;    
     };
 };
 
+
+
+// Powered by FileEdit
+// Powered by moj 4.18 [modified TZTester]
+
+// Powered by CodeProcessor
 
 
 // Powered by FileEdit

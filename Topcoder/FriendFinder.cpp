@@ -9,10 +9,18 @@ using namespace std;
 // using namespace __gnu_pbds;
 
 
+#define md                  1000000007
+#define pb                  push_back
 #define F                   first
 #define S                   second
+#define inp(v)              for(auto &x: v) cin>>x  
+#define all(x)              (x).begin(), (x).end() 
+#define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
 
 typedef long long ll;
+typedef pair<ll,ll> pll;
+typedef pair<int,int>pii;
 typedef unsigned long long ull;
 typedef long double lld;
 // typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
@@ -72,35 +80,165 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 class FriendFinder {
   public:
-  int distance(string s) {
-			int start=0,end=0, n=s.length();
-
-			for(int i=0;i<n;i++){
-				if(s[i]=='S' || s[i]=='F'){
-					start=i;
-					break;
-				}
-			}
-			for(int i=n-1;i>=0;i--){
-				if(s[i]=='S' || s[i]=='F'){
-					end=i;
-					break;
-				}
-			}
-			
-			return end-start;
+  int distance(string line) {
+      ll start=0, end=0;
+	  for(ll i=0;i<line.size();i++){
+		  if(line[i]=='S' || line[i]=='F'){
+			  start=i;
+			  break;
+		  }
+	  }
+	  for(ll i=line.size()-1;i>=0;i--){
+		  if(line[i]=='S' || line[i]=='F'){
+			  end=i;
+			  break;
+		  }
+	  }
+	  return end-start;
   }
 };
 
+// BEGIN CUT HERE
+#include <cstdio>
+#include <ctime>
+#include <iostream>
+#include <string>
+#include <vector>
+namespace moj_harness {
+	using std::string;
+	using std::vector;
+	int run_test_case(int);
+	void run_test(int casenum = -1, bool quiet = false) {
+		if (casenum != -1) {
+			if (run_test_case(casenum) == -1 && !quiet) {
+				std::cerr << "Illegal input! Test case " << casenum << " does not exist." << std::endl;
+			}
+			return;
+		}
+		
+		int correct = 0, total = 0;
+		for (int i=0;; ++i) {
+			int x = run_test_case(i);
+			if (x == -1) {
+				if (i >= 100) break;
+				continue;
+			}
+			correct += x;
+			++total;
+		}
+		
+		if (total == 0) {
+			std::cerr << "No test cases run." << std::endl;
+		} else if (correct < total) {
+			std::cerr << "Some cases FAILED (passed " << correct << " of " << total << ")." << std::endl;
+		} else {
+			std::cerr << "All " << total << " tests passed!" << std::endl;
+		}
+	}
+	
+	int verify_case(int casenum, const int &expected, const int &received, std::clock_t elapsed) { 
+		std::cerr << "Example " << casenum << "... "; 
+		
+		string verdict;
+		vector<string> info;
+		char buf[100];
+		
+		if (elapsed > CLOCKS_PER_SEC / 200) {
+			std::sprintf(buf, "time %.2fs", elapsed * (1.0/CLOCKS_PER_SEC));
+			info.push_back(buf);
+		}
+		
+		if (expected == received) {
+			verdict = "PASSED";
+		} else {
+			verdict = "FAILED";
+		}
+		
+		std::cerr << verdict;
+		if (!info.empty()) {
+			std::cerr << " (";
+			for (size_t i=0; i<info.size(); ++i) {
+				if (i > 0) std::cerr << ", ";
+				std::cerr << info[i];
+			}
+			std::cerr << ")";
+		}
+		std::cerr << std::endl;
+		
+		if (verdict == "FAILED") {
+			std::cerr << "    Expected: " << expected << std::endl; 
+			std::cerr << "    Received: " << received << std::endl; 
+		}
+		
+		return verdict == "PASSED";
+	}
 
+	int run_test_case(int casenum__) {
+		switch (casenum__) {
+		case 0: {
+			string line               = "....SF...";
+			int expected__            = 1;
 
-// Powered by FileEdit
-// Powered by moj 4.18 [modified TZTester]
+			std::clock_t start__      = std::clock();
+			int received__            = FriendFinder().distance(line);
+			return verify_case(casenum__, expected__, received__, clock()-start__);
+		}
+		case 1: {
+			string line               = "S........F";
+			int expected__            = 9;
 
-// Powered by CodeProcessor
+			std::clock_t start__      = std::clock();
+			int received__            = FriendFinder().distance(line);
+			return verify_case(casenum__, expected__, received__, clock()-start__);
+		}
+		case 2: {
+			string line               = "..F...S..";
+			int expected__            = 4;
 
+			std::clock_t start__      = std::clock();
+			int received__            = FriendFinder().distance(line);
+			return verify_case(casenum__, expected__, received__, clock()-start__);
+		}
 
-// Powered by FileEdit
-// Powered by moj 4.18 [modified TZTester]
+		// custom cases
 
-// Powered by CodeProcessor
+/*      case 3: {
+			string line               = ;
+			int expected__            = ;
+
+			std::clock_t start__      = std::clock();
+			int received__            = FriendFinder().distance(line);
+			return verify_case(casenum__, expected__, received__, clock()-start__);
+		}*/
+/*      case 4: {
+			string line               = ;
+			int expected__            = ;
+
+			std::clock_t start__      = std::clock();
+			int received__            = FriendFinder().distance(line);
+			return verify_case(casenum__, expected__, received__, clock()-start__);
+		}*/
+/*      case 5: {
+			string line               = ;
+			int expected__            = ;
+
+			std::clock_t start__      = std::clock();
+			int received__            = FriendFinder().distance(line);
+			return verify_case(casenum__, expected__, received__, clock()-start__);
+		}*/
+		default:
+			return -1;
+		}
+	}
+}
+
+#include <cstdlib>
+int main(int argc, char *argv[]) {
+	if (argc == 1) {
+		moj_harness::run_test();
+	} else {
+		for (int i=1; i<argc; ++i)
+			moj_harness::run_test(std::atoi(argv[i]));
+	}
+}
+// END CUT HERE

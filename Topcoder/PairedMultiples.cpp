@@ -81,7 +81,7 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 class PairedMultiples {
   public:
   int selectedTotal(vector <int> values, int m) {
-		
+
 		ll ans=0;
 		for(auto x:values){
 			for(auto y:values){
@@ -93,6 +93,7 @@ class PairedMultiples {
 		}
 
 		return ans;
+      
   }
 };
 
