@@ -1,0 +1,32 @@
+Test 1 Passed
+
+Input 1: 
+S
+2
+1
+
+Expected Output : 
+E
+
+Obtained Output : 
+E 
+
+
+________________________________________________________
+
+Test 2 Passed
+
+Input 2: 
+N
+5
+0
+
+Expected Output : 
+W
+
+Obtained Output : 
+W 
+
+
+________________________________________________________
+

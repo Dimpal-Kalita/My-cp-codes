@@ -1,50 +1,67 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 23/04/2023 11:36:38
- * 
- */
+#include <iostream>
+#include <vector>
+#include <unordered_set>
 
-#include<bits/stdc++.h>
 using namespace std;
 
-#define md                  1000000007
-#define pb                  push_back
-#define endl                " \n"
-#define F                   first
-#define S                   second
-#define sz(x)               (int)(x).size()   
-#define inp(v)              for(auto &x: v) cin>>x  
-#define all(x)              (x).begin(), (x).end()
-#define rep(i, a, b)        for (int i = a; i < (b); ++i)
-#define fast_io             cin.tie(0)->sync_with_stdio(0);cin.exceptions(cin.failbit);
+void dfs(vector<vector<int>>& graph, int platform, unordered_set<int>& visited, int depth, int& count) {
+    // Base case: reached the desired depth
+    if (depth == 0) {
+        count++;
+        return;
+    }
 
-using ll  = long long;
-using ull = unsigned long long;
-using lld = long double;
-using pii = pair<int,int>;
-using pll = pair<ll,ll>;
-using vl  = vector<ll>;
-
-
-void dk(){
-      ll n;
-      cin>>n;
-      vl v(n);
-      
-
+    // Explore unvisited neighbors
+    for (int neighbor : graph[platform]) {
+        if (visited.find(neighbor) == visited.end()) {
+            visited.insert(neighbor);
+            dfs(graph, neighbor, visited, depth - 1, count);
+            visited.erase(neighbor);
+        }
+    }
 }
 
+int maximum_new_pavements(int N, int M, vector<pair<int, int>>& connections) {
+    // Step 1: Create adjacency list representation of the graph
+    vector<vector<int>> graph(N + 1);
+    for (int i = 0; i < M; i++) {
+        int A = connections[i].first;
+        int B = connections[i].second;
+        graph[A].push_back(B);
+        graph[B].push_back(A);
+    }
 
+    // Step 2: Initialize variables
+    int maxPavements = 0;
 
-int main()
-{ 
-    fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-    dk();
-   }
-  return 0;
+    // Step 3: Iterate through each pair of platforms
+    for (int x = 1; x <= N; x++) {
+        unordered_set<int> visited;
+        visited.insert(x);
+
+        // Perform DFS from platform x with a depth limit of 3
+        int count = 0;
+        dfs(graph, x, visited, 3, count);
+        maxPavements += count;
+    }
+
+    // Step 4: Return the maximum number of new pavements
+    return maxPavements;
+}
+
+int main() {
+    // Example usage
+    int N;  // Number of platforms
+    int M;  // Number of pavements
+    cin>>N>>M;
+    vector<pair<int, int>> connections;
+    for(int i=0;i<M;i++){
+        int u,v;
+        cin>>u>>v;
+        connections.push_back({u,v});
+    }
+    int maxPavements = maximum_new_pavements(N, M, connections);
+    cout << "Maximum number of new pavements Alice can add: " << maxPavements << endl;
+
+    return 0;
 }

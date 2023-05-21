@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 15/05/2023 19:00:34
+ * date: 15/05/2023 21:05:34
  * 
  */
 
@@ -27,38 +27,26 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-const int MAX_PR = 5'000'000;
-bitset<MAX_PR> isprime;
-vector<int> primeSieve(int lim) {
-     isprime.set();
-     isprime[0] = isprime[1] = 0;
-     for (int i = 4; i < lim; i += 2) isprime[i] = 0;
-     for (int i = 3; i * i < lim; i += 2)
-          if (isprime[i])
-               for (int j = i * i; j < lim; j += i * 2) isprime[j] = 0;
-     vector<int> pr;
-     for (int i = 2; i < lim; i++)
-          if (isprime[i]) pr.push_back(i);
-     return pr;
-}
-
-
-vector<int> prime= primeSieve(1e3+2);
 
 void dk(){
-      ll n;
-      cin>>n;
-      map<ll,ll> mp;
-      for(auto it:prime){
-          while(n%it==0){
-               n/=it;
-               mp[it]++;
-          }
+      ll n,x;
+      cin>>n>>x;
+      vector<pair<ll,pll>>vp(n);
+      rep(i,0,n){
+          cin>>vp[i].S.F;
       }
-      if(n>1) mp[n]++;
-      ll ans=1;
-      for(auto [x,y]:mp){
-          ans*=(y+1);
+      rep(i,0,n){
+          cin>>vp[i].S.S;
+      }
+      rep(i,0,n){
+          vp[i].F=vp[i].S.S/vp[i].S.F;
+      }
+      sort(all(vp));
+      ll ans=0;
+      rep(i,0,n){
+          ll val= min(vp[i].S.F,x/vp[i].F);
+          ans+=val;
+          x-= val*vp[i].F;
       }
       cout<<ans<<endl;
 }

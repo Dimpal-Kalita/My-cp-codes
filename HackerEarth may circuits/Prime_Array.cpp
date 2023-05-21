@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 15/05/2023 19:00:34
+ * date: 19/05/2023 23:39:00
  * 
  */
 
@@ -27,6 +27,7 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+
 const int MAX_PR = 5'000'000;
 bitset<MAX_PR> isprime;
 vector<int> primeSieve(int lim) {
@@ -41,26 +42,22 @@ vector<int> primeSieve(int lim) {
           if (isprime[i]) pr.push_back(i);
      return pr;
 }
+vector<int> prime=primeSieve(100000+3);
 
-
-vector<int> prime= primeSieve(1e3+2);
 
 void dk(){
-      ll n;
-      cin>>n;
-      map<ll,ll> mp;
-      for(auto it:prime){
-          while(n%it==0){
-               n/=it;
-               mp[it]++;
+     ll n;
+     cin>>n;
+     vector<ll> v(n);
+     inp(v);
+     ll x=count(all(v),1);
+     ll ans=0;
+     for(int i=0;i<n;i++){
+          if(binary_search(all(prime),v[i])){
+               ans+= (x*(x-1))/2;
           }
-      }
-      if(n>1) mp[n]++;
-      ll ans=1;
-      for(auto [x,y]:mp){
-          ans*=(y+1);
-      }
-      cout<<ans<<endl;
+     }
+     cout<<ans<<endl;
 }
 
 

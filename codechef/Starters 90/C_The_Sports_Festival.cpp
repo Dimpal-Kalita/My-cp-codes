@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 15/05/2023 19:00:34
+ * date: 17/05/2023 18:08:25
  * 
  */
 
@@ -27,40 +27,26 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-const int MAX_PR = 5'000'000;
-bitset<MAX_PR> isprime;
-vector<int> primeSieve(int lim) {
-     isprime.set();
-     isprime[0] = isprime[1] = 0;
-     for (int i = 4; i < lim; i += 2) isprime[i] = 0;
-     for (int i = 3; i * i < lim; i += 2)
-          if (isprime[i])
-               for (int j = i * i; j < lim; j += i * 2) isprime[j] = 0;
-     vector<int> pr;
-     for (int i = 2; i < lim; i++)
-          if (isprime[i]) pr.push_back(i);
-     return pr;
+
+const int N=2e3+7;
+ll n;
+vl v;
+vector<vl> dp(N, vl(N,-1));
+
+
+ll calc(ll l, ll r){
+     if(r<=l || l>=n || r<0) return 0;
+     if(dp[l][r]!=-1) return dp[l][r];
+     return dp[l][r]=min(calc(l+1,r),calc(l,r-1))+ (v[r]-v[l]);
+
 }
 
-
-vector<int> prime= primeSieve(1e3+2);
-
 void dk(){
-      ll n;
-      cin>>n;
-      map<ll,ll> mp;
-      for(auto it:prime){
-          while(n%it==0){
-               n/=it;
-               mp[it]++;
-          }
-      }
-      if(n>1) mp[n]++;
-      ll ans=1;
-      for(auto [x,y]:mp){
-          ans*=(y+1);
-      }
-      cout<<ans<<endl;
+     cin>>n;
+     v.resize(n);
+     inp(v);
+     sort(all(v));
+     cout<<calc(0,n-1)<<endl;
 }
 
 
@@ -70,7 +56,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 15/05/2023 19:00:34
+ * date: 06/05/2023 23:25:38
  * 
  */
 
@@ -25,42 +25,38 @@ using lld = long double;
 using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
-using vi  = vector<int>;
-
-const int MAX_PR = 5'000'000;
-bitset<MAX_PR> isprime;
-vector<int> primeSieve(int lim) {
-     isprime.set();
-     isprime[0] = isprime[1] = 0;
-     for (int i = 4; i < lim; i += 2) isprime[i] = 0;
-     for (int i = 3; i * i < lim; i += 2)
-          if (isprime[i])
-               for (int j = i * i; j < lim; j += i * 2) isprime[j] = 0;
-     vector<int> pr;
-     for (int i = 2; i < lim; i++)
-          if (isprime[i]) pr.push_back(i);
-     return pr;
-}
 
 
-vector<int> prime= primeSieve(1e3+2);
+
 
 void dk(){
-      ll n;
-      cin>>n;
-      map<ll,ll> mp;
-      for(auto it:prime){
-          while(n%it==0){
-               n/=it;
-               mp[it]++;
+      ll n,m;
+      cin>>n>>m;
+      vector<vl> adj(n+1);
+      vector<ll> degree(n+1);
+      rep(i,0,m){
+          ll x,y;
+          cin>>x>>y;
+          adj[x].pb(y);
+          adj[y].pb(x);
+          degree[x]++;
+          degree[y]++;
+      }
+
+      for(int i=1;i<=n;i++){
+          bool flag=1;
+          for(auto it:adj[i]){
+               if(degree[it]!=degree[adj[i][0]]){
+                    flag=0;
+                    break;
+               }
+          }
+
+          if(flag==1 and adj[i].size()>1 and degree[adj[i][0]]>1){
+               cout<<adj[i].size()<<" "<<degree[adj[i][0]]-1<<endl;
+               return;
           }
       }
-      if(n>1) mp[n]++;
-      ll ans=1;
-      for(auto [x,y]:mp){
-          ans*=(y+1);
-      }
-      cout<<ans<<endl;
 }
 
 

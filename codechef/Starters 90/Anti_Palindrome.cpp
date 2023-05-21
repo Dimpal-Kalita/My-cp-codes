@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 15/05/2023 19:00:34
+ * date: 17/05/2023 20:08:27
  * 
  */
 
@@ -27,40 +27,57 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-const int MAX_PR = 5'000'000;
-bitset<MAX_PR> isprime;
-vector<int> primeSieve(int lim) {
-     isprime.set();
-     isprime[0] = isprime[1] = 0;
-     for (int i = 4; i < lim; i += 2) isprime[i] = 0;
-     for (int i = 3; i * i < lim; i += 2)
-          if (isprime[i])
-               for (int j = i * i; j < lim; j += i * 2) isprime[j] = 0;
-     vector<int> pr;
-     for (int i = 2; i < lim; i++)
-          if (isprime[i]) pr.push_back(i);
-     return pr;
-}
-
-
-vector<int> prime= primeSieve(1e3+2);
 
 void dk(){
       ll n;
       cin>>n;
-      map<ll,ll> mp;
-      for(auto it:prime){
-          while(n%it==0){
-               n/=it;
-               mp[it]++;
+      string s;
+      cin>>s;
+      map<char,ll> mp;
+      for(auto it:s){
+          mp[it]++;
+      }
+      ll ct=0;
+      for(auto [x,y]:mp){
+          if(y%2) ct++;
+      }
+      if(ct>=2){
+          cout<<0<<endl;
+          return;
+      }
+      if(n%2==0){
+          cout<<((ct>0)?0:1)<<endl;
+          return;
+      }
+
+     auto all_equal = [](string s){
+          for(int i=1;i<s.size();i++){
+          if(s[i]!=s[i-1]) return false;
+          }
+          return true;
+     };
+      if(all_equal(s)){
+          cout<<2<<endl;
+          return;
+      }
+      ll ct2=0;
+      for(char i='a';i<='z';i++){
+          if(mp[i]==0){
+               cout<<1<<endl;
+               return;
           }
       }
-      if(n>1) mp[n]++;
-      ll ans=1;
+
       for(auto [x,y]:mp){
-          ans*=(y+1);
+          if(y%2==0) ct2++;
       }
-      cout<<ans<<endl;
+      if(ct2>=2){
+          cout<<1<<endl;
+          return;
+      }
+
+      cout<<2<<endl;
+
 }
 
 

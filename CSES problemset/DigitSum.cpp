@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 15/05/2023 19:00:34
+ * date: 30/04/2023 11:39:02
  * 
  */
 
@@ -25,42 +25,49 @@ using lld = long double;
 using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
-using vi  = vector<int>;
 
-const int MAX_PR = 5'000'000;
-bitset<MAX_PR> isprime;
-vector<int> primeSieve(int lim) {
-     isprime.set();
-     isprime[0] = isprime[1] = 0;
-     for (int i = 4; i < lim; i += 2) isprime[i] = 0;
-     for (int i = 3; i * i < lim; i += 2)
-          if (isprime[i])
-               for (int j = i * i; j < lim; j += i * 2) isprime[j] = 0;
-     vector<int> pr;
-     for (int i = 2; i < lim; i++)
-          if (isprime[i]) pr.push_back(i);
-     return pr;
+
+vector<vector<vl>> dp(100,vector<vl>(200,vl (2,-1)));
+
+void reset(){
+     dp.clear();
+     dp.resize(100, vector<vl>(200,vl(2,-1)));
 }
 
 
-vector<int> prime= primeSieve(1e3+2);
+ll a, b;
+
+ll recur(ll c, ll x=0,ll y=0,bool z=0){
+     
+     if(dp[x][y][z]!=-1) return dp[x][y][z];
+
+     if(x==to_string(c).length()){
+          return 0;
+     }
+
+     ll limit=9;
+     if(!z){
+          limit= to_string(c)[x]-'0';
+     }
+     ll val=0;
+     for(int i=0;i<=limit;i++){
+          val+= (z?recur(c,x+1,y+i,1):recur(c,x+1,y+i,i<limit));
+          if(i!=0) val+= y+i;
+     }
+
+     return dp[x][y][z]=val;
+}
 
 void dk(){
-      ll n;
-      cin>>n;
-      map<ll,ll> mp;
-      for(auto it:prime){
-          while(n%it==0){
-               n/=it;
-               mp[it]++;
-          }
-      }
-      if(n>1) mp[n]++;
-      ll ans=1;
-      for(auto [x,y]:mp){
-          ans*=(y+1);
-      }
-      cout<<ans<<endl;
+      ll a,b;
+      cin>>a>>b;
+      reset();
+      ll x= recur(a-1);
+      reset();
+      ll y= recur(b);
+     //  cout<<y<<" "<<x<<" /";
+      cout<<y-x<<endl;
+
 }
 
 

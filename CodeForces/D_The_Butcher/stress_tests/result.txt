@@ -1,0 +1,18 @@
+Test 1 Failed
+
+Input 1: 
+2
+8 4
+8 3
+
+
+Brute Force Output: 
+
+
+Obtained Output: 
+1 
+1 
+
+
+________________________________________________________
+

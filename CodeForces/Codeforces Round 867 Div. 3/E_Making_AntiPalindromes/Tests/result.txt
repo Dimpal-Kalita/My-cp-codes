@@ -1,0 +1,86 @@
+Test 1 Passed
+
+Input 1: 
+10
+10
+codeforces
+3
+abc
+10
+taarrrataa
+10
+dcbdbdcccc
+4
+wwww
+12
+cabbaccabaac
+10
+aadaaaaddc
+14
+aacdaaaacadcdc
+6
+abccba
+12
+dcbcaebacccd
+
+
+Expected Output : 
+0
+-1
+1
+1
+-1
+3
+-1
+2
+2
+2
+
+
+Obtained Output : 
+0 
+-1 
+1 
+1 
+-1 
+3 
+-1 
+2 
+2 
+2 
+
+
+Standard Error : 
+mp [ ] 
+mp [ {97,1} {114,1} ] 
+mp [ {99,1} ] 
+mp [ {119,2} ] 
+mp [ {97,2} {98,1} {99,2} ] 
+mp [ {97,2} {100,1} ] 
+mp [ {97,2} {99,1} {100,1} ] 
+mp [ {97,1} {98,1} {99,1} ] 
+mp [ {97,1} {99,2} {100,1} ] 
+
+
+________________________________________________________
+
+Test 2 Failed
+
+Input 2: 
+1
+12
+aabbccccbbaa
+
+Expected Output : 
+3
+
+Obtained Output : 
+4 
+
+
+Standard Error : 
+mp [ {97,2} {98,2} {99,2} ] 
+
+
+________________________________________________________
+

@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 15/05/2023 19:00:34
+ * date: 27/04/2023 20:21:15
  * 
  */
 
@@ -25,42 +25,38 @@ using lld = long double;
 using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
-using vi  = vector<int>;
-
-const int MAX_PR = 5'000'000;
-bitset<MAX_PR> isprime;
-vector<int> primeSieve(int lim) {
-     isprime.set();
-     isprime[0] = isprime[1] = 0;
-     for (int i = 4; i < lim; i += 2) isprime[i] = 0;
-     for (int i = 3; i * i < lim; i += 2)
-          if (isprime[i])
-               for (int j = i * i; j < lim; j += i * 2) isprime[j] = 0;
-     vector<int> pr;
-     for (int i = 2; i < lim; i++)
-          if (isprime[i]) pr.push_back(i);
-     return pr;
-}
 
 
-vector<int> prime= primeSieve(1e3+2);
 
 void dk(){
-      ll n;
-      cin>>n;
-      map<ll,ll> mp;
-      for(auto it:prime){
-          while(n%it==0){
-               n/=it;
-               mp[it]++;
+      ll n,k;
+      cin>>n>>k;
+      vl v(n);
+      inp(v);
+      ll ins=0;
+      for(int i=0;i<n;i++){
+          if(i>=k) break;
+          set<ll> st;
+          for(int j=i;j<n;j+=k){
+               st.insert(v[j]);
+          }
+          for(int j=i;j<n;j+=k){
+               if(!st.count(j+1))  ins++;
           }
       }
-      if(n>1) mp[n]++;
-      ll ans=1;
-      for(auto [x,y]:mp){
-          ans*=(y+1);
+
+     //  cout<<ins<<" ";
+
+      if(ins==0){
+          cout<<0<<endl;
+          return;
       }
-      cout<<ans<<endl;
+      if(ins==2){
+          cout<<1<<endl;
+          return;
+      }
+      cout<<-1<<endl;
+
 }
 
 

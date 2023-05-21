@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 15/05/2023 19:00:34
+ * date: 04/05/2023 20:10:14
  * 
  */
 
@@ -25,42 +25,43 @@ using lld = long double;
 using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
-using vi  = vector<int>;
 
-const int MAX_PR = 5'000'000;
-bitset<MAX_PR> isprime;
-vector<int> primeSieve(int lim) {
-     isprime.set();
-     isprime[0] = isprime[1] = 0;
-     for (int i = 4; i < lim; i += 2) isprime[i] = 0;
-     for (int i = 3; i * i < lim; i += 2)
-          if (isprime[i])
-               for (int j = i * i; j < lim; j += i * 2) isprime[j] = 0;
-     vector<int> pr;
-     for (int i = 2; i < lim; i++)
-          if (isprime[i]) pr.push_back(i);
-     return pr;
+
+
+
+vector<vector<vl>>dp;
+
+
+void reset(){
+     dp.clear();
+     dp.resize(20, vector<vl>(20, vector<ll>(2,-1)));
+}
+
+ll recur(ll number, ll x=0, ll y=0, ll z=0){
+     if(x==to_string(number).length()) return (y<=3?1:0);
+     if(dp[x][y][z]!=-1) return dp[x][y][z];
+
+     ll limit=9;
+     if(!z){
+         limit=to_string(number)[x]-'0';
+     }
+
+     ll val=0;
+     rep(i,0,limit+1){
+         val+=recur(number,x+1,y+(i!=0),(z?z:i<limit));
+     }
+     return dp[x][y][z]=val;
 }
 
 
-vector<int> prime= primeSieve(1e3+2);
-
 void dk(){
-      ll n;
-      cin>>n;
-      map<ll,ll> mp;
-      for(auto it:prime){
-          while(n%it==0){
-               n/=it;
-               mp[it]++;
-          }
-      }
-      if(n>1) mp[n]++;
-      ll ans=1;
-      for(auto [x,y]:mp){
-          ans*=(y+1);
-      }
-      cout<<ans<<endl;
+      ll a,b;
+      cin>>a>>b;
+      reset();
+      ll x= recur(a-1);
+      reset();
+      ll y= recur(b);
+      cout<<y-x<<endl;
 }
 
 
