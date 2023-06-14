@@ -28,8 +28,13 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     char p,q;
+     cin>>p>>q;
+     vector<ll>v={3,1,4,1,5,9};
+     ll mn=(min(p,q)-'A');
+     ll mx=(max(p,q)-'A');
+     // cout<<mn<<" "<<mx<<endl;
+     cout<<accumulate(v.begin()+mn,v.begin()+mx,0)<<endl;
 }
 
 
@@ -39,7 +44,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

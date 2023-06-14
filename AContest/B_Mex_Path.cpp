@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -68,50 +67,76 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
+ll find_mex(map<ll,ll>st){
+     ll mex=0;
+     while(st.count(mex)) mex++;
+     return mex;
+}
+
+
 void dk(){
-      ll n,m;
-      cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
+     ll n;
+     cin>>n;
+     vector<pll>v(n);
+     rep(i,0,n) cin>>v[i].F;
+     rep(i,0,n) cin>>v[i].S;
+    
+     map<ll,ll>st;
+     for(auto it:v){
+          st[it.F]++;
+          st[it.S]++;
+     }
 
-      vector<ll> pre(n), suf(n);
+     ll ans=find_mex(st);
+     map<ll,ll> mp=st;     
+     if(n%2){
+          cout<<find_mex(st)<<endl;
+          return;
+     }
 
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
+     priority_queue<ll> pq1,pq2;
+     ll temp=0;
+
+
+     for(int i=1;i<n-1;i++){
+          if(i%2==0){
+               pq1.push(v[i].F);
+          }else{
+               pq2.push(v[i].S);
           }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
+     }
+
+     
+     for(int i=0;i<n;i++){
+
+          if(i%2==0){
+               if(mp[v[i].S]==1){
+                    if(v[i].S<=ans){
+                         temp=max(temp,v[i].S);
+                    }else{
+                        cout<<ans<<endl;
+                        return;
+                    }
+               }else{
+                    cout<<ans<<endl;
+                    return;
+               }
           }
-
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
+          else{
+               if(mp[v[i].F]==1){
+                    if(v[i].F<=ans){
+                         temp=max(temp,v[i].F);
+                    }else{
+                        cout<<ans<<endl;
+                        return;
+                    }
+               }else{
+                    cout<<ans<<endl;
+                    return;
+               }
           }
-
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
-      }
-
+     }
+     cout<<temp<<endl;
 }
 
 
@@ -121,7 +146,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

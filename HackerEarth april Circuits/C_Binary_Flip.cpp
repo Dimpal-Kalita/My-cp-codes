@@ -28,8 +28,40 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n,m;
+     cin>>n>>m;
+     string s[n];
+     rep(i,0,n){
+          cin>>s[i];
+     } 
 
+     ll ans=0;
+     vector<ll>flip(n,0);
+     for(int j=m-1;j>=0;j--){ 
+
+          ll ct1=0,ct2=0;
+          for(int i=0;i<n;i++){
+               if(flip[i]%2==1){
+                    if(s[i][j]=='1') s[i][j]='0';
+                    else s[i][j]='1';
+               }
+               if(s[i][j]=='1') ct1++;
+               else ct2++;
+          }
+          if(ct1>ct2){
+               ans+=ct2;
+               for(int i=0;i<n;i++){
+                    if(s[i][j]=='1') flip[i]++;
+               }
+          }
+          else{
+               ans+=ct1;
+               for(int i=0;i<n;i++){
+                    if(s[i][j]=='0') flip[i]++;
+               }
+          }
+     }
+     cout<<ans<<endl;
 }
 
 

@@ -28,7 +28,10 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     ll x= ceil(2*sqrtl(n));
+     cout<<2*x<<endl; 
 
 }
 

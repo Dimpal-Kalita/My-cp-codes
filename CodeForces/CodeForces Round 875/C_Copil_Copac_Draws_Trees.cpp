@@ -27,9 +27,36 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+ll n;
+vector<vl> adj;
+map<pll,ll> mp;
+ll max_depth(ll u, ll p=0){
 
+     ll mx=0;
+     for(auto v:adj[u]){
+          if(v!=p){
+              if(p==0) mx=max(mx,max_depth(v,u));
+              else{
+                    if(mp[{u,v}]<mp[{u,p}]) mx=max(mx,max_depth(v,u)+1);
+                    else mx=max(mx,max_depth(v,u));
+              }
+          }
+     }
+     return mx;
+}
+
+void dk(){
+     cin>>n;
+     adj.assign(n+1,vl());
+     mp.clear();
+     rep(i,0,n-1){
+          ll u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
+          adj[v].pb(u);
+          mp[{u,v}]=mp[{v,u}]=i;
+     }
+     cout<<max_depth(1)+1<<endl;
 }
 
 

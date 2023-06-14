@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 26/05/2023 21:32:29
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -27,9 +28,23 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+ 
+ll nCr(int n, int r) {
+     long double sum=1;
+     for(int i = 1; i <= r; i++){
+          sum = sum * (n - r + i) / i;
+     }
+     return sum;
+}
+ 
 
+
+void dk(){
+      ll n;
+      cin>>n;
+      ll ans=0;
+      ans= nCr(n,5)+nCr(n,7)+nCr(n,6);
+      cout<<ans<<endl;
 }
 
 
@@ -39,7 +54,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

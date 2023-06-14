@@ -28,8 +28,24 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n,m,k;
+     cin>>n>>m>>k;
+     priority_queue<ll>pq;
+     rep(i,0,n){
+          ll x;
+          cin>>x;
+          pq.push(x);
+     }
+     while(k and pq.size()>=m){
+          ll x=0;
+          rep(i,0,m){
+               x+=pq.top();
+               pq.pop();
+          }
+          pq.push(x);
+          k--;
+     }
+     cout<<pq.top()<<endl;
 }
 
 
@@ -39,7 +55,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -26,6 +25,7 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
+
 
 
 
@@ -68,50 +68,70 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
+
+namespace SCCTarjan {
+vector<int> val, comp, z, cont;
+int Time, ncomps;
+template<class G, class F> int dfs(int j, G& g, F& f) {
+     int low = val[j] = ++Time, x;
+     z.push_back(j);
+     for (auto e : g[j])
+          if (comp[e] < 0) low = min(low, val[e] ?: dfs(e, g, f));
+     if (low == val[j]) {
+          do {
+               x = z.back();
+               z.pop_back();
+               comp[x] = ncomps;
+               cont.push_back(x);
+          } while (x != j);
+          f(cont);
+          cont.clear();
+          ncomps++;
+     }
+     return val[j] = low;
+}
+template<class G, class F> vector<int> scc(G& g, F f) {
+     int n = g.size();
+     val.assign(n, 0);
+     comp.assign(n, -1);
+     Time = ncomps = 0;
+     for (int i = 0; i < n; i++)
+          if (comp[i] < 0) dfs(i, g, f);
+     return comp;
+}
+template<class G> // convenience function w/o lambda
+vector<int> scc(G& g) {
+     return scc(g, [](auto& v) {});
+}
+} // namespace SCCTarjan
+using namespace SCCTarjan;
+
+
 void dk(){
-      ll n,m;
-      cin>>n>>m;
-      vl v(n);
+      int n;
+      cin>>n;
+      vector<vi> adj(n+1);
+      vi v(n);
       inp(v);
-      sort(all(v));
-
-      vector<ll> pre(n), suf(n);
-
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
+      int m;
+      cin>>m;
+      rep(i,0,m){
+          int u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
       }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
+      vi pos= scc(adj);
+      map<ll,vector<ll>> mp;
+      rep(i,1,n+1){
+          mp[pos[i]].pb(v[i-1]);
       }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
+      ll ans=0, way=1;
+      for(auto [x,y]: mp){
+          ll mn= *min_element(all(y));
+          ans+=mn;
+          way= (way*count(all(y),mn))%md;
       }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
-          }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
-          }
-
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
-          }
-
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
-      }
-
+      cout<<ans<<" "<<way<<endl;
 }
 
 

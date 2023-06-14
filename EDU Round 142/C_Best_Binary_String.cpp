@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 25/05/2023 20:33:17
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,7 +29,32 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+      string s;
+      cin>>s;
+      ll n=s.length();
+      for(int i=0;i<n;i++){
+          if(s[i]!='?') continue;
+          if(i-1>=0 and s[i-1]=='1'){
+               s[i]='1';
+          }
+          else if(i+1<n and s[i+1]=='1'){
+               s[i]='1';
+          }
+      }
+      for(int i=n-1;i>=0;i--){
+          if(s[i]!='?') continue;
+          if(i-1>=0 and s[i-1]=='1'){
+               s[i]='1';
+          }
+          else if(i+1<n and s[i+1]=='1'){
+               s[i]='1';
+          }
+      }
+      for(int i=0;i<n;i++){
+          if(s[i]!='?') continue;
+          s[i]='0';
+      }
+      cout<<s<<endl;
 
 }
 

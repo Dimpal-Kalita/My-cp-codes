@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
+ * date: 22/05/2023 17:25:50
  * 
  */
 
@@ -68,48 +68,45 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
+
+
+vector<pll> vp ={{0,0},{0,1},{0,-1},{1,0},{-1,0},{1,1},{1,-1},{-1,1},{-1,-1}};
 void dk(){
       ll n,m;
       cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
-
-      vector<ll> pre(n), suf(n);
-
+      vector<vl>v(n,vl(m,0)),v2(n,vl(m,0));
+      rep(i,0,n) inp(v[i]);
+      vector<pll> ans;
       for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
+          for(int j=1;j<m;j++){
+               ll val=v[i-1][j-1];
+               if(val==0) continue;
+               else if(val==1){
+                    for(auto [x,y]:vp){
+                         if(i+x>=0 && i+x<n && j+y>=0 && j+y<m){
+                              v[i+x][j+y]--;
+                         }
+                    }
+                    ans.pb({i,j});
+               }
+               else{
+                    cout<<-1<<endl;
+                    return;
+               }
           }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
-          }
+      }
 
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
-          }
 
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
+
+     //  for(auto it: v2){
+     //      for(auto it1: it){
+     //           cout<<it1<<" ";
+     //      }
+     //      cout<<endl;
+     //  }
+     //  cout<<endl;
+      for(auto it: ans){
+          cout<<it.F<<" "<<it.S<<endl;
       }
 
 }

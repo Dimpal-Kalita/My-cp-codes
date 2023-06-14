@@ -26,10 +26,43 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+ll n;
+vector<vl> adj;
+vl star;
+
+ll dfs(ll u,ll p=0){
+     ll ret=0;
+     for(auto v: adj[u]){
+          if(v==p) continue;
+          ret=max(ret,dfs(v,u));
+     }
+     ret++;
+     if(ret%3==2) star.pb(u);
+     return ret;
+}
+
 
 void dk(){
-      
+     cin>>n;
+     adj.resize(n+1); 
+     rep(i,0,n-1){
+          ll u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
+          adj[v].pb(u);
+     }
+     dfs(1);
 
+     vl ans;
+     for(auto it: star){
+          ans.pb(adj[it].size());
+     }
+
+     sort(all(ans));
+     for(auto it: ans){
+          cout<<it<<" ";
+     }
+     cout<<endl;
 }
 
 
@@ -39,7 +72,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

@@ -27,9 +27,31 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+ll comb(ll n,ll k){
+     if(k>n) return 0;
+     ll ans=n-k+1;
+     return (ans*(ans+1))/2;
+}
 
+void dk(){
+     ll n,k,q;
+     cin>>n>>k>>q;
+     vl v(n);
+     inp(v);
+     ll ans=0;
+     for(int i=0;i<n;i++){
+          if(v[i]>q) continue;
+
+          ll ct=0;
+          ll j=i;
+          while(j<n and v[j]<=q){
+               ct++;
+               j++;
+          }
+          ans+=comb(ct,k);
+          i=j-1;
+     }
+     cout<<ans<<endl;
 }
 
 

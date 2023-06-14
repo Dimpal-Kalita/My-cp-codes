@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 22/05/2023 18:13:23
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,7 +29,18 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+      ll n;
+      cin>>n;
+      ll ct=0;
+      while(n>1){
+          ct++;
+          if(n==2){
+               n--;
+               continue;
+          }
+          n%3==2?n/=3:n--; 
+      }
+      cout<<ct<<endl;
 
 }
 
@@ -39,7 +51,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

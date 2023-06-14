@@ -27,9 +27,38 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+lld n,p;
+vector<lld> v,fact(60);
+vector<vector<vector<lld>>>dp(60,vector<vector<lld>>(60,vector<lld>(60,-1)));
 
+lld recur(ll ind, ll k, ll take=0){
+     if(ind>=n){
+          if(take==0) return 0;
+          else return fact[take]*fact[n-take];
+     }
+
+     if(dp[ind][k][take]!=-1) return dp[ind][k][take];
+     lld ans=recur(ind+1,k,take);
+     if(k-v[ind]>=0){
+          ans+= recur(ind+1,k-v[ind],take+1);
+     }
+     return dp[ind][k][take]=ans;
+}
+
+
+
+void dk(){
+     cin>>n;
+     v.resize(n);
+     inp(v);
+     cin>>p;      
+     sort(all(v));
+     fact[0]=1;
+     for(int i=1;i<=50;i++){
+          fact[i]=(fact[i-1]*i);
+     }
+     lld ans=recur(0,p);
+     cout<<(ans/fact[n])<<endl;
 }
 
 
@@ -39,7 +68,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

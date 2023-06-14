@@ -28,8 +28,10 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n,k;
+     cin>>n>>k;
+     ll xx=__lg(n)+1;
+     cout<<(k>=xx?n+1:1LL<<k)<<endl;
 }
 
 

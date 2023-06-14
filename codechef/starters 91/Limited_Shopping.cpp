@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 24/05/2023 21:52:06
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -26,10 +27,32 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+const int N=505;
+vector<ll> v;
+vector<vector<vl>> dp(N,vector<vl>(N,vl(N,-1)));
+
+ll n,k;
+ll recur(ll ind, ll k,ll prev){
+     // cout<<k<<" ";
+     if(ind==n || k==0){
+          return 0;
+     }
+     if(dp[ind][k][prev]!=-1){
+          return dp[ind][k][prev];
+     }
+     ll ans=0;
+     for(int i=0;i<=min(k,prev+1);i++){
+          // cout<<v[ind]*i<<" ";
+          ans=max(ans,v[ind]*i+recur(ind+1,k-i,i));
+     }
+     return dp[ind][k][prev]=ans;
+}
 
 void dk(){
-      
-
+     cin>>n>>k;
+     v.resize(n);
+     inp(v);
+     cout<<max(recur(1,k,0),recur(1,k-1,1)*v[0])<<endl;
 }
 
 
@@ -39,7 +62,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

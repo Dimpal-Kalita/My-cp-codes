@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -26,7 +25,6 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
-
 
 
 
@@ -68,49 +66,53 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
+
 void dk(){
-      ll n,m;
-      cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
+     ll n,t,q;
+     // cin>>n;
+     vector<string>s(2);
+     cin>>s[0]>>s[1];
+     pair<ll,ll> cnt={0,0};
+     n=s[0].length();
+     rep(i,0,n){
+          if(s[0][i]==s[1][i]) cnt.F++;
+     }
 
-      vector<ll> pre(n), suf(n);
-
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
+     map<ll,ll> mp;
+     cin>>t>>q;
+     for(int i=0;i<q;i++){
+          if(mp[i]>0){
+               ll ind=mp[i]-1;
+               cnt.S--;
+               if(s[0][ind]==s[1][ind]) cnt.F++;
           }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
+          ll type;
+          cin>>type;
+          if(type==1){
+               ll ind;
+               cin>>ind;
+               mp[i+t]=ind;
+               ind--;
+               cnt.S++;
+               if(s[0][ind]==s[1][ind]) cnt.F--;
           }
+          else if(type==2){
+               ll x1,x2,ind1,ind2;
+               cin>>x1>>ind1>>x2>>ind2;
+               x1--,ind1--,x2--,ind2--;
 
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
+               if(s[0][ind1]==s[1][ind1]) cnt.F--;
+               if(s[0][ind2]==s[1][ind2]) cnt.F--;
+
+               swap(s[x1][ind1],s[x2][ind2]);
+               
+               if(s[0][ind1]==s[1][ind1]) cnt.F++;
+               if(s[0][ind2]==s[1][ind2]) cnt.F++;
+
+          }else{
+               cout<<((n-cnt.S)==cnt.F?"YES":"NO")<<endl;
           }
-
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
-      }
+     }
 
 }
 
@@ -121,7 +123,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

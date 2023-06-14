@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 26/05/2023 22:29:36
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -27,9 +28,29 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+ll n;
+vl v;
+vector<vl> dp;
 
+ll MCM(ll i,ll j){
+     if(i==j) return 0;
+     if(dp[i][j]!=-1) return dp[i][j];
+     ll ans=INT_MIN;
+     for(ll k=i;k<j;k++){
+          ans=max(ans,MCM(i,k)+MCM(k+1,j)+v[i-1]*v[k]*v[j]);
+     }
+     return dp[i][j]=ans;
+}
+
+
+void dk(){
+     cin>>n;
+     v.resize(n+2); 
+     dp.resize(n+2,vl(n+2,-1));     
+     v[0]=1;
+     rep(i,1,n+1) cin>>v[i];
+     v[n+1]=1;
+     cout<<MCM(1,n+1)<<endl;
 }
 
 
@@ -39,7 +60,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

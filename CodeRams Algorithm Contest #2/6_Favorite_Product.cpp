@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -26,7 +25,6 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
-
 
 
 
@@ -69,50 +67,54 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 void dk(){
-      ll n,m;
-      cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
-
-      vector<ll> pre(n), suf(n);
-
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
+     ll n,k;
+     cin>>n>>k;
+     vector<ll>cnt(1e6+1,0),notcnt(1e6+1,0); 
+     set<ll>st;
+     rep(i,0,n){
           ll x;
           cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
+          if(k%x==0){
+              st.insert(x);
+              notcnt[x]++;
           }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
+     }
+     ll ans=0;
+     for(auto val:st){
+
+          cnt[val]+=notcnt[val];
+          ll x=k/val;
+
+          for(ll i=1;i*i<=x;i++){
+               if(x%i==0){
+                    ll ff=i, ss=x/i;
+                    ll tt=0;
+                    if(ff==ss and ss==val){
+                         ll ct= cnt[ff];
+                         tt+= (ct*(ct-1)*(ct-2))/6;
+                    }
+                    else if(ff==ss){
+                         ll ct=cnt[ff];
+                         tt+= (ct*(ct-1))/2 * cnt[val];
+                    }else if(ff==val){
+                         ll ct=cnt[ff];
+                         tt+= (ct*(ct-1))/2 * cnt[ss];
+                    }
+                    else if(ss==val){
+                         ll ct=cnt[ss];
+                         tt+= (ct*(ct-1))/2 * cnt[ff];
+                    }
+                    else{
+                         tt+= cnt[ff]*cnt[ss]*cnt[val];
+                    }
+                    ans+=tt;
+               }
           }
-
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
-          }
-
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
-      }
-
+     }
+     // debug(v);
+     cout<<ans<<endl;
 }
+
 
 
 

@@ -27,9 +27,43 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+vector<int>generate_allPelindrome(int n){
+     vector<int>pel;
+     for(int i=0;i<n;i++){
+           int temp=i;
+           int rev=0;
+           while(temp>0){
+                int rem=temp%10;
+                rev=rev*10+rem;
+                temp/=10;
+           }
+           if(rev==i){
+                pel.pb(i);
+           }
+     }
+     return pel;
+}
 
+vector<int>pelind=generate_allPelindrome((1<<15));
+
+void dk(){
+     ll n;
+     cin>>n;
+     int ans=0;
+     vector<int>v(n);
+     vector<int> mp(1<<15,0);
+     for(auto &it:v){
+          cin>>it;
+          mp[it]++;
+     }
+     for(auto it:v){
+          for(auto it2:pelind){
+               ll x= (it2 ^ it);
+               ans+=mp[x];
+          }
+          mp[it]--;
+     }
+    cout<<ans<<endl;
 }
 
 

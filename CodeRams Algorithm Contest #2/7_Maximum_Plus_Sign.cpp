@@ -28,8 +28,23 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+      ll n;
+      cin>>n;
+      vector<vl> v(n,vector<ll>(n,0));
+      rep(i,0,n) rep(j,0,n) cin>>v[i][j];
 
+      ll mx=0,ans=0;
+
+      rep(i,0,n){
+          rep(j,0,n){
+               mx=mx+v[i][j];
+               if(ans<mx){
+                    ans=mx;
+               }
+               if(mx<0) mx=0;
+          }
+      }
+      cout<<ans<<endl;
 }
 
 
@@ -39,7 +54,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

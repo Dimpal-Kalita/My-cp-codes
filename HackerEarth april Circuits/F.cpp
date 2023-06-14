@@ -1,9 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
-* 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -27,8 +21,9 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+
 void dk(){
-      
+
 
 }
 

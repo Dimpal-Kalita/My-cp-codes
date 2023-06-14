@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -68,50 +67,54 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
+
+ll n,m,k;
+map<ll,ll> guard;
+vector<vector<ll>>adj(2e5+7);
+set<ll> st;
+vector<ll> vis(2e5+7),dp(2e5+7);
+
+
+
+
 void dk(){
-      ll n,m;
-      cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
-
-      vector<ll> pre(n), suf(n);
-
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
+     cin>>n>>m>>k;
+     rep(i,0,m){
+          ll u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
+          adj[v].pb(u);
+     }
+     rep(i,0,k){
+          ll u,v;
+          cin>>u>>v;
+          guard[u]=v+1;
+     }
+     
+     priority_queue<pll,vector<pll>,less<pll>> pq;
+     for(auto it:guard){
+          pq.push({it.S,it.F});
+          dp[it.F]=it.S;
+     }
+     while(!pq.empty()){
+          ll u=pq.top().S;
+          ll d=pq.top().F;
+          pq.pop();
+          if(vis[u]) continue;
+          for(auto v: adj[u]){
+             if(dp[v]<d-1 and d-1>0){
+                  dp[v]=d-1;
+                  pq.push({d-1,v});
+             }
           }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
-          }
-
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
-          }
-
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
-      }
-
+          vis[u]=1;
+     }
+     rep(i,1,n+1){
+          if(dp[i]) st.insert(i);
+     }
+     
+     cout<<st.size()<<endl;
+     for(auto x: st) cout<<x<<" ";
 }
 
 

@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 23/05/2023 20:48:19
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +29,24 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+      ll n;
+      cin>>n;
+      vl v(n);
+      inp(v);
+      for(int i=0;i<n;i++){
+          v[i]=v[i]-(i+1);
+      }
+      sort(all(v));
+     //  for(auto it:v){
+     //      cout<<it<<" ";
+     //  }
+     //  cout<<endl;
+      ll x=v[(n-1)/2];
+      ll sum=0;
+      for(int i=0;i<n;i++){
+          sum+=abs(v[i]-x);
+      }
+     cout<<sum<<endl;
 }
 
 
@@ -39,7 +56,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

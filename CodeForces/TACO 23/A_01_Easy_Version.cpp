@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 22/05/2023 14:09:39
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +29,31 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     string t;
+     cin>>t;
+     stack<char> st;
 
+     for(auto it:t){
+          if(it=='1'){
+               if(!st.empty() and st.top()=='0'){
+                    st.pop();
+               }else{
+                    st.push(it);
+               }
+          }
+          else{
+               st.push(it);
+          }
+     }
+
+     string s="";
+     while(!st.empty()){
+          s+=st.top();
+          st.pop();
+     }
+     cout<<s.size()<<endl;
+     reverse(all(s));
+     cout<<s<<endl;
 }
 
 
@@ -39,7 +63,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

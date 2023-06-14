@@ -27,9 +27,13 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+vector<ll> val={0,0,1,4,17,78,407,2468,17313,138554,1247051,12470592,137176613,1646119478,21399553359,299593747196,4493906208137,71902499330418,1222342488617363};
 
+
+void dk(){
+    ll n;
+    cin>>n;
+    cout<<val[n]<<endl;
 }
 
 
@@ -39,7 +43,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

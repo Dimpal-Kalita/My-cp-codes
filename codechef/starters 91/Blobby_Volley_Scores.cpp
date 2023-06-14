@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 24/05/2023 20:01:34
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +29,25 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+      ll n;
+      cin>>n;
+      string s;
+      cin>>s;
+      ll ans1=0, ans2=0;
+      ll a=1,b=0;
+      for(int i=0;i<n;i++){
+          if(s[i]=='A'){
+               a++;
+               b=0;
+               if(a>=2) ans1++;
+          }else{
+               b++;
+               if(b>=2) ans2++;
+               a=0;
+          }
 
+      }
+      cout<<ans1<<" "<<ans2<<endl;
 }
 
 

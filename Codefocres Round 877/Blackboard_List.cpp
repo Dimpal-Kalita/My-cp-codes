@@ -28,8 +28,17 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     ll mn=*min_element(all(v));
+     if(mn<0){
+          cout<<mn<<endl;
+          return;
+     }
+     sort(all(v));
+     cout<<v.back()<<endl;
 }
 
 

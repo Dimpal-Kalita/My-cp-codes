@@ -28,7 +28,21 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     string s,t;
+     cin>>s>>t;
+     rep(i,0,n){
+          if(s[i]==t[i]) continue;
+          if(s[i]=='l' && t[i]=='1') continue;
+          if(t[i]=='l' && s[i]=='1') continue;
+          if(s[i]=='o' && t[i]=='0') continue;
+          if(t[i]=='o' && s[i]=='0') continue;
+          cout<<"No\n";
+          return;
+     }
+
+     cout<<"Yes"<<endl;
 
 }
 
@@ -39,7 +53,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

@@ -27,9 +27,40 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+const int N=2e5;
+vector<vl> adj;
+ll n;
+ll ct=0;
 
+ll dfs(ll node, ll par=0){
+
+     ll ret=0;
+
+     for(auto it:adj[node]){
+          if(it==par) continue;
+          ret=max(ret,dfs(it,node));
+     }
+
+     if(node!=1 and adj[node].size()==2 and ret==1){
+          ct++;
+     }
+
+     return ret+1;
+}
+
+
+
+void dk(){
+     cin>>n;
+     adj.resize(n+1);
+     rep(i,0,n-1){
+          ll u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
+          adj[v].pb(u);
+     }
+     dfs(1);
+     cout<<ct<<endl;
 }
 
 
@@ -39,7 +70,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

@@ -27,9 +27,41 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+bool check(vl v,ll mid,ll m){
+     ll ind=0,n=v.size();
+     for(ll i=0,val=0;i<n;i++){
+          ll x = min(mid,v[i]);
+          if(x+val<mid){
+               val+=x;
+               x = 0;
+          }else{
+               x-=(mid-val);
+               val = x;
+               x = 0;
+               ind++;
+          }
+          if(ind == m) return 1;
+     }
+     return ind>=m;
+}
 
+
+void dk(){
+     ll n,m;
+     cin>>n>>m;
+     vector<ll> v(n);
+     inp(v);
+     ll l=0, r=1e18,ans=0;
+     while(l<r){
+          ll mid=(r-l)/2+l;
+          if(check(v,mid,m)){
+               ans=mid;
+               l=mid+1;
+          }else{
+               r=mid;
+          }
+     }
+     cout<<ans<<endl;
 }
 
 

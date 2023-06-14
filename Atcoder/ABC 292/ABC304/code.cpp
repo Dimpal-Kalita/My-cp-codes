@@ -1,9 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
-* 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,8 +22,9 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+   ll n,m;
+   cin>>n>>m;
+   cout<<n<<" "<<m<<endl;
 }
 
 
@@ -37,11 +32,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
+
     int n=1;
-    cin>>n;
     for(int i=0;i<n;i++){
-    dk();
-   }
-  return 0;
+        dk();
+    }
+    return 0;
 }
+

@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -69,49 +68,44 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 void dk(){
-      ll n,m;
-      cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
-
-      vector<ll> pre(n), suf(n);
-
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
+     ll n;
+     cin>>n;
+     vector<ll> v(n);
+     inp(v);
+     vector<ll>ps(n+1),ss,ee;
+     for(int i=1;i<n;i++){
+          if(i%2==1){
+               ps[i]=ps[i-1];
                continue;
           }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
+          ps[i]=ps[i-1]+v[i]-v[i-1];
+          if(i%2==0){
+               ss.pb(v[i]);
           }
-
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
+          else{
+               ee.pb(v[i]);
           }
-
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
-      }
-
+     }
+     ps[n]=ps[n-1];
+     ll q;
+     cin>>q;
+     while(q--){
+          ll l,r;
+          cin>>l>>r;
+          ll ind1=lower_bound(all(ss),l)-ss.begin();
+          ll ind2=lower_bound(all(ee),r)-ee.begin();
+          ll ans=0;
+          // ind1--;
+          // ind2--;
+          ans+=ps[2*ind2+1]-ps[2*ind1];
+          // if(ind2>=0){
+          //      ans+=r-ee[ind2];
+          // }
+          // if(ind1>=0){
+          //      ans+=l-ss[ind1];
+          // }
+          cout<<ans<<endl;
+     }
 }
 
 

@@ -28,7 +28,15 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+
+     for(auto it:v){
+          cout<<n-it+1<<" ";
+     } 
+     cout<<endl;
 
 }
 

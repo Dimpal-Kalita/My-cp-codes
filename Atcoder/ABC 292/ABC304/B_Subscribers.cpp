@@ -28,7 +28,18 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     string s;
+     cin>>s;
+     for(int i=0;i<min(3LL,(ll)s.length());i++){
+          cout<<s[i];
+     }
+
+     for(int i=3;i<s.length();i++){
+          cout<<0;
+     }
+     cout<<endl;
+
+
 
 }
 
@@ -39,7 +50,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

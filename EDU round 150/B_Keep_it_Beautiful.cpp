@@ -28,8 +28,37 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
 
+     ll mn=1e9,last=0, ct=0;
+     string ans="";
+     mn=v[0];
+     for(int i=0;i<n;i++){
+          if(ct==0){
+               if(v[i]>=last){
+                    ans+='1';
+                    last=v[i];
+               }else if(v[i]<=mn){
+                    ans+='1';
+                    ct=1;
+                    last=v[i];
+               }else{
+                    ans+='0';
+               }
+          }
+          else if(ct==1){
+               if(v[i]>=last and v[i]<=mn){
+                    ans+='1';
+                    last=v[i];
+               }else{
+                    ans+='0';
+               }
+          }
+     }
+     cout<<ans<<endl;
 }
 
 

@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 25/05/2023 20:15:10
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +29,21 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+      ll n;
+      cin>>n;
+      string s;
+      cin>>s;
+      ll ans=-1;
+      for(int i=0;i<n;i++){
+          ll ct=0,j=i;
+          while(j<n and s[j]==s[i]){
+              ct++;
+              j++;
+          }
+          ans= max(ans,ct);
+          i=j-1;
+      }
+      cout<<ans+1<<endl;
 }
 
 

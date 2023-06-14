@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 23/05/2023 20:38:50
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +29,19 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+      ll n;
+      cin>>n;
+      vl v(n);
+      inp(v);
+      ll ans=0;
+      for(auto it:v){
+          if(it<0){
+               ans-=1;
+          }else{
+               ans+=it;
+          }
+      }
+      cout<<ans<<endl;
 }
 
 

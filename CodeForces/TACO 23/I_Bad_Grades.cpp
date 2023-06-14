@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 22/05/2023 14:14:30
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +29,27 @@ using vi  = vector<int>;
 
 
 void dk(){
+      string s;
+      cin>>s;
+      bool less=0;
+      for(auto &it:s){
+          if(less==1){
+               it='9';
+               continue;
+          }
+          if(it=='7'){
+               it--;
+               less=1;
+          }
+      }
       
-
+      if(less==0){
+          s[s.length()-1]--;
+          if(s[s.length()-1]=='7'){
+               s[s.length()-1]--;
+          }
+      }
+      cout<<s<<endl;
 }
 
 
@@ -39,7 +59,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

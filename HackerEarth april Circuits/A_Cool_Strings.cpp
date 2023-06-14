@@ -28,7 +28,32 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     string s;
+     cin>>s;
+     ll n=s.length();
+     map<char,ll> mp,pos;
+     for(int i=0;i<n;i++){
+          mp[s[i]]++;
+          pos[s[i]]=i;
+
+     } 
+     ll mx=0;
+     vector<pair<ll,char>>vp;
+     for(auto [x,y]:mp){
+          mx=max(mx,y);
+     }
+     for(auto  [x,y]:mp){
+          if(y==mx){
+               vp.pb({pos[x],x});
+          }
+     }
+     sort(all(vp));
+
+     for(auto it:vp){
+          cout<<it.S;
+     }
+     cout<<endl;
+
 
 }
 

@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 24/05/2023 20:09:04
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,7 +29,19 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+      ll n,k;
+      cin>>n>>k;
+      if(n<2*k){
+          cout<<"NO"<<endl;
+          return;
+      }
+      ll odd= (n+1)/2;
+      odd-=k; 
+      if((odd)%2==0){
+          cout<<"YES"<<endl;
+          return;
+      }
+      cout<<"NO"<<endl;
 
 }
 

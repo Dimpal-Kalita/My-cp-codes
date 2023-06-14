@@ -27,9 +27,40 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+const int N=2e5+5;
+ll n,m,ans=0;
+vector<ll> adj[N],subTree(N),v;
 
+
+void dfs(int node,int par){
+
+     if(binary_search(all(v),node)) subTree[node]=1;
+
+     for(auto &it:adj[node]){
+          if(it==par) continue;
+          dfs(it,node);
+          subTree[node]+=subTree[it];
+     }
+
+     int mn=min(subTree[node],2*m-subTree[node]);
+     ans+=mn;
+}
+
+
+
+void dk(){
+     cin>>n>>m;
+     v.resize(2*m);
+     inp(v);
+     sort(all(v));
+     for(int i=0;i<n-1;i++){
+          int u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
+          adj[v].pb(u);
+     }
+     dfs(1,0);
+     cout<<ans<<endl;
 }
 
 
@@ -39,7 +70,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

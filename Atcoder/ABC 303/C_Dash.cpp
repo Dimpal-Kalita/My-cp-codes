@@ -28,7 +28,46 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n,m,h,k;
+     cin>>n>>m>>h>>k;
+     pll start={0,0};
+     string s;
+     cin>>s;
+     vector<pll> v(m);
+     map<pll,ll> vis;
+     while(m--){
+          cin>>v[m].F>>v[m].S;
+          vis[v[m]]=0;
+     } 
+     sort(all(v));
+     
+
+     for(auto it:s){
+          if(it=='R'){
+               start.F++;               
+          }
+          else if(it=='L'){
+               start.F--;
+          }
+          else if(it=='U'){
+               start.S++;
+          }
+          else if(it=='D'){
+               start.S--;
+          }
+          h--;
+          if(h<0){
+               cout<<"No"<<endl;
+               return;
+          }
+          if(h<k){
+               if(binary_search(all(v),start) and !vis[start]){
+                   h=k;
+                   vis[start]=1;
+               }
+          }
+     }
+     cout<<"Yes"<<endl;
 
 }
 
@@ -39,7 +78,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

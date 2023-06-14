@@ -28,8 +28,13 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     if(n==2 ||n==3 || n==4){
+          cout<<"Bob"<<endl;
+          return;
+     }
+     cout<<"Alice"<<endl;
 }
 
 

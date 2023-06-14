@@ -28,8 +28,26 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     vector<pll> vp;
+     rep(i,0,n){
+          ll x,y;
+          cin>>x>>y;
+          vp.pb({x,-y});
+     } 
+     sort(all(vp));
+     ll ans=0,ct=0,cur=1;
+     for(int i=0;i<n;i++){
+          if(cur!=vp[i].F){
+               cur=vp[i].F;
+               ct=0;
+          }
+          if(ct>=cur) continue;
+          ans+= (-vp[i].S);
+          ct++;
+     }
+     cout<<ans<<endl;    
 }
 
 

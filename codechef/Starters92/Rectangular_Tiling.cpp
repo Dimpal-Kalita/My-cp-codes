@@ -28,8 +28,27 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll w,l;
+     cin>>w>>l;
+     ll x=w%2;
+     if(x==0){
+          cout<<"YES"<<endl;
+          return;
+     } 
+     if((2*x+2*l)%4!=0){
+          cout<<"YES"<<endl;
+          return;
+     }
+     x=l%2;
+     if(x==0){
+          cout<<"YES"<<endl;
+          return;
+     }
+     if((2*x+2*w)%4!=0){
+          cout<<"YES"<<endl;
+          return;
+     }
+     cout<<"NO"<<endl;
 }
 
 

@@ -27,9 +27,39 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
 
+
+void dk(){
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     ll ans=0;
+     multiset<ll> st;
+     vl tt=v;
+     for(int _=0;_<2;_++){
+
+          for(int i=0;i<v.size();i++){
+               st.insert(v[i]-i);
+          }
+          
+          vector<ll> temp;
+
+          for(int i=0;i<v.size();i++){
+              ll val=v[i]-i;
+
+
+              if(st.count(val)) st.erase(st.find(val));
+
+              if(st.size()==0) continue;
+              ll mx=*st.rbegin();
+              temp.pb(tt[i]+i+mx);
+
+          }
+          v.clear(); 
+          v=temp;
+     }
+     cout<<*max_element(all(v))<<endl;
 }
 
 

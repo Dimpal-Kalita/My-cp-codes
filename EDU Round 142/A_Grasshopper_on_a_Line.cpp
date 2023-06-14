@@ -1,7 +1,8 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * date: 25/05/2023 20:08:01
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +29,15 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+      ll x,k;
+      cin>>x>>k;
+      if(x%k!=0){
+          cout<<1<<endl;
+          cout<<x<<endl;
+          return;
+      }
+      cout<<2<<endl;
+      cout<<1<<" "<<x-1<<endl;
 }
 
 

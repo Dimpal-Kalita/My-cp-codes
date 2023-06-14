@@ -28,8 +28,22 @@ using vi  = vector<int>;
 
 
 void dk(){
+      ll n;
+      cin>>n;
+      string s;
+      cin>>s;
+      string ans="";
       
-
+      for(int i=0;i<n;i++){
+          ans+=s[i];
+          ll j=i+1;
+          while(j<n and s[j]!=s[i]){
+               j++;
+          }
+          i=j;
+          // cout<<i<<" "<<j<<endl;
+      }
+      cout<<ans<<endl;
 }
 
 

@@ -28,8 +28,19 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+  ll n;
+  cin>>n;
+  vl v(n);
+  inp(v);
+  ll ans=n;
+  sort(all(v));
+  for(int i=0;i<n;i++){
+    ll j=i;
+    while(j<n && v[j]==v[i]) j++;
+    ans+= n-j;
+    i=j-1;
+  }
+  cout<<ans<<endl;
 }
 
 
@@ -39,7 +50,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

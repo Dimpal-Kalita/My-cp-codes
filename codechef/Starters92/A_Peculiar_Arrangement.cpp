@@ -27,9 +27,21 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+bool all_equal(vector<ll>v){
+     auto st=set<ll>(all(v));
+     return st.size()==1;
+}
 
+void dk(){
+     ll n,k;
+     cin>>n>>k;
+     vl v(n);
+     inp(v);
+     if(!all_equal(v) || n<3){
+          cout<<0<<endl;
+          return;
+     }
+     cout<<k<<endl;
 }
 
 

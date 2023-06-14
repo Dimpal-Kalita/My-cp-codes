@@ -28,7 +28,18 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     string s="coderams";
+     string t;
+     cin>>t;
+     map<char,ll> mp;
+     for(auto it:t) mp[it]++;
+     ll ans=1e9;
+     for(auto it:s){
+          ans=min(ans,mp[it]);
+     }
+     cout<<ans<<endl;
 
 }
 
@@ -39,7 +50,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

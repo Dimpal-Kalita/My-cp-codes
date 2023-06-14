@@ -27,6 +27,9 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+map<pll,vl> mp;
+
+
 void dk(){
       
 
@@ -39,7 +42,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

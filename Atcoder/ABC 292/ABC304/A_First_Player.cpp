@@ -28,7 +28,26 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vector<pair<ll,string>>vp;
+     ll mn=1e9, ind=0;
+     rep(i,0,n){
+          string s;
+          cin>>s;
+          ll t;
+          cin>>t;
+          vp.pb({t,s});
+          if(t<mn){
+               mn=t;
+               ind=i;
+          }
+     }
+     rotate(vp.begin(),vp.begin()+ind,vp.end());
+     for(auto it:vp){
+          cout<<it.S<<endl;
+     }
+
 
 }
 
@@ -39,7 +58,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
+ * date: 26/05/2023 21:51:13
  * 
  */
 
@@ -68,50 +68,55 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
+struct DSU {
+     vector<int> s;
+     DSU(int n): s(n, -1) {}
+     int find(int i) { return s[i] < 0 ? i : s[i] = find(s[i]); }
+     bool join(int a, int b) {
+          a = find(a), b = find(b);
+          if (a == b) return false;
+          if (s[a] > s[b]) swap(a, b);
+          s[a] += s[b], s[b] = a;
+          return true;
+     }
+     int size(int i) { return -s[find(i)]; }
+     bool same(int a, int b) { return find(a) == find(b); }
+};
+
+
 void dk(){
       ll n,m;
       cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
+      DSU dsu(n+1);
+      vl cnt(n+1,1);
+      map<ll,ll> mark;
+      mark[1]=1;
+      rep(i,0,m){
+          ll u,v;
+          cin>>u>>v;
 
-      vector<ll> pre(n), suf(n);
+          if(!cnt[u]) continue;
 
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
+          cnt[u]--;
+          cnt[v]++;
+          if(mark[u]){
+               mark[v]=1;
           }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
+          if(!cnt[u]){
+               mark[u]=0;
           }
 
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
-          }
-
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
+          dsu.join(u,v);
       }
-
+     //  debug(mark);
+      ll par=dsu.find(1);
+      ll ans=0;
+      rep(i,1,n+1){
+          if(cnt[i]){
+               ans++;
+          }
+      }
+      cout<<ans<<endl;
 }
 
 

@@ -28,8 +28,16 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     ll mn=20,ans=0;
+     for(int i=0;i<=100;i+=5){
+          if(abs(n-i)<mn){
+               mn=abs(n-i);
+               ans=i;
+          }
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -39,7 +47,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

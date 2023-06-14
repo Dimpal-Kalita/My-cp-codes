@@ -28,8 +28,28 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vl v(n);
+     map<ll,ll> mp;
+     for(int i=0;i<n;i++){
+         cin>>v[i];
+         mp[v[i]]++;
+     }
 
+     ll ct=0;
+     for(auto it:mp){
+          ll x=it.S;
+          ll big= n-it.S-ct;
+          ll small=ct;
+          if(small>=x+1 || big>=x-1 || (x==n/2 and big>0 and ct>0)){
+               ct+=x;
+               continue;
+          }
+          cout<<"No"<<endl;
+          return;
+     }
+     cout<<"Yes"<<endl;
 }
 
 
@@ -39,7 +59,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

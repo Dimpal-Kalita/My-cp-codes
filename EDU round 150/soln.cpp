@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -26,7 +25,6 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
-
 
 
 
@@ -68,50 +66,58 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
+
+
+
+
+
+map<char,ll> mp={{'A',1},{'B',10},{'C',100},{'D',1000},{'E',10000}};
+
+ll calc(string s){
+     reverse(all(s));
+     ll ans=0;
+     char mx='A';
+     for(auto it:s){
+          if(it<mx){
+               ans-=mp[it];
+          }else{
+               ans+=mp[it];
+          }
+          mx=max(mx,it);
+     }
+     return ans;
+}
+
 void dk(){
-      ll n,m;
-      cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
+     string s;
+     cin>>s;
+     ll n=s.length();
+     ll ans=calc(s);
+     map<char,ll>left,right;
 
-      vector<ll> pre(n), suf(n);
+     rep(i,0,n){
+          left[s[i]]=i;
+     }
+     for(int i=n-1;i>=0;i--){
+          right[s[i]]=i;
+     }
+     
+     for(char i='A';i<='E';i++){
+          for(char j='A';j<='E';j++){
 
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
+               char cur=s[left[i]];
+               s[left[i]]=j;
+               ans=max(ans,calc(s));
+               s[left[i]]=cur;
+          
+               cur=s[right[i]];
+               s[right[i]]=j;
+               ans=max(ans,calc(s));
+               s[right[i]]=cur;
+               
           }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
-          }
-
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
-          }
-
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
-      }
-
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -121,7 +127,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

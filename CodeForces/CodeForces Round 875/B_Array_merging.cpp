@@ -28,8 +28,43 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vl a(n), b(n);
+     inp(a);
+     inp(b);
+     map<ll,ll> ma,mb;
 
+
+     for(int i=0;i<n;i++){
+          ll ct=0, j=i;
+          while(j<n and a[j]==a[i]){
+               ct++;
+               j++;
+          }
+          ma[a[i]]=max(ma[a[i]],ct);
+          i=j-1;
+     } 
+
+     for(int i=0;i<n;i++){
+          ll ct=0, j=i;
+          while(j<n and b[j]==b[i]){
+               ct++;
+               j++;
+          }
+          mb[b[i]]=max(mb[b[i]],ct);
+          i=j-1;
+     }
+
+     ll ans=0;
+
+     for(auto [x,y]:ma){
+          ans=max(ans,y+mb[x]);
+     }
+     for(auto [x,y]:mb){
+          ans=max(ans,y+ma[x]);
+     }
+     cout<<ans<<endl;
 }
 
 
