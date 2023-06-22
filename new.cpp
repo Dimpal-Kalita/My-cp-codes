@@ -1,129 +1,100 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 14/06/2023 12:08:29
- * 
- */
+/* Trilasha Mazumder */
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-#define md                  1000000007
-#define pb                  push_back
-#define endl                " \n"
-#define F                   first
-#define S                   second
-#define sz(x)               (int)(x).size()   
-#define inp(v)              for(auto &x: v) cin>>x  
-#define all(x)              (x).begin(), (x).end()
-#define rep(i, a, b)        for (int i = a; i < (b); ++i)
-#define fast_io             cin.tie(0)->sync_with_stdio(0);cin.exceptions(cin.failbit);
-
-using ll  = long long;
-using ull = unsigned long long;
-using lld = long double;
-using pii = pair<int,int>;
-using pll = pair<ll,ll>;
-using vl  = vector<ll>;
-using vi  = vector<int>;
-
-
-
-
-
-
-/*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
-#ifndef ONLINE_JUDGE
-#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
-#else
-#define debug(x)
-#endif
-
-
-void _print(long long t) {cerr << t;}
-void _print(int t) {cerr << t;}
-void _print(string t) {cerr << t;}
-void _print(char t) {cerr << t;}
-void _print(lld t) {cerr << t;}
-void _print(double t) {cerr << t;}
-void _print(ull t) {cerr << t;}
-
-
-template <class T, class V> void _print(pair <T, V> p);
-template <class T> void _print(vector <T> v);
-template <class T> void _print(set <T> v);
-template <class T, class V> void _print(map <T, V> v);
-template <class T> void _print(multiset <T> v);
-template <class T> void _print(stack<T> v);
-template <class T> void _print(list<T> v);
-template <class T> void _print(stack<T> v){cerr<< "[" ; while(!v.empty()){_print(v.top()); cerr<< " " ; v.pop();} cerr<< "]" ;}
-template <class T> void _print(list<T> v) {cerr << "["; for(auto i: v){_print(i);cerr << " " ;} cerr<< "]";}
-template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.first); cerr << ","; _print(p.second); cerr << "}";}
-template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
-/*-----------------------------------------------Debug Ends--------------------------------------------------------------------*/
+           
+#define ll                    long long
+#define ld                    long double
+#define pb                    push_back
+#define lb                    lower_bound
+#define ub                    upper_bound
+#define ff                    first
+#define ss                    second
+#define maxpq                 priority_queue <ll> pq;
+#define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
+#define inpv(v)               for(auto &x: v) cin>>x;
+#define fr(i,n)               for (ll i=0;i<n;++i)
+#define all(str)              str.begin(), str.end()
+#define pll                   pair<ll,ll>
+#define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
+#define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
+#define printset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
+#define line                  cout<<"----------------------------------------"<<endl;
+#define arrow                 cout<<"--->";
+#define debugmap(mp)          for(auto &i: mp){cout << i.ff << "-->" << i.ss <<endl;} cout << endl;
+#define debugset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
+#define fast_io               ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define sp(x)                 fixed<<setprecision(x)
+#define PI                    3.141592653589793238
+#define bpl(n)                __builtin_popcountll(n);
+#define md                    998244353
+#define modval                1000000007
+// define endl                " \n"
+/*----------------------------------------------------------------------------------------------------------- */
 
 
 
 
-void dk(){
-      ll n,m;
-      cin>>n>>m;
-      vl v(n);
-      inp(v);
-      sort(all(v));
 
-      vector<ll> pre(n), suf(n);
 
-      for(int i=1;i<n;i++){
-          pre[i]= pre[i-1]+ (v[i]-v[i-1])*i;
-      }
-     //  debug(pre);
-      for(int i=n-2;i>=0;i--){
-          suf[i]= suf[i+1]+ (v[i+1]-v[i])*(n-i-1);
-      }
-     //  debug(suf);
-      vl tot(n);
-      for(int i=0;i<n;i++){
-          tot[i]= pre[i]+ suf[i];
-      }
-      rep(tt,0,m){
-          ll x;
-          cin>>x;
-          ll ind= lower_bound(all(v),x)-v.begin();
-          if(ind<n and ind>=0 and v[ind]==x){
-               cout<<tot[ind]<<" ";
-               continue;
-          }
-          ll y=ind-1;
-          if(y==n-1){
-               cout<<(x-v[y])*n+tot[y]<<" ";
-               continue;
-          }
+// dp[i] -> the number of coins required to make sum i
+// dp[i] = sum(dp[i-v[j]]) for all j
 
-          if(ind==0){
-               cout<<(v[0]-x)*n+tot[0]<<" ";
-               continue;
-          }
+vector<vector<int>> dp(105,vector<int>(1e6+5,-1));
+vector<ll> v;
+ll sum,n;
+ 
+ll recur(ll ind,ll sum){
+    if(sum==0) return 1;
+ 
+    if(ind>=n){
+        return 0;
+    }
+ 
+    if(v[ind]>sum){
+        return 0;
+    }
+    
+    if(dp[ind][sum]!=-1){
+        return dp[ind][sum];
+    }
+ 
+    ll ans=0;
+    if(v[ind]<=sum){
+        ans=(ans+recur(ind,sum-v[ind]))%modval;
+    }
+    ans=(ans+recur(ind+1,sum))%modval;
+    
+    return dp[ind][sum]=ans;
+}
+ 
+void solve(){
+    cin>>n>>sum;
+    v.resize(n);
+    inpv(v);
+    sort(all(v));
+    cout<<recur(0,sum)<<endl;
+}
+ 
 
-          ll left=v[ind-1], right=v[ind];
-          cout<<(x-left)*(ind)+(right-x)*(n-ind)+pre[y]+suf[ind]<<" ";
-      }
 
+int main(){
+
+fast_io;
+
+ll q=1;
+//cin>>q;
+for(ll i=0;i<q;i++){
+    solve();
+}
+    return 0;
 }
 
 
 
-int main()
-{ 
-    fast_io;
-  
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
-    dk();
-   }
-  return 0;
-}
+
+
+
+
+
+
