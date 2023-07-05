@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 29/06/2023 14:12:31
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,29 +27,18 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-bool checkHappy(ll n){
-     string s=to_string(n);
-     while(s.length()>1){
-          ll x=0;
-          for(auto it:s){
-               x+= (it-'0')*(it-'0');
-          }
-          s=to_string(x);
-     }
-     return s=="1" or s=="7";
-}
-
 void dk(){
-      ll n;
-      cin>>n;
-      ll x=n+1;
-      while(1){
-          if(checkHappy(x)){
-               cout<<x<<endl;
+     vl v(8);
+     for(auto &it:v){
+          cin>>it;
+          if(it%25!=0  || it<100 || it>675){
+               cout<<"No"<<endl;
                return;
           }
-          x++;
-      }
+     } 
+     vl temp=v;
+     sort(all(temp));
+     cout<<(temp==v?"Yes":"No")<<endl;
 }
 
 

@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 29/06/2023 14:12:31
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -27,30 +26,31 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+ll n, m;
+vector<string>v;
+vector<vl>vis;
+map<char,char>mp;
+vector<pll> dxy={{-1,0},{0,-1},{1,0},{0,1}};
 
-bool checkHappy(ll n){
-     string s=to_string(n);
-     while(s.length()>1){
-          ll x=0;
-          for(auto it:s){
-               x+= (it-'0')*(it-'0');
-          }
-          s=to_string(x);
+bool dfs(ll x, ll y){
+     if(x==n-1 and y==m-1) return 1;
+     if(vis[x][y]!=-1) return vis[x][y];
+     vis[x][y]=0;
+     bool ans=0;
+     for(auto [dx,dy]:dxy){
+          if(x+dx<0 || x+dx>=n || y+dy<0 || y+dy>=m) continue;
+          if(mp[v[x][y]]==v[x+dx][y+dy]) ans|=dfs(x+dx,y+dy);
      }
-     return s=="1" or s=="7";
+     return vis[x][y]=ans;
 }
 
 void dk(){
-      ll n;
-      cin>>n;
-      ll x=n+1;
-      while(1){
-          if(checkHappy(x)){
-               cout<<x<<endl;
-               return;
-          }
-          x++;
-      }
+      cin>>n>>m;
+      mp['s']='n',mp['n']='u',mp['u']='k',mp['k']='e',mp['e']='s';
+      v.resize(n);
+      vis.resize(n+1,vl(m+1,-1));
+      inp(v);
+      cout<<(dfs(0,0)?"Yes":"No")<<endl;
 }
 
 

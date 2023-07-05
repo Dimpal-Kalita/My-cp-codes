@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 29/06/2023 14:12:31
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,29 +27,20 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-bool checkHappy(ll n){
-     string s=to_string(n);
-     while(s.length()>1){
-          ll x=0;
-          for(auto it:s){
-               x+= (it-'0')*(it-'0');
-          }
-          s=to_string(x);
-     }
-     return s=="1" or s=="7";
-}
-
 void dk(){
-      ll n;
-      cin>>n;
-      ll x=n+1;
-      while(1){
-          if(checkHappy(x)){
-               cout<<x<<endl;
-               return;
-          }
-          x++;
-      }
+     ll n,m;
+     cin>>n>>m;
+     vector<ll> a(n), b(m);
+     inp(a);
+     inp(b);
+     ll sum1= accumulate(all(a),0ll); 
+     ll sum2= accumulate(all(b),0ll);
+     // cout<<sum1<<" "<<sum2<<endl;
+     if(sum1==sum2){
+          cout<<"Draw"<<endl;
+          return;
+     } 
+     cout<<(sum1>sum2?"Tsondu":"Tenzing")<<endl;
 }
 
 
@@ -60,7 +50,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

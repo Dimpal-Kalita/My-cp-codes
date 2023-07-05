@@ -1,0 +1,17 @@
+Test 100 Passed
+
+Input 100: 
+1
+25 1 1
+
+
+Brute Force Output: 
+NO
+
+
+Obtained Output: 
+NO 
+
+
+________________________________________________________
+

@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 29/06/2023 14:12:31
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,29 +27,31 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-bool checkHappy(ll n){
-     string s=to_string(n);
-     while(s.length()>1){
-          ll x=0;
-          for(auto it:s){
-               x+= (it-'0')*(it-'0');
-          }
-          s=to_string(x);
-     }
-     return s=="1" or s=="7";
+bool palindrome(string s){
+     return s==string(s.rbegin(),s.rend());
 }
 
+
 void dk(){
-      ll n;
-      cin>>n;
-      ll x=n+1;
-      while(1){
-          if(checkHappy(x)){
-               cout<<x<<endl;
-               return;
+     ll n;
+     cin>>n;
+     vector<string>v(n);
+     rep(i,0,n) cin>>v[i];
+     rep(i,0,n){
+          rep(j,i+1,n){
+               string t=v[i]+v[j];
+               if(palindrome(t)){
+                    cout<<"Yes"<<endl;
+                    return;
+               }
+               t=v[j]+v[i];
+               if(palindrome(t)){
+                    cout<<"Yes"<<endl;
+                    return;
+               }
           }
-          x++;
-      }
+     }
+     cout<<"No"<<endl;
 }
 
 

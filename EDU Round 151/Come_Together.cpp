@@ -1,8 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 29/06/2023 14:12:31
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,29 +27,35 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-bool checkHappy(ll n){
-     string s=to_string(n);
-     while(s.length()>1){
-          ll x=0;
-          for(auto it:s){
-               x+= (it-'0')*(it-'0');
-          }
-          s=to_string(x);
-     }
-     return s=="1" or s=="7";
-}
-
 void dk(){
-      ll n;
-      cin>>n;
-      ll x=n+1;
-      while(1){
-          if(checkHappy(x)){
-               cout<<x<<endl;
-               return;
-          }
-          x++;
-      }
+     vector<pll>v(3);
+     rep(i,0,3){
+          cin>>v[i].F>>v[i].S;
+     }
+     ll ans=1;
+
+     ll val=0;
+     if(v[1].F<v[0].F and v[2].F<v[0].F){
+          val=min(abs(v[1].F-v[0].F),abs(v[2].F-v[0].F));
+     }
+     if(v[1].S<v[0].S and v[2].S<v[0].S){
+          val+=min(abs(v[1].S-v[0].S),abs(v[2].S-v[0].S));
+     }
+     if(v[1].S>v[0].S and v[2].S>v[0].S){
+          val+=min(abs(v[1].S-v[0].S),abs(v[2].S-v[0].S));
+     }
+     ll val2=0;
+     if(v[1].F>v[0].F and v[2].F>v[0].F){
+          val2=min(abs(v[1].F-v[0].F),abs(v[2].F-v[0].F));
+     }
+     if(v[1].S<v[0].S and v[2].S<v[0].S){
+          val2+=min(abs(v[1].S-v[0].S),abs(v[2].S-v[0].S));
+     }
+     if(v[1].S>v[0].S and v[2].S>v[0].S){
+          val2+=min(abs(v[1].S-v[0].S),abs(v[2].S-v[0].S));
+     }
+     ans=max(val,val2);
+     cout<<ans<<endl;
 }
 
 
@@ -60,7 +65,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

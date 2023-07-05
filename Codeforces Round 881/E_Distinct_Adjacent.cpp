@@ -1,14 +1,13 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 29/06/2023 14:12:31
- * 
+* 
  */
 
 #include<bits/stdc++.h>
 using namespace std;
 
-#define md                  1000000007
+#define md                  998244353
 #define pb                  push_back
 #define endl                " \n"
 #define F                   first
@@ -28,30 +27,18 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-bool checkHappy(ll n){
-     string s=to_string(n);
-     while(s.length()>1){
-          ll x=0;
-          for(auto it:s){
-               x+= (it-'0')*(it-'0');
-          }
-          s=to_string(x);
-     }
-     return s=="1" or s=="7";
-}
-
 void dk(){
-      ll n;
-      cin>>n;
-      ll x=n+1;
-      while(1){
-          if(checkHappy(x)){
-               cout<<x<<endl;
-               return;
-          }
-          x++;
-      }
-}
+     ll N,M;
+     cin>>N>>M;
+     ll prev = M;
+     ll curr = (1LL * M * (M - 1)) % md;
+     for (int i = 3; i <= N; ++i) {
+          ll temp = curr;
+          curr = (1LL * (M - 1) * (prev)+1LL*(M-2)*(prev)) % md;
+          prev = temp;
+     }
+     cout<<curr<<endl;
+}    
 
 
 
