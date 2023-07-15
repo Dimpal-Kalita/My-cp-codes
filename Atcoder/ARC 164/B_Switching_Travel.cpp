@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -27,9 +27,48 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+ll n,m;
+vector<vl>adj;
+vl par,col;
+void dfs(ll node, ll parent){
+     par[node]=parent;
+     for(auto x: adj[node]){
+          if(!par[x] and col[node]!=col[x]){
+               dfs(x,parent);
+          }
+     }
+}
 
+
+void dk(){
+     cin>>n>>m;
+     adj.resize(n+1);
+     par.resize(n+1);
+     col.resize(n+1);
+     rep(i,0,m){
+          ll x,y;
+          cin>>x>>y;
+          adj[x].pb(y);
+          adj[y].pb(x);
+     }
+     rep(i,1,n+1){
+          cin>>col[i];
+     }
+     rep(i,1,n+1){
+          if(!par[i]){
+               dfs(i,i);
+          }
+     }
+
+     rep(i,1,n+1){
+          for(auto x: adj[i]){
+               if(par[i]==par[x] and col[i]==col[x]){
+                    cout<<"Yes"<<endl;
+                    return;
+               }
+          }
+     }
+     cout<<"No"<<endl;
 }
 
 
@@ -39,7 +78,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

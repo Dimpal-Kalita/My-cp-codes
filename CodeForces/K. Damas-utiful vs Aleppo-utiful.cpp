@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>

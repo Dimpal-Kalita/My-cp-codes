@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -27,9 +27,38 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
 
+ll n,m;
+vl a,b;
+
+bool check(ll mid){
+    ll x= m*mid;
+    for(auto it:a){
+        if(x>it) return 0;
+    }
+    ll val=n*mid;
+    for(auto it:b){
+        if(val>it) return 0;
+    }
+    return 1;
+}
+
+void dk(){
+    cin>>n>>m;
+    a.resize(n);
+    b.resize(m);
+    inp(a);
+    inp(b);
+    ll l=0,r=1e12,ans=0;
+    //check(100);
+    while(l<r){
+        ll mid=(l+r)/2;
+        if(check(mid)){
+            ans=mid;
+            l=mid+1;
+        }else r=mid;
+    }
+    cout<<ans<<endl;
 }
 
 
@@ -39,7 +68,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    //cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

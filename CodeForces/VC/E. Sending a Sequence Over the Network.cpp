@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,23 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     int n;
+     cin>>n;
+     vi v(n+1);
+     rep(i,1,n+1) cin>>v[i];
+     vector<bool>dp(n+1,0);
 
+     dp[0]=1;
+     for(int i=1;i<=n;i++){
+         if(i-v[i]-1>=0 and dp[i-v[i]-1]){
+             dp[i]=1;
+         }
+         if(i+v[i]<=n and dp[i-1]){
+             dp[i+v[i]]=1;
+         }
+     }
+
+     cout<<(dp[n]?"YES":"NO")<<endl;
 }
 
 

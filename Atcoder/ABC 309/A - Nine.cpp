@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,20 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+    vector<vector<int>> v={{1,2,3},{4,5,6},{7,8,9}};
+    int n,m;
+    cin>>n>>m;
+    rep(i,0,3){
+        rep(j,0,2){
+            if(v[i][j]==n and v[i][j+1]==m){
+                cout<<"Yes"<<endl;
+                return;
+            }
+        }
+    }
+    
+    cout<<"No"<<endl;
+    return;
 }
 
 
@@ -39,7 +51,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

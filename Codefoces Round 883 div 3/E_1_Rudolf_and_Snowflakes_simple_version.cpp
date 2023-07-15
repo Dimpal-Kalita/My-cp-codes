@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -26,10 +26,25 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+vl vis(1e6+10,0);
+
+
+void pre(){
+     for(int i=2;i<=1e3;i++){
+          ll sum=1+i+i*i;
+          ll x=i*i;
+          while(sum<=1e6){
+               vis[sum]=i;
+               x*=i;
+               sum+=x;
+          }
+     }
+}
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     cout<<(vis[n]?"YES":"NO")<<endl;
 }
 
 
@@ -37,7 +52,7 @@ void dk(){
 int main()
 { 
     fast_io;
-  
+    pre();
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){

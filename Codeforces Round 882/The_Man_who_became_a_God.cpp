@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,20 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n,k;
+     cin>>n>>k;
+     vl v(n);
+     inp(v);
+     vector<ll> diff;
+     for(int i=1;i<n;i++){
+          diff.pb(abs(v[i]-v[i-1]));
+     } 
+     sort(all(diff));
+     ll ans=0;
+     for(int i=0;i<n-k;i++){
+          ans+=diff[i];
+     }
+     cout<<ans<<endl;
 }
 
 

@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,24 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     int n,m;
+     cin>>n>>m;
+     map<int,int>mp1,mp2;
+     vi a(n),b(n);
+     int ans=0;
+     for(auto &it:a){
+         cin>>it;
+         mp1[it]++;
+     }
+     for(auto &it:b){
+         cin>>it;
+         mp2[it]++;
+     }
 
+     for(auto [x,y]:mp1){
+         ans+= min(y,mp2[x]);
+     }
+     cout<<ans<<endl;
 }
 
 

@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,27 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     ll x=0,ans=0;
+     vl ps(n+1,0),ss(n+1);
 
+     for(int i=0;i<n;i++){
+          ps[i+1]=v[i]^ps[i];
+     }
+     ll x=0;
+     map<ll,ll> mp;
+     for(int i=0;i<n;i++){
+          x^=v[i];
+          ans=max(ans,x);
+          for(auto it:mp){
+               ans=max(ans,x^it.F);
+          }
+          mp[x]++;
+     }
+     cout<<ans<<endl;
 }
 
 

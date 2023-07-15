@@ -28,7 +28,8 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+    int n,m;
+    cin>>n>>m;
 
 }
 

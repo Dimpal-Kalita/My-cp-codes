@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,20 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     string s="abcdefghijklmnopqrstuvwxyz";
+     ll x=2;
+     rep(i,2,27){
+          if(n%i!=0){
+               x=i;
+               break;
+          }
+     }
+     rep(i,0,n){
+          cout<<s[i%x];
+     }
+     cout<<"\n";
 }
 
 

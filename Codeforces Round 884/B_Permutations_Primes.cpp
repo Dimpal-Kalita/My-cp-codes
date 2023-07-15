@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,30 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     if(n==1){
+          cout<<1<<endl;
+          return;
+     }
+     if(n==2){
+          cout<<2<<" "<<1<<endl;
+          return;
+     }
+     vector<ll>v(n);
+     v[0]=2;
+     v[n-1]=3;
+     v[n/2]=1;
+     ll x=4;
+     for(auto &it:v){
+          if(it==0){
+               it=x++;
+          }
+     }
+     for(auto it:v){
+          cout<<it<<" ";
+     }
+     cout<<endl;
 }
 
 

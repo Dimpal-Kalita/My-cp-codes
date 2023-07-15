@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,40 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     vector<string>v(3);
+     rep(i,0,3) cin>>v[i];
 
+     rep(i,0,3){
+          char ch=v[i][0],ct=0;
+          rep(j,0,3){
+               if(v[i][j]=='.') continue;
+               if(v[i][j]==ch) ct++; 
+          }
+          if(ct==3){
+               cout<<ch<<endl;
+               return;
+          }
+     }
+     rep(i,0,3){
+          char ch=v[0][i],ct=0;
+          rep(j,0,3){
+               if(v[j][i]=='.') continue;
+               if(v[j][i]==ch) ct++;
+          }
+          if(ct==3){
+               cout<<ch<<endl;
+               return;
+          }
+     }
+     if(v[0][0]==v[1][1] and v[1][1]==v[2][2] and v[0][0]!='.'){
+          cout<<v[0][0]<<endl;
+          return;
+     }
+     if(v[0][2]==v[1][1] and v[1][1]==v[2][0] and v[0][2]!='.'){
+          cout<<v[0][2]<<endl;
+          return;
+     }
+    cout<<"DRAW"<<endl;
 }
 
 

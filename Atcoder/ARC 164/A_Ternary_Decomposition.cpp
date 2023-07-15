@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,14 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n,k;
+     cin>>n>>k;
+     ll ct=0,x=n;
+     while(x>0){
+          ct+=x%3;
+          x/=3;
+     }
+     cout<<((ct<=k and k<=n and (k-ct)%2==0)?"Yes":"No")<<endl;
 }
 
 

@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,23 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     ll mx=*max_element(all(v));
+     if(mx<=0){
+          cout<<mx<<endl;
+          return;
+     }
+     ll sum1=0,sum2=0;
+     rep(i,0,n){
+          if(v[i]>=0){
+               if(i%2) sum1+=v[i];
+               else sum2+=v[i];
+          }
+     }
+     cout<<max(sum1,sum2)<<endl;
 }
 
 

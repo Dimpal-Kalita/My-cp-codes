@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -27,9 +27,32 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+int n;
+vi v;
+set<int>ans;
+vi dp(600,INT_MIN);
 
+void dk(){
+     cin>>n;
+     v=vi(n,0);
+     inp(v);
+
+     for(int i=0;i<n;i++){
+          for(int j=0;j<600;j++){
+               if(j>v[i])
+                    dp[j^v[i]]=max(dp[j^v[i]],v[i]);
+          }
+     }
+
+     rep(i,0,501){
+          if(dp[i]>=0){
+               ans.insert(i);
+          }
+     }
+
+     for(auto it:ans){
+          cout<<it<<" ";
+     }
 }
 
 
@@ -39,7 +62,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

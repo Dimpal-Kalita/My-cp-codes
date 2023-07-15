@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,7 +28,13 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll a,b;
+     cin>>a>>b;
+     if(min(a,b)==1){
+          cout<<max(a,b)+1<<endl;
+          return;
+     }
+     cout<<1<<endl;
 
 }
 

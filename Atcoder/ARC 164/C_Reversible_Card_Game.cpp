@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * 
+* 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,20 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+      ll n;
+      cin>>n;
+      ll ans=0,mn=1e9+7,ct=0;
+      for (int i = 0; i < n; i++) {
+          ll x,y;
+          cin>>x>>y;
+          ans+=max(x,y);
+          mn=min(mn,abs(x-y));
+          if(x>y) ct++;
+      }
+      if(ct%2){
+          ans-=mn;
+      }
+      cout<<ans<<endl;
 }
 
 
@@ -39,7 +51,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }
