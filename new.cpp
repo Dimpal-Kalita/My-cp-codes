@@ -37,7 +37,6 @@ void dk(){
 int main()
 { 
     fast_io;
-  
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
