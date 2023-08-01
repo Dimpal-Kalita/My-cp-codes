@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -28,8 +27,40 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+typedef struct Ans{
+     int i,j,x;
+} Ans;
+
+
 void dk(){
-  
+     ll n,k;
+     cin>>n>>k;
+     vector<pll>vp;
+     rep(i,0,n){
+          ll x;
+          cin>>x;
+          vp.pb({x,i});
+     }
+     Ans ans;
+     sort(all(vp));
+     ll mx=-1;
+     rep(i,0,n-1){
+          ll x=0;
+          for(int j=0;j<k;j++){
+               ll t=1ll<<j;
+               if(!(vp[i].F&t) and !(vp[i+1].F&t)){
+                    x|=t;
+               }
+          }
+          ll val=(vp[i].F^x) &  (vp[i+1].F^x); 
+          if(val>mx){
+               mx=val;
+               ans.i=vp[i].S+1;
+               ans.j=vp[i+1].S+1;
+               ans.x=x;
+          }
+     }
+     cout<<ans.i<<" "<<ans.j<<" "<<ans.x<<endl; 
 }
 
 

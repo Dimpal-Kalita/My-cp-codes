@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -29,7 +28,18 @@ using vi  = vector<int>;
 
 
 void dk(){
-  
+     ll n;
+     cin>>n;
+     vector<pll>vp;
+     rep(i,0,n){
+          ll a,b;
+          cin>>a>>b;
+          if(a<=10){
+               vp.pb({b,i+1});
+          }
+     } 
+     sort(all(vp),greater<pll>());
+     cout<<vp[0].second<<endl;
 }
 
 

@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -25,34 +25,34 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
+using i128 = __int128;
 
+ll n,m;
+vl v;
 
-int n;
-vi v;
-set<int>ans;
-vi dp(600,INT_MIN);
+bool check(i128 mid){
+    i128 sum=0,val=mid*m;
+    for(int i=0;i<n;i++){
+        sum+=min(mid,(i128)v[i]);
+    }
+    return sum>=val;
+}
 
 void dk(){
-     cin>>n;
-     v=vi(n,0);
+     cin>>n>>m;
+     v.resize(n);
      inp(v);
-
-     for(int i=0;i<n;i++){
-          for(int j=0;j<600;j++){
-               if(j>v[i])
-                    dp[j^v[i]]=max(dp[j^v[i]],v[i]);
-          }
+     ll l=0,r=1e18;
+     while(l<r){
+       i128 mid=l+(r-l)/2;
+       if(check(mid)){
+           l=mid+1;
+       }
+       else{
+           r=mid;
+       }
      }
-
-     rep(i,0,501){
-          if(dp[i]>=0){
-               ans.insert(i);
-          }
-     }
-
-     for(auto it:ans){
-          cout<<it<<" ";
-     }
+     cout<<max(l-1,0LL)<<endl;
 }
 
 

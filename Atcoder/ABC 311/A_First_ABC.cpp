@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -29,7 +28,19 @@ using vi  = vector<int>;
 
 
 void dk(){
-  
+     ll n;
+     cin>>n;
+     string s;
+     cin>>s;
+     set<char>st;
+     rep(i,0,n){
+          st.insert(s[i]);
+          if(st.size()==3){
+               cout<<i+1<<endl;
+               return;
+          }
+     } 
+
 }
 
 
@@ -39,7 +50,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

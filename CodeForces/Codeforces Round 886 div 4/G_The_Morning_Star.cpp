@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 29/06/2023 14:12:31
  * 
  */
 
@@ -28,29 +27,26 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-bool checkHappy(ll n){
-     string s=to_string(n);
-     while(s.length()>1){
-          ll x=0;
-          for(auto it:s){
-               x+= (it-'0')*(it-'0');
-          }
-          s=to_string(x);
-     }
-     return s=="1" or s=="7";
-}
-
 void dk(){
-      ll n;
-      cin>>n;
-      ll x=n+1;
-      while(1){
-          if(checkHappy(x)){
-               cout<<x<<endl;
-               return;
+     ll n;
+     cin>>n;
+     map<ll,ll>mp[6];
+     ll ans=0;
+     rep(i,0,n){
+          ll x,y;
+          cin>>x>>y;
+          mp[0][x]++;
+          mp[1][y]++;
+          mp[2][x-y]++;
+          mp[3][x+y]++;
+     }
+     
+     rep(i,0,4){
+          for(auto [x,y]:mp[i]){
+               ans+= (y*(y-1));
           }
-          x++;
-      }
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -60,7 +56,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

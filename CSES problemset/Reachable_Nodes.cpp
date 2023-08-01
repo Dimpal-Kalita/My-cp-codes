@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -28,8 +27,38 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+const int mx=5e4+10;
+int n,m;
+bitset<mx> bit[mx];
+vector<vector<int>>adj(mx);
+vector<int>vis(mx);
+
+void dfs(int node){
+     vis[node]=1;
+     for(auto x:adj[node]){
+         if(!vis[x]){
+             dfs(x);
+         }
+         bit[node]|=bit[x];
+     }
+}
+
 void dk(){
-  
+     cin>>n>>m;
+     for(int i=0;i<m;i++){
+         int u,v;
+         cin>>u>>v;
+         adj[u].pb(v);
+         bit[u][v]=1;
+     }
+     for(int i=1;i<=n;i++){
+          if(!vis[i]){
+              dfs(i);
+          }
+     }
+     for(int i=1;i<=n;i++){
+         cout<<bit[i].count()+1<<" ";
+     }
 }
 
 
@@ -39,7 +68,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

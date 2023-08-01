@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -26,10 +25,35 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
+using LL  = __int128; 
+
+ll n,c;
+vl v;
+
+bool check(ll mid){
+     LL val=0;
+     for(int i=0;i<n;i++){
+          LL temp=v[i]+2*mid;
+          val=val+(temp)*(temp);
+     }
+     return val>=c;
+}
 
 
 void dk(){
-  
+     cin>>n>>c;
+     v.resize(n);
+     inp(v);
+     ll l=0,r=1e9+2;
+     while(l<r){
+          ll mid=l+(r-l)/2;
+          if(check(mid)){
+               r=mid;
+          }else{
+               l=mid+1;
+          }
+     } 
+     cout<<l<<endl;
 }
 
 

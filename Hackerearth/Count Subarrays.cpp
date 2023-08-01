@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -28,8 +27,32 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+
+bool count(ll n){
+    return (__builtin_popcount(n))%2;
+}
+
 void dk(){
-  
+      ll n;
+      cin>>n;
+      vl v(n);
+      inp(v);
+      ll ans=0;
+      ll curodd=0, cureven=0;
+      rep(i,0,n){
+          ll newodd=0,neweven=0;
+          if(count(v[i])){
+              neweven=curodd;
+              newodd= (cureven+1);
+          }else{
+              newodd=curodd;
+              neweven=cureven+1;
+          }
+          curodd=newodd;
+          cureven=neweven;
+          ans+=curodd;
+      }
+      cout<<ans<<endl;
 }
 
 

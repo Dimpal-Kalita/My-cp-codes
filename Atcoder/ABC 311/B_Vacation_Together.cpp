@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -29,7 +28,28 @@ using vi  = vector<int>;
 
 
 void dk(){
-  
+     ll n,m;
+     cin>>n>>m;
+     vector<string>s(n);
+     rep(i,0,n){
+          cin>>s[i];
+     } 
+     ll mx=0, ct=0;
+     for(int j=0;j<m;j++){
+          bool check=1;
+          for(int i=0;i<n;i++){
+               if(s[i][j]=='x') check=0;
+          }
+          if(check){
+               ct++;
+          }else{
+               mx=max(mx,ct);
+               ct=0;
+          }
+     }
+     mx=max(mx,ct);
+     cout<<mx<<endl;
+
 }
 
 
@@ -39,7 +59,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

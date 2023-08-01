@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -29,7 +28,23 @@ using vi  = vector<int>;
 
 
 void dk(){
-  
+     ll n,k;
+     cin>>n>>k;
+     vl v(n);
+     inp(v);
+     sort(all(v));
+     ll mx=1,ct=1;
+     for(int i=0;i<n;i++){
+         int j=i+1;
+         ll ct=1;
+         while(j<n and v[j]-v[j-1]<=k){
+               ct++;
+               j++;
+         }
+         mx=max(mx,ct);
+         i=j-1;
+     }
+     cout<<n-mx<<endl;
 }
 
 

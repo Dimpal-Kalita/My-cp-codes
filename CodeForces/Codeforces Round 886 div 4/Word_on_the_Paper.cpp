@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -28,8 +27,30 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+bool check(char a){
+     if(a>='a' and a<='z') return 1;
+     return 0;
+}
+
 void dk(){
-  
+     vector<string>s(8);
+     rep(i,0,8){
+          cin>>s[i];
+     }
+
+     rep(i,0,8){
+          rep(j,0,8){
+               if(check(s[i][j])){
+                    string ans="";
+                    while(i<8 and check(s[i][j])){
+                         ans+=s[i][j];
+                         i++;
+                    }
+                    cout<<ans<<endl;
+                    return;
+               }
+          }
+     }
 }
 
 

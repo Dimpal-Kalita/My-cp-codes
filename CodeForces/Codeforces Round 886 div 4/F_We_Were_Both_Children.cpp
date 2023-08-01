@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -29,7 +28,28 @@ using vi  = vector<int>;
 
 
 void dk(){
-  
+     ll n;
+     cin>>n;
+     vl v(n);
+     map<ll,ll>mp;
+     for(auto &i:v){
+          cin>>i;
+          mp[i]++;
+     } 
+     ll ans=0;
+     for(int i=1;i<=n;i++){
+          ll ct=0;
+          for(int j=1;j*j<=i;j++){
+               if(i%j==0){
+                    ct+=mp[j];
+                    if(i/j!=j){
+                         ct+=mp[i/j];
+                    }
+               }
+          }
+          ans=max(ans,ct);
+     }
+     cout<<ans<<endl;
 }
 
 

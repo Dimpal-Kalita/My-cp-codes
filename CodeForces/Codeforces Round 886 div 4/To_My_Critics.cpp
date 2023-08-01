@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
  * 
  */
 
@@ -29,7 +28,14 @@ using vi  = vector<int>;
 
 
 void dk(){
-  
+     ll a,b,c;
+     cin>>a>>b>>c;
+     if(a+b>=10 || b+c>=10 || c+a>=10){
+          cout<<"YES"<<endl;
+          return;
+     } 
+     cout<<"NO"<<endl;
+
 }
 
 

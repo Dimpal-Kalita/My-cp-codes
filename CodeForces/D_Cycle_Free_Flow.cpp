@@ -1,35 +1,31 @@
-// 2112048
-// Dimpal Kalita
-// CSE sec A
+/**
+ * 
+ * author: Dimpal Kalita
+ * 
+ */
 
 #include<bits/stdc++.h>
-
-
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-
 using namespace std;
-// using namespace __gnu_pbds;
 
 #define md                  1000000007
 #define pb                  push_back
-#define fr(i,n)             for(ll i=0;i<n;i++)
-#define fr1(i,k,n)          for(ll i=k;i<n;i++)
-#define endl                "\n"
+#define endl                " \n"
 #define F                   first
 #define S                   second
+#define sz(x)               (int)(x).size()   
 #define inp(v)              for(auto &x: v) cin>>x  
-#define all(x)              (x).begin(), (x).end() 
-#define fast_io             ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define file_io             freopen("D:/cp/input.txt", "r+", stdin);freopen("D:/cp/output.txt", "w+", stdout);
+#define all(x)              (x).begin(), (x).end()
+#define rep(i, a, b)        for (int i = a; i < (b); ++i)
+#define fast_io             cin.tie(0)->sync_with_stdio(0);cin.exceptions(cin.failbit);
 
+using ll  = long long;
+using ull = unsigned long long;
+using lld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll,ll>;
+using vl  = vector<ll>;
+using vi  = vector<int>;
 
-typedef long long ll;
-typedef pair<ll,ll> pll;
-typedef pair<int,int>pii;
-typedef unsigned long long ull;
-typedef long double lld;
-// typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds; // find_by_order, order_of_key
 
 
 
@@ -43,7 +39,7 @@ typedef long double lld;
 #endif
 
 
-void _print(ll t) {cerr << t;}
+void _print(long long t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
 void _print(char t) {cerr << t;}
@@ -70,8 +66,10 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
+
+
 struct LCA{
-    vector<vector<int>> up;
+    vector<vector<int>> up,mn;
     vector<int> tin, tout, distance;
     int timer;
     LCA(int n) {
@@ -79,17 +77,21 @@ struct LCA{
         tin.resize(n);
         tout.resize(n);
         up.assign(n, vector<int>(21, -1));
+        mn.assign(n, vector<int>(21, INT_MAX));
         distance.assign(n, 0);
     }
-    void dfs(int v, int p, vector<vector<int>> &adj, int dis) {
+    void dfs(int v, int p, vector<vector<pii>> &adj, int dis,int val=INT_MAX) {
         distance[v]=dis;
         tin[v] = ++timer;
         up[v][0] = p;
-        for (int i = 1; i < 21; i++)
+        mn[v][0]=val;
+        for (int i = 1; i < 21; i++){
             up[v][i] = up[up[v][i - 1]][i - 1];
-        for (int u : adj[v]) {
-            if (u != p)
-                dfs(u, v, adj, dis+1);
+            mn[v][i]= min(mn[v][i-1],mn[up[v][i-1]][i-1]);
+        }
+        for (auto [u,w]: adj[v]) {
+            if (u == p) continue;
+            dfs(u, v, adj, dis+1,w);
         }
         tout[v] = ++timer;
     }
@@ -112,78 +114,54 @@ struct LCA{
         return abs(distance[u] + distance[v] - 2*distance[w]);
     }
 };
-
+ 
 
 void dk(){
-    int n, q;
-    cin>>n;
-    vector<vector<int>>adj(n+1);
-    fr(i, n-1){
-      int u, v;
-      cin>>u>>v;
-      adj[u].pb(v);
-      adj[v].pb(u);
-    }
-    LCA lca(n+1);
-    lca.dfs(1, 1, adj, 0);
-
-    cin>>q;
-
-    while(q--){
-      int a, b, c;
-      cin>>a>>b>>c;
-      int l=  lca.lca(a, b);
-      int dist= lca.dist(a, b);
-
-      if(dist<=c){
-        cout<<b<<endl;
-      }
-      else if(c<=lca.dist(a,l)){
-        int x= a;
-        int d= c;
-
-        for(int i=20;i>=0;i--){
-            if(d>=(1<<i)){
-              x= lca.up[x][i];
-              d-=(1<<i);
-            }
-        }
-        cout<<x<<endl;
-      }
-      else{
-        int x= b;
-        int d= dist-c+1;
-
-        for(int i=20;i>=0;i--){
-              if(d>=(1<<i)){
-                x= lca.up[x][i];
-                d-=(1<<i);
-              }
-          } 
-         cout<<x<<endl;
-      }
-
-    }
-
-
+     int n,m;
+     cin>>n>>m;
+     vector<vector<pair<int,int>>>adj(n+1);
+     for(int i=0;i<m;i++){
+          int x,y,w;
+          cin>>x>>y>>w;
+          adj[x].pb({y,w});
+          adj[y].pb({x,w});
+     }
+     LCA lca(n+1);
+     lca.dfs(1,1,adj,0);
+     int q;
+     cin>>q;
+     while(q--){
+          int x,y;
+          cin>>x>>y;
+          int ans=INT_MAX;
+          int l=lca.lca(x,y), a=lca.dist(x,l), b=lca.dist(y,l);
+          for(int i=20;i>=0;i--){
+               if(a&(1<<i)){
+                    ans=min(ans,lca.mn[x][i]);
+                    x=lca.up[x][i];
+                    a-=(1<<i);
+               }
+          }
+          for(int i=20;i>=0;i--){
+               if(b&(1<<i)){
+                    ans=min(ans,lca.mn[y][i]);
+                    y=lca.up[y][i];
+                    b-=(1<<i);
+               }
+          }
+          cout<<ans<<endl;
+     }
 }
-
 
 
 
 int main()
 { 
     fast_io;
-    
-    //#ifndef ONLINE_JUDGE
-    //file_io;
-    //freopen("D:/cp/error.txt", "w+", stderr);
-    //#endif
-
+  
     int n=1;
-    // cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
-    //google(i+1);
     dk();
    }
   return 0;

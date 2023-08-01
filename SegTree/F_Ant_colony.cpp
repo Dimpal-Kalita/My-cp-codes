@@ -26,18 +26,20 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+struct node{
+     int mn, g,count;
+};
+
 struct Tree {
-     typedef  struct node {
-          int mn, count;
-     }  T;
-     static constexpr T unit = {INT_MAX,1};
+     typedef node T;
+     static constexpr T unit = {INT_MAX,0,1};
      T f(T a, T b) { 
-          T temp={INT_MAX,0};
-          temp.mn=min(a.mn,b.mn);
-          if(a.mn==temp.mn) temp.count+=a.count;
-          if(b.mn==temp.mn) temp.count+=b.count;
-          return temp;
-      } // (any associative fn)
+          int count=0;
+          int mn=min(a.mn,b.mn);
+          if(a.mn==mn) count+=a.count;
+          if(b.mn==mn) count+=b.count;
+          return {mn,__gcd(a.g,b.g),count};
+     } // (any associative fn)
      vector<T> s;
      int n;
      Tree(int n = 0, T def = unit): s(2 * n, def), n(n) {}
@@ -56,29 +58,27 @@ struct Tree {
 };
 
 void dk(){
-      int n,q;
-      cin>>n>>q;
-      Tree tree(n);
-      rep(i,0,n) {
-          int x;
-          cin>>x;
-          tree.update(i,{x,1});
-      } 
-      while(q--){
-          int t;
-          cin>>t;
-          if(t==1){
-              int k,u;
-              cin>>k>>u;
-              tree.update(k,{u,1});
+     int n;
+     cin>>n;
+     vi v(n);
+     inp(v);
+     Tree T(n);
+     rep(i,0,n){
+          T.update(i,{v[i],v[i],1});
+     }
+     int q;
+     cin>>q;
+     while(q--){
+          int l,r;
+          cin>>l>>r;
+          l--;
+          struct node  val=T.query(l,r);
+          if(val.mn==val.g){
+               cout<<(r-l)-val.count<<endl;
+               continue;
           }
-          else{
-              int a,b;
-              cin>>a>>b;
-              cout<<tree.query(a,b).mn<<" "<<tree.query(a,b).count<<endl;
-          }
-      }
-
+          cout<<(r-l)<<endl;
+     }
 
 }
 

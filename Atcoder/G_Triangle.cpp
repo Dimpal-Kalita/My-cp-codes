@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -27,9 +20,30 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-
+const int N=3001;
+uitset<N>bt[N];
+vector<string>v(N);
 void dk(){
-  
+    int n;
+    cin>>n;
+    rep(i,0,n){
+        string s;
+        cin>>s;
+        v[i]=s;
+        rep(j,i+1,n){
+            if(s[j]=='1'){
+                bt[i][j]=1;
+            }
+        }
+    }
+    ll ans=0;
+    rep(i,0,n){
+        rep(j,i+1,n){
+           if(v[i][j]=='1') ans+= (bt[i]&bt[j]).count();
+        }
+    }
+    cout<<ans<<endl;
+
 }
 
 
@@ -37,11 +51,12 @@ void dk(){
 int main()
 { 
     fast_io;
-  
+
     int n=1;
-    cin>>n;
+    //cin>>n;
     for(int i=0;i<n;i++){
-    dk();
-   }
-  return 0;
+        dk();
+    }
+    return 0;
 }
+
