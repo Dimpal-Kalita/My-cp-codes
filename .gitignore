@@ -5,3 +5,6 @@
 *.cpl_files
 *.jnlp
 *.cph
+*.o
+.vscode/settings.json
+.bashrc

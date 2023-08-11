@@ -28,31 +28,24 @@ using vi  = vector<int>;
 
 
 
-bool count(ll n){
-    return (__builtin_popcount(n))%2;
+ll recur(ll n){
+     if(n==0) return 0;
+     ll x=n%10;
+     n=n/10;
+     ll ans=x*(x+1)/2+ 45*n;
+     return ans+recur(n);
 }
 
+
 void dk(){
-      ll n;
-      cin>>n;
-      vl v(n);
-      inp(v);
-      ll ans=0;
-      ll curodd=0, cureven=0;
-      rep(i,0,n){
-          ll newodd=0,neweven=0;
-          if(count(v[i])){
-              neweven=curodd;
-              newodd= (cureven+1);
-          }else{
-              newodd=curodd;
-              neweven=cureven+1;
-          }
-          curodd=newodd;
-          cureven=neweven;
-          ans+=curodd;
-      }
-      cout<<ans<<endl;
+     while(1){
+         ll a,b;
+         cin>>a>>b;
+         if(a<=-1 and b<=-1) break;
+         ll ans=recur(b)-recur(a-1);
+         cout<<ans<<endl;
+     } 
+
 }
 
 
@@ -62,7 +55,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

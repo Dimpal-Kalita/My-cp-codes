@@ -3,5 +3,6 @@
         "iostream": "cpp"
     },
     "peacock.color": "#ff3d00",
-    "C_Cpp.errorSquiggles": "disabled"
+    // "C_Cpp.errorSquiggles": "disabled",
+    "editor.tabSize": 5
 }

@@ -1,46 +1,43 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 01/08/2023 07:52:49
- * 
- */
-
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define md                  1000000007
-#define pb                  push_back
-#define endl                " \n"
-#define F                   first
-#define S                   second
-#define sz(x)               (int)(x).size()   
-#define inp(v)              for(auto &x: v) cin>>x  
-#define all(x)              (x).begin(), (x).end()
-#define rep(i, a, b)        for (int i = a; i < (b); ++i)
-#define fast_io             cin.tie(0)->sync_with_stdio(0);cin.exceptions(cin.failbit);
+#define ll long long
 
-using ll  = long long;
-using ull = unsigned long long;
-using lld = long double;
-using pii = pair<int,int>;
-using pll = pair<ll,ll>;
-using vl  = vector<ll>;
-using vi  = vector<int>;
+int main() {
+    ll n, coins;
+    cin >> n;
+    cin >> coins;
 
+    vector<ll> cost(n);
+    vector<ll> sell(n);
 
-void dk(){
-  
-}
+    for (ll i = 0; i < n; ++i) {
+        cin >> cost[i];
+    }
 
+    for (ll i = 0; i < n; ++i) {
+        cin >> sell[i];
+    }
 
+    vector<pair<ll, ll>> pair;
+    for (ll i = 0; i < n; ++i) {
+        if (cost[i] <= sell[i]) {
+            pair.push_back(make_pair(cost[i], sell[i]));
+        }
+    }
 
-int main()
-{ 
-    fast_io;
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-    dk();
-   }
-  return 0;
+    sort(pair.begin(), pair.end());
+    ll profit = 0;
+
+    for (ll i = 0; i < pair.size(); ++i) {
+        if (coins < pair[i].first) {
+            break;
+        }
+        profit += pair[i].second - pair[i].first;
+        coins += pair[i].second - pair[i].first;
+    }
+
+    cout << profit << endl;
+
+    return 0;
 }
