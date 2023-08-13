@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 12/08/2023 10:04:58
  * 
  */
 
@@ -28,10 +27,40 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-string pi="3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
 void dk(){
+      vector<vl>v;
       int n;
+      cin>>n;
 
+      rep(i,0,n){
+          int k;
+          cin>>k;
+          vl temp(k);
+          inp(temp);
+          v.pb(temp);
+      }
+      ll x;
+      cin>>x;
+      ll last=39;
+      vl ans;
+      rep(i,0,n){
+          rep(j,0,v[i].size()){
+               if(v[i][j]==x){
+                    last=min(last,(ll)v[i].size());
+               }
+          }
+      }
+     rep(i,0,n){
+          rep(j,0,v[i].size()){
+               if(v[i][j]==x and v[i].size()==last){
+                    ans.pb(i+1);
+               }
+          }
+      }     
+      cout<<ans.size()<<endl;
+      for(auto x:ans){
+          cout<<x<<" ";
+      }
 }
 
 
@@ -41,7 +70,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

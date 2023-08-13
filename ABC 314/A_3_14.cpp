@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 12/08/2023 10:04:58
  * 
  */
 
@@ -27,11 +26,13 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-
 string pi="3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
 void dk(){
       int n;
-
+      cin>>n;
+      rep(i,0,n+2){
+          cout<<pi[i];
+      }
 }
 
 
@@ -41,7 +42,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

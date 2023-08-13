@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 12/08/2023 10:04:58
  * 
  */
 
@@ -28,10 +27,30 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-string pi="3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
 void dk(){
-      int n;
-
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     ll mx=*max_element(all(v)); 
+     ll ct=count(all(v),mx);
+     if(ct==n){
+          cout<<-1<<endl;
+          return;
+     }
+     cout<<n-ct<<" "<<ct<<endl;
+     for(auto i:v){
+          if(i!=mx){
+               cout<<i<<" ";
+          }
+     }
+     cout<<endl;
+     for(auto i:v){
+          if(i==mx){
+               cout<<i<<" ";
+          }
+     }
+     cout<<endl;
 }
 
 

@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 10/08/2023 18:21:34
  * 
  */
 
@@ -26,6 +25,7 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
+
 
 
 
@@ -66,48 +66,65 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
-
-int n;
-vector<vector<pii>>adj;
-vector<int>dp,ans;
-int dfs(int node,int par){
-     int val=0;
-     for(auto x:adj[node]){
-         if(x.F!=par){
-             val+=dfs(x.F,node);
-             val+=x.S;
-         }
-     }
-     return dp[node]=val;
-}
-
-
-void dfs2(int node,int par,int val){
-     ans[node]=val+dp[node];
-     for(auto x:adj[node]){
-         if(x.F!=par){
-             int mn=1;
-             if(x.S==0) mn=-1;
-             dfs2(x.F,node,ans[node]-dp[x.F]-mn);
-         }
-     }
-}
-
 void dk(){
-     cin>>n;
-     adj.resize(n+1);
-     dp.resize(n+1);
-     ans.resize(n+1);
-     for(int i=0;i<n-1;i++){
-         int u,v;
-         cin>>u>>v;
-         adj[u].pb({v,0});
-         adj[v].pb({u,1});
+     ll n;
+     cin>>n; 
+     vector<vl>v;
+     for(int i=0;i<n;i++){
+          ll x,y,a,b;
+          cin>>x>>y>>a>>b;
+          v.pb({x,y,b});
      }
-     dfs(1,0);
-     dfs2(1,0,0);
-     rep(i,1,n+1){
-          cout<<ans[i]<<" ";
+     sort(all(v));
+     ll seg=1;
+     ll begin=v[0][0];
+     ll end=v[0][1];
+     map<ll,ll>mp;
+     ll mx=v[0][2];
+     map<ll,pll>mp2;
+     mp2[0]={0,0};
+     mp2[seg]={begin,end};
+     mp[seg]=v[0][2];
+
+     for(int i=0;i<n;i++){
+          if(v[i][0]<=mx){
+               mx=max(mx,v[i][2]);
+               mp[seg]=max(mp[seg],v[i][2]);
+               end=max(end,v[i][1]);
+               mp2[seg]={begin,end};
+          }else{
+               mx=v[i][2];
+               seg++;
+               mp[seg]=v[i][2];
+               begin=v[i][0];
+               end=v[i][1];
+               mp2[seg]={begin,end};
+          }
+     }
+     // debug(v);
+     // debug(mp);
+     // debug(mp2);
+     vector<ll>l,r;
+     map<pll,ll>mp3;
+     for(auto i:mp2){
+          l.pb(i.S.F);
+          r.pb(i.S.S);
+          mp3[i.S]=i.F;
+     }
+
+
+     ll q;
+     cin>>q;
+     while(q--){
+          ll x;
+          cin>>x;
+          ll ans=x;
+          ll ind=upper_bound(all(l),x)-l.begin();
+          ind--;
+          if(x<=r[ind]){
+               ans=max(ans,mp[mp3[{l[ind],r[ind]}]]);
+          }
+          cout<<ans<<" ";
      }
      cout<<endl;
 }
@@ -119,7 +136,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 12/08/2023 10:04:58
  * 
  */
 
@@ -28,10 +27,29 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-string pi="3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
 void dk(){
-      int n;
-
+     ll n,m;
+     cin>>n>>m;
+     map<ll,vl>mp;
+     string s;
+     cin>>s;
+     rep(i,0,n){
+          ll x;
+          cin>>x;
+          mp[x].pb(i);
+     }
+     string ans=s;
+     for(auto [x,v]:mp){
+          string temp="";
+          for(auto y:v){
+               temp+=s[y];
+          }
+          rotate(temp.begin(),temp.begin()+sz(temp)-1,temp.end());
+          for(int i=0;i<sz(v);i++){
+               ans[v[i]]=temp[i];
+          }
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -41,7 +59,7 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }
