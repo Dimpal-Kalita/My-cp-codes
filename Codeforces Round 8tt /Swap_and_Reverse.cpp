@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -26,28 +25,31 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
- 
 
-
-vi operator+=(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
-vi operator+(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
 
 void dk(){
-      vi a={1,2,3,4,5};
-      vi b={7,8};
-      vi temp=a+b;
-      a+=b;
-      for(auto x: temp){
-          cout<<x<<" ";
-      }
+     ll n,k;
+     cin>>n>>k;
+     string s;
+     cin>>s;
+     if(k%2){
+          string a="",b="";
+          for(int i=0;i<n;i++){
+               if(i%2) a+=s[i];
+               else b+=s[i];
+          }
+          sort(all(a));
+          sort(all(b));
+          for(int i=0;i<n;i++){
+               if(i%2) s[i]=a[i/2];
+               else s[i]=b[i/2];
+          }
+          cout<<s<<endl;
+     }else{
+          sort(all(s));
+          cout<<s<<endl;
+     }
+
 }
 
 
@@ -57,7 +59,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

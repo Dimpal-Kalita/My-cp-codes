@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -26,28 +25,33 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
- 
 
-
-vi operator+=(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
-vi operator+(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
 
 void dk(){
-      vi a={1,2,3,4,5};
-      vi b={7,8};
-      vi temp=a+b;
-      a+=b;
-      for(auto x: temp){
-          cout<<x<<" ";
+      int n,a,q;
+      cin>>n>>a>>q;
+      string s;
+      cin>>s;
+      int plus=count(all(s),'+');
+      int minus=count(all(s),'-');
+      if(a+plus<n){
+          cout<<"NO"<<endl;
+          return;
       }
+      int ct=a;
+      if(ct>=n){
+          cout<<"YES"<<endl;
+          return;
+      }
+      for(auto i:s){
+          if(i=='+') ct++;
+          else ct--;
+          if(ct>=n){
+               cout<<"YES"<<endl;
+               return;
+          }
+      }
+      cout<<"MAYBE"<<endl;
 }
 
 
@@ -57,7 +61,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

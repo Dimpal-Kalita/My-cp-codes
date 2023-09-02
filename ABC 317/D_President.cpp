@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -26,28 +25,38 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
- 
 
 
-vi operator+=(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
+
+
+
+int n;
+vector<array<ll,3>>v;
+ll total=0;
+vector<vector<ll>>dp;
+ll recur(ll ind, ll sum){
+     if(ind==n){
+          if(sum>total-sum) return 0;
+          else return 1e12;
+     }
+     if(dp[ind][sum]!=-1) return dp[ind][sum];
+     ll x=(v[ind][0]+v[ind][1]+1)/2;
+     ll val=max(0ll,x-v[ind][0]);
+     return dp[ind][sum]=min(recur(ind+1,sum+v[ind][2])+val,recur(ind+1,sum));
 }
-vi operator+(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
+
+
 
 void dk(){
-      vi a={1,2,3,4,5};
-      vi b={7,8};
-      vi temp=a+b;
-      a+=b;
-      for(auto x: temp){
-          cout<<x<<" ";
-      }
+     cin>>n;
+     rep(i,0,n){
+          int x,y,z;
+          cin>>x>>y>>z;
+          v.pb({x,y,z});
+          total+=z;
+     }
+     dp.resize(n+1,vector<ll>(total+1,-1));
+     cout<<recur(0,0)<<endl;
 }
 
 

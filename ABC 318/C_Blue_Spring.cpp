@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -26,28 +25,24 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
- 
 
 
-vi operator+=(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
+ll mdiv(ll n,ll d){
+     if(n<=0) return 0;
+     return n/d+(n%d!=0);
 }
-vi operator+(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
-
 void dk(){
-      vi a={1,2,3,4,5};
-      vi b={7,8};
-      vi temp=a+b;
-      a+=b;
-      for(auto x: temp){
-          cout<<x<<" ";
+      ll n,d,p;
+      cin>>n>>d>>p;
+      vl v(n);
+      inp(v);
+      sort(all(v));
+      ll ans=mdiv(n,d)*p,sum=0;
+      for(int i=0;i<n;i++){
+          sum+=v[i];
+          ans=min(ans,mdiv(n-i-1,d)*p+sum);
       }
+      cout<<ans<<endl;
 }
 
 

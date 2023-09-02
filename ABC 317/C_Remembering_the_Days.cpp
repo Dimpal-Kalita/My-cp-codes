@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -26,28 +25,39 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
- 
 
 
-vi operator+=(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
-vi operator+(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
+
+
+ll max_distance( vector<vector<pair<int,ll>>> &adj, int s,vector<int>&vis) {
+     ll mx=0;
+     vis[s]=1;
+     for(auto i:adj[s]){
+          if(!vis[i.F]){
+               mx=max(mx,max_distance(adj,i.F,vis)+i.S);
+          }
+     }
+     vis[s]=0;
+     return mx;
 }
 
 void dk(){
-      vi a={1,2,3,4,5};
-      vi b={7,8};
-      vi temp=a+b;
-      a+=b;
-      for(auto x: temp){
-          cout<<x<<" ";
+      ll n,m;
+      cin>>n>>m;
+      vector<vector<pair<int,ll>>>adj(n+1);
+      rep(i,0,m){
+           int x,y;
+           ll w;
+           cin>>x>>y>>w;
+           adj[x].pb({y,w});
+           adj[y].pb({x,w});
       }
+      ll mx=0;
+      rep(i,1,n+1){
+          vector<int>vis(n+1,0);
+          mx=max(mx,max_distance(adj,i,vis));
+      }
+      cout<<mx<<endl;
 }
 
 

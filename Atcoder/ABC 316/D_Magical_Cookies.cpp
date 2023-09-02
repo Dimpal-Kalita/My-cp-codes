@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -26,28 +25,36 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
- 
 
-
-vi operator+=(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
-vi operator+(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
 
 void dk(){
-      vi a={1,2,3,4,5};
-      vi b={7,8};
-      vi temp=a+b;
-      a+=b;
-      for(auto x: temp){
-          cout<<x<<" ";
-      }
+     ll n,m;
+     cin>>n>>m;
+     vector<string>v(n);
+     rep(i,0,n) cin>>v[i];
+
+     vector<vector<ll>>row(n,vl(26,0));
+     vector<vector<ll>>col(n,vl(26,0));
+
+     rep(i,0,n){
+        rep(j,0,m){
+          row[i][v[i][j]-'a']++;
+          col[j][v[i][j]-'a']++;
+        }
+     }
+
+     for(int _=0;_<2*n;_++){
+          vector<ll>r;
+          for(int i=0;i<n;i++){
+            set<ll>st;
+            for(int j=0;j<26;j++){
+              if(row[i][j]>0) st.insert(j);
+            }
+          }
+
+
+     }
+    //  cout<<ans<<endl;
 }
 
 
@@ -57,7 +64,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    // cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

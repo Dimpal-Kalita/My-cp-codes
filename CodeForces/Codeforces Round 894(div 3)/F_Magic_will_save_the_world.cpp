@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -26,28 +25,50 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
- 
 
 
-vi operator+=(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
-vi operator+(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
+ll w,f,n;
+vi v;
+
+
+bool check(ll curw,ll curf,ll sum){
+     if(curf>=1e6 || curw>=1e6) return 1;
+     ll mx=max(curw,curf);
+     vector<int>dp(mx+1,INT_MIN);
+
+     dp[0]=0;
+     for(int j=0;j<n;j++){
+          for(int i=mx;i>=0;i--){
+             if(v[j]<=i and dp[i-v[j]]!=INT_MIN){
+                    dp[i]=max(dp[i],(dp[i-v[j]]+v[j]));
+             }
+          }
+     }
+     ll mxx=0;
+     for(int i=0;i<=mx;i++){
+          mxx=max(mxx,(ll)dp[i]);
+     }
+     sum-=mxx;
+     return sum<=min(curw,curf);
 }
 
 void dk(){
-      vi a={1,2,3,4,5};
-      vi b={7,8};
-      vi temp=a+b;
-      a+=b;
-      for(auto x: temp){
-          cout<<x<<" ";
-      }
+     cin>>w>>f;
+     cin>>n;
+     v.assign(n,0);
+     inp(v);
+     ll sum=accumulate(all(v),0LL);
+     ll l=1,r=1e6+10,ans=0;
+     while(l<r){
+          ll mid=(r-l)/2+l;
+          if(check(w*mid,f*mid,sum)){
+               ans=mid;
+               r=mid;
+          }else{
+               l=mid+1;
+          }
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -57,7 +78,7 @@ int main()
     fast_io;
   
     int n=1;
-//     cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }
