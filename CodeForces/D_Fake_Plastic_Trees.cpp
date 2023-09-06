@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -27,50 +27,44 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-ll n,h,k;
-vector<pll>v;
+ll n;
+vector<pll> v;
+vector<vl>adj;
+ll ans;
 
-bool check(lld R, ll x, ll y){
-    ll n=v.size();
-    if(x-R<=0 || x+R>=h) return false;
-    if(y-R<=0 || y+R>=h) return false;
-    for(int i=0;i<n;i++){
-      lld dist=(v[i].F-x)*(v[i].F-x)+(v[i].S-y)*(v[i].S-y);
-      if(dist<=R*R) return false;
+ll dfs(ll node, ll par){
+    ll mn=0;
+    for(auto x: adj[node]){
+        if(x!=par){
+            mn+=dfs(x,node);
+        }
     }
-    return true;
+    mn=min(mn,v[node].S);
+    if(mn<v[node].F){
+      ans++;
+      mn=v[node].S;
+    }
+    return mn;
 }
 
 
+
 void dk(){
-    cin>>h>>k>>n;
-    rep(i,0,n){
-      int x,y;
-      cin>>x>>y;
-      v.pb({x,y});
+    cin>>n;
+    ans=0;
+    v.resize(n+1);
+    adj.assign(n+1,{});
+    rep(i,0,n-1){
+      ll x=i+2,y;
+      cin>>y;
+      adj[x].pb(y);
+      adj[y].pb(x);
     }
-    lld ans=0;
-    for(int x=0;x<=h;x++){
-      for(int y=0;y<=k;y++){
-        
-            ll mn=200;
-            lld l=0,r=mn;
-
-            while(r-l>1e-9){
-              lld mid=(l+r)/2;
-              if(check(mid,x,y)){
-                  l=mid;
-              }
-              else{
-                  r=mid;
-              }
-            }
-
-            ans=max(ans,l);
-      }
+    rep(i,1,n+1){
+        cin>>v[i].F>>v[i].S;
     }
-
-    cout<<fixed<<setprecision(9)<<ans<<endl;
+    dfs(1,0);
+    cout<<ans<<endl;
 }
 
 
@@ -80,7 +74,7 @@ int main()
     fast_io;
   
     int n=1;
-    // cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
     dk();
    }

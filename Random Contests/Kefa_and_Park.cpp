@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -27,9 +27,35 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+ll n,m;
+vector<vl>adj;
+vl v;
+ll dfs(ll u, ll p, ll ct){
+          ll ans=0;
+          if(v[u]) ct++;
+          else ct=0;
+          if(ct>m) return 0;
+          if(adj[u].size()==1 && u!=1) return 1;
+          for(auto v: adj[u]){
+               if(v!=p){
+                    ans+=dfs(v,u,ct);
+               }
+          }
+          return ans;
+}
 
+void dk(){
+     cin>>n>>m;
+     adj.resize(n+1);
+     v.resize(n+1);
+     rep(i,1,n+1) cin>>v[i];
+     rep(i,0,n-1){
+           ll u,v;
+           cin>>u>>v;
+           adj[u].pb(v);
+           adj[v].pb(u);
+     }
+     cout<<dfs(1,0,0)<<endl;
 }
 
 
@@ -38,9 +64,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

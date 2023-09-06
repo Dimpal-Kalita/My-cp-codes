@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -28,8 +28,30 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     ll mn=1e12,cur=0;
+     ll last=0,sum=0;
+     map<ll,vl>mp;
+     for(auto i:v){
+          cur+=i;
+          sum+=i;
+          if(cur>0){
+               last=sum;
+               cur=0; 
+          }
+          if(mn>=cur){
+               mn=cur;
+               mp[mn].pb(last);
+          }
+     }
+     ll mx=0,ind=0;
+     for(auto i:mp[mn]){
+          mx=max(mx,i-ind*mn);
+     }
+     cout<<mx<<endl;
 }
 
 
@@ -38,9 +60,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

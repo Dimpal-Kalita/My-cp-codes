@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
-* 
+ * 
  */
 
 #include<bits/stdc++.h>
@@ -27,9 +27,31 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
 
+
+void dk(){
+     ll n,k;
+     cin>>n>>k;
+     vl v(n);
+     inp(v);
+     list<int>list;
+     for(int i=0;i<k;i++){
+           while(!list.empty() && v[list.back()]>=v[i]){
+                list.pop_back();
+           }
+           list.push_back(i);
+     }
+     for(int i=k,j=0;i<n;i++,j++){
+           cout<<v[list.front()]<<" ";
+           while(!list.empty() && list.front()<=j){
+                list.pop_front();
+           }
+           while(!list.empty() && v[list.back()]>=v[i]){
+                list.pop_back();
+           }
+           list.push_back(i);
+     }
+     cout<<v[list.front()]<<" ";
 }
 
 
@@ -38,9 +60,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

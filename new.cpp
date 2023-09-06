@@ -26,31 +26,11 @@ using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
- 
-
-
-vi operator+=(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
-vi operator+(vi &a, vi &b){
-    a.reserve(a.size()+b.size());
-    a.insert(a.end(),b.begin(),b.end()); 
-    return a;
-}
 
 void dk(){
-      vi a={1,2,3,4,5};
-      vi b={7,8};
-      vi temp=a+b;
-      a+=b;
-      for(auto x: temp){
-          cout<<x<<" ";
-      }
+    vi a = {1, 2, 3, 4, 5};
+    vi b = {7, 8};
 }
-
-
 
 int main()
 { 

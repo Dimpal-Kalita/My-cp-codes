@@ -38,9 +38,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
