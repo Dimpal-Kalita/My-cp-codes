@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -28,34 +27,51 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-struct DSU {
-    vector<int> s;
-    DSU(int n): s(n, -1) {}
-    int find(int i) { return s[i] < 0 ? i : s[i] = find(s[i]); }
-    bool join(int a, int b) {
-        a = find(a), b = find(b);
-        if (a == b) return false;
-        if (s[a] > s[b]) swap(a, b);
-        s[a] += s[b], s[b] = a;
-        return true;
-    }
-    int size(int i) { return -s[find(i)]; }
-    bool same(int a, int b) { return find(a) == find(b); }
-};
+
 
 
 void dk(){
-    vi a = {1, 2, 3, 4, 5};
-    vi b = {7, 8};
+     ll n,m;
+     cin>>n>>m;
+     vl v(n);
+     inp(v);
+     ll mx=*max_element(all(v));
+     
+     auto check=[&](ll w)->bool{
+          if(mx>w) return 0;
+          ll curlen=w,ct=1;
+          for(auto i:v){
+               if(curlen-i>=0){
+                    curlen-=(i+1);
+               }else{
+                    ct++;
+                    curlen=w-(i+1);
+               }
+          }
+          return ct<=m;
+     };
+     
+     ll l=0,r=1e16;
+     while(l<r){
+          ll mid=(r-l)/2+l;
+          if(check(mid)){
+               r=mid;
+          }else{
+               l=mid+1;
+          }
+     }
+     cout<<r<<endl;
 }
+
+
 
 int main()
 { 
     fast_io;
   
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -28,34 +27,33 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-struct DSU {
-    vector<int> s;
-    DSU(int n): s(n, -1) {}
-    int find(int i) { return s[i] < 0 ? i : s[i] = find(s[i]); }
-    bool join(int a, int b) {
-        a = find(a), b = find(b);
-        if (a == b) return false;
-        if (s[a] > s[b]) swap(a, b);
-        s[a] += s[b], s[b] = a;
-        return true;
-    }
-    int size(int i) { return -s[find(i)]; }
-    bool same(int a, int b) { return find(a) == find(b); }
-};
-
-
 void dk(){
-    vi a = {1, 2, 3, 4, 5};
-    vi b = {7, 8};
+     string s;
+     cin>>s;
+     map<string,int>mp={
+          {"tourist", 3858},
+          {"ksun48", 3679},
+          {"Benq", 3658},
+          {"Um_nik", 3648},
+          {"apiad", 3638},
+          {"Stonefeang", 3630},
+          {"ecnerwala", 3613},
+          {"mnbvmar", 3555},
+          {"newbiedmy", 3516},
+          {"semiexp", 3481}
+     };
+     cout<<mp[s]<<endl;
 }
+
+
 
 int main()
 { 
     fast_io;
   
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

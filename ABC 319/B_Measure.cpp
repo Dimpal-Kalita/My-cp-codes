@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -28,34 +27,42 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-struct DSU {
-    vector<int> s;
-    DSU(int n): s(n, -1) {}
-    int find(int i) { return s[i] < 0 ? i : s[i] = find(s[i]); }
-    bool join(int a, int b) {
-        a = find(a), b = find(b);
-        if (a == b) return false;
-        if (s[a] > s[b]) swap(a, b);
-        s[a] += s[b], s[b] = a;
-        return true;
-    }
-    int size(int i) { return -s[find(i)]; }
-    bool same(int a, int b) { return find(a) == find(b); }
-};
-
-
 void dk(){
-    vi a = {1, 2, 3, 4, 5};
-    vi b = {7, 8};
+     ll n;
+     cin>>n;
+     vector<pll>vp;
+     for(int i=1;i<=9;i++){
+          if(n%i==0){
+               vp.pb({i,n/i});
+          }
+     } 
+
+     for(int i=0;i<=n;i++){
+          bool flag=1;
+          for(auto [x,y]:vp){
+               if(i%y==0){
+                    cout<<x;
+                    flag=0;
+                    break;
+               }
+          }
+          if(flag){
+               cout<<"-";
+          }
+     }
+     cout<<endl;
+
 }
+
+
 
 int main()
 { 
     fast_io;
   
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

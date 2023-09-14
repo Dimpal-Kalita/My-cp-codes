@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -28,34 +27,51 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-struct DSU {
-    vector<int> s;
-    DSU(int n): s(n, -1) {}
-    int find(int i) { return s[i] < 0 ? i : s[i] = find(s[i]); }
-    bool join(int a, int b) {
-        a = find(a), b = find(b);
-        if (a == b) return false;
-        if (s[a] > s[b]) swap(a, b);
-        s[a] += s[b], s[b] = a;
-        return true;
-    }
-    int size(int i) { return -s[find(i)]; }
-    bool same(int a, int b) { return find(a) == find(b); }
-};
-
-
 void dk(){
-    vi a = {1, 2, 3, 4, 5};
-    vi b = {7, 8};
+     ll n;
+     cin>>n;
+     string s;
+     cin>>s;
+     ll neq=0;
+     for(int i=0;i<n/2;i++){
+          if(s[i]!=s[n-i-1]) neq++;
+     }
+     if(n%2){
+          for(int i=0;i<neq;i++){
+               cout<<0;
+          }
+          for(int i=neq;i<=n-neq;i++){
+               cout<<1;
+          }
+          for(int i=n-neq;i<n;i++){
+               cout<<0;
+          }
+          cout<<endl;
+          return;
+     }
+     for(int i=0;i<neq;i++){
+          cout<<0;
+     }
+     bool one=1;
+     for(int i=neq;i<=n-neq;i++){
+          cout<<one;
+          one^=1;
+     }
+     for(int i=n-neq;i<n;i++){
+          cout<<0;
+     }
+     cout<<endl;
 }
+
+
 
 int main()
 { 
     fast_io;
   
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

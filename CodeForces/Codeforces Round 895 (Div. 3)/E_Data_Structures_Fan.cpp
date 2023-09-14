@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -28,34 +27,52 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-struct DSU {
-    vector<int> s;
-    DSU(int n): s(n, -1) {}
-    int find(int i) { return s[i] < 0 ? i : s[i] = find(s[i]); }
-    bool join(int a, int b) {
-        a = find(a), b = find(b);
-        if (a == b) return false;
-        if (s[a] > s[b]) swap(a, b);
-        s[a] += s[b], s[b] = a;
-        return true;
-    }
-    int size(int i) { return -s[find(i)]; }
-    bool same(int a, int b) { return find(a) == find(b); }
-};
-
-
 void dk(){
-    vi a = {1, 2, 3, 4, 5};
-    vi b = {7, 8};
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     string s;
+     cin>>s;
+     ll one=0,zero=0;
+     vl ps(n+1,0);
+     vl ans(2,0);
+     rep(i,0,n){
+          if(s[i]=='0'){
+               ans[0]^=v[i];
+          }else{
+               ans[1]^=v[i];
+          }
+          ps[i+1]=ps[i]^v[i];
+     }
+     ll q;
+     cin>>q;
+     while(q--){
+          ll t;
+          cin>>t;
+          if(t==1){
+               ll l,r;
+               cin>>l>>r;
+               ans[1]^=ps[r]^ps[l-1];
+               ans[0]^=ps[r]^ps[l-1];
+          }else{
+               ll ind;
+               cin>>ind;
+               cout<<ans[ind]<<" ";
+          } 
+     }
+     cout<<endl;
 }
+
+
 
 int main()
 { 
     fast_io;
   
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
