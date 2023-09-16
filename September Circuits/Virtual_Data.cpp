@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -27,51 +26,54 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-int perfectSubstring(string s,int k){
-    int ct[10]={0};
-    int n=s.length();
-    int ans=0;
-
-    for(int i=0,j=0;i<n;i++){
-         ct[s[i]-'0']++;
-         while(j<i && *max_element(ct,ct+10)>k){
-              ct[s[j]-'0']--;
-              j++;
-         }
-
-         bool flag=1;
-         for(int i=0;i<10;i++){
-              if(ct[i] && ct[i]!=k){
-                   flag=0;
-                   break;
-              }
-         }
-         if(flag){
-            cout<<j<<" "<<i<<endl;
-
-         }
-
-    }
-    return ans;
-}
-
-
 
 void dk(){
-    string s;
-    cin>>s;
-    ll k;
-    cin>>k;
-    cout<<perfectSubstring(s,k)<<endl;
+     int n;
+     cin>>n;
+     string a,b;
+     cin>>a>>b;
+     vl blocks;
+     int ct=0;
+     for(int i=0;i<n;i++){
+          if(a[i]==b[i]){
+               if(ct) blocks.pb(ct);
+               ct=0;
+          }
+          else{
+               ct++;
+          }
+     }
+     if(ct){
+          blocks.pb(ct);
+     }
+     if(blocks.size()>2){
+          cout<<0<<endl;
+          return;
+     }
+     if(blocks.size()==1){
+          cout<<2*(blocks[0]-1)<<endl;
+          return;
+     }
+     int zero=0,prev=0;
+     for(int i=0;i<n;i++){
+          if(a[i]==b[i]) zero++;
+          else{
+               prev=zero;
+               zero=0;
+          }
+     }
+     cout<<(prev+2)*2<<endl;
 }
+
+
 
 int main()
 { 
     fast_io;
   
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

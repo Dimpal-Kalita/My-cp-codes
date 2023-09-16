@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -27,51 +26,39 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-int perfectSubstring(string s,int k){
-    int ct[10]={0};
-    int n=s.length();
-    int ans=0;
 
-    for(int i=0,j=0;i<n;i++){
-         ct[s[i]-'0']++;
-         while(j<i && *max_element(ct,ct+10)>k){
-              ct[s[j]-'0']--;
-              j++;
-         }
-
-         bool flag=1;
-         for(int i=0;i<10;i++){
-              if(ct[i] && ct[i]!=k){
-                   flag=0;
-                   break;
-              }
-         }
-         if(flag){
-            cout<<j<<" "<<i<<endl;
-
-         }
-
-    }
-    return ans;
+bool isPalindrom(string s){
+     int n=s.length();
+     for(int i=0;i<n/2;i++){
+          if(s[i]!=s[n-i-1]) return false;
+     }
+     return true;
 }
-
-
 
 void dk(){
-    string s;
-    cin>>s;
-    ll k;
-    cin>>k;
-    cout<<perfectSubstring(s,k)<<endl;
+      string s;
+      cin>>s;
+      ll n=s.length();
+      int ans=0;
+      for(int i=0;i<n;i++){
+          for(int j=i;j<n;j++){
+               if(isPalindrom(s.substr(i,j-i+1))){
+                    ans=max(ans,j-i+1);
+               }
+          }
+      }
+      cout<<ans<<endl;
 }
+
+
 
 int main()
 { 
     fast_io;
   
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

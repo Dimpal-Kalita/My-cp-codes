@@ -55,12 +55,13 @@ void dk(){
      BIT<ll> bit(n);
      rep(i,0,n){
           bit.update(i,1);
-     }
+     } 
+     ll search=k;
      for(int i=0;i<n;i++){
-          ll x=bit.kth((i+k)%(n-i));
-          if(i==0) x-=1;
+          ll x=bit.kth(search);
           bit.update(x,-1);
           cout<<x+1<<" ";
+          search%=(n-i);
      }
 }
 

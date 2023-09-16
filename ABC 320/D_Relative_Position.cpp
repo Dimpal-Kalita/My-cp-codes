@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/08/2023 09:50:19
  * 
  */
 
@@ -27,51 +26,56 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-int perfectSubstring(string s,int k){
-    int ct[10]={0};
-    int n=s.length();
-    int ans=0;
 
-    for(int i=0,j=0;i<n;i++){
-         ct[s[i]-'0']++;
-         while(j<i && *max_element(ct,ct+10)>k){
-              ct[s[j]-'0']--;
-              j++;
-         }
+ll n,m;
+vector<vl>adj;
+map<pll,pll>mp;
+vl vis;
+vector<pll>ans;
 
-         bool flag=1;
-         for(int i=0;i<10;i++){
-              if(ct[i] && ct[i]!=k){
-                   flag=0;
-                   break;
-              }
-         }
-         if(flag){
-            cout<<j<<" "<<i<<endl;
-
-         }
-
-    }
-    return ans;
+void dfs(ll node){
+     vis[node]=1;
+     for(auto i:adj[node]){
+          if(!vis[i]){
+               ans[i]={ans[node].F+mp[{node,i}].F,ans[node].S+mp[{node,i}].S};
+               dfs(i);
+          }
+     }
 }
-
-
 
 void dk(){
-    string s;
-    cin>>s;
-    ll k;
-    cin>>k;
-    cout<<perfectSubstring(s,k)<<endl;
+     cin>>n>>m;
+     adj.resize(n+1);
+     vis.resize(n+1);
+     ans.resize(n+1,{-1,-1});
+     rep(i,0,m){
+          ll a,b,x,y;
+          cin>>a>>b>>x>>y;
+          adj[a].pb(b);
+          adj[b].pb(a);
+          mp[{a,b}]={x,y};
+          mp[{b,a}]={-x,-y};
+     }
+     ans[1]={0,0};
+     dfs(1);
+     rep(i,1,n+1){
+          if(!vis[i]){
+               cout<<"undecidable"<<endl;
+               continue;
+          }
+          cout<<ans[i].F<<" "<<ans[i].S<<endl;
+     }
 }
+
+
 
 int main()
 { 
     fast_io;
   
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
