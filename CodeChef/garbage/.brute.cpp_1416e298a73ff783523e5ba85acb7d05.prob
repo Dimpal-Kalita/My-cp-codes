@@ -1,0 +1,1 @@
+{"name":"Local: brute","url":"/home/dksensei/Work/stress test/With Diff/brute.cpp","tests":[{"id":1695005537666,"input":"5\n9 7 7 3 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/dksensei/Work/stress test/With Diff/brute.cpp","group":"local","local":true}

@@ -28,41 +28,31 @@ using vi  = vector<int>;
 
 
 void dk(){
-     int n;
+     ll n;
      cin>>n;
-     string a,b;
-     cin>>a>>b;
-     vl blocks;
-     int ct=0;
-     for(int i=0;i<n;i++){
-          if(a[i]==b[i]){
-               if(ct) blocks.pb(ct);
-               ct=0;
+     string s,t;
+     cin>>s>>t;
+     ll ans=0;
+     for(int a=0;a<n;a++){
+          for(int b=a;b<n;b++){
+               for(int c=0;c<n;c++){
+                    for(int d=c;d<n;d++){
+                         string temp=s;
+                         for(int i=a;i<=b;i++){
+                              temp[i]=(temp[i]=='0'?'1':'0');
+                         }
+                         for(int i=c;i<=d;i++){
+                              temp[i]=(temp[i]=='0'?'1':'0');
+                         }
+                         if(temp==t){
+                              // cout<<a<<" "<<b<<" "<<c<<" "<<d<<endl;
+                              ans++;
+                         }
+                    }
+               }
           }
-          else{
-               ct++;
-          }
-     }
-     if(ct){
-          blocks.pb(ct);
-     }
-     if(blocks.size()>2){
-          cout<<0<<endl;
-          return;
-     }
-     if(blocks.size()==1){
-          cout<<2*(blocks[0]-1)<<endl;
-          return;
-     }
-     int zero=0,prev=0;
-     for(int i=0;i<n;i++){
-          if(a[i]==b[i]) zero++;
-          else{
-               prev=zero;
-               zero=0;
-          }
-     }
-     cout<<(prev+2)*2<<endl;
+     } 
+     cout<<ans<<endl;
 }
 
 

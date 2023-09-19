@@ -26,38 +26,46 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<class T>
+using Tree = tree<T, null_type, less<T>, rb_tree_tag,
+     tree_order_statistics_node_update>;
 
 void dk(){
-     ll n,m;
-     cin>>n>>m;
-     vl v(n);
-     inp(v);
-
-     auto check=[&](ll money){
-          ll ct=0;
-          for(auto i:v){
-               if(i<=money){
-                    ct++;
-                    money-=i;
-               }
-          }
-          return ct<=m;
-     };
-
-     ll sum=0;
-     rep(i,0,m) sum+=v[i];
-     ll l=sum,r=1e15,ans=0;
-     while(l<r){
-          ll mid=(r-l)/2+l;
-          if(check(mid)){
-               ans=mid;
-               l=mid+1;
-          }
-          else{
-               r=mid;
-          }
+     ll n;
+     cin>>n;
+     vector<pll>vp(n);
+     rep(i,0,n){
+          cin>>vp[i].F;
      }
-     cout<<ans<<endl;
+     rep(i,0,n){
+          cin>>vp[i].S;
+     }
+     sort(all(vp));
+     ll Q;
+     cin>>Q;
+     vector<pair<pll,ll>>q;
+     rep(i,0,Q){
+          ll x,y;
+          cin>>x>>y;
+          q.pb({{x,y},i});
+     } 
+     sort(all(q));
+     int ind=0;
+     Tree<ll>tree;
+     vector<ll>ans(Q);
+     for(auto it:q){
+          while(ind<n and vp[ind]<=it.F){
+               tree.insert(vp[ind].S);
+               ind++;
+          }
+          ans[it.S]=tree.order_of_key(it.F.S+1);
+     }
+     for(auto it:ans){
+          cout<<it<<endl;
+     }
 }
 
 
