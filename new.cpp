@@ -33,7 +33,7 @@ struct SegmentTree {
     // TO CHANGE
 
     struct Node { // set default values
-        ll val = 0;
+        ll val = -1;
         ll lazy = 0;
         template<typename T>
         void apply(int l, int r, T val) { // update value and save push
@@ -49,11 +49,13 @@ struct SegmentTree {
     }
 
     void push(int v, int l, int r) {
-            if(tree[v].lazy==0) return;
+        if(tree[v].val!=-1){
             int mid = (r + l) >> 1;
             int vl = v + 1, vr = v + ((mid - l) << 1);
             tree[vl].apply(l, mid, tree[v]);
             tree[vr].apply(mid, r, tree[v]);
+            tree[v].val = -1;
+        }
     }
 
 

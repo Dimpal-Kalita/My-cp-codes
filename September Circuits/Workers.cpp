@@ -178,7 +178,7 @@ void dk(){
                ind++;
           }
           for(auto [x,y,ind1]:arr){
-               ans[ind1]=bit.query(lca.tin[x])+bit.query(lca.tin[y])-2*bit.query(lca.tin[lca.lca(x,y)])+(store[lca.lca(x,y)]<=val-1);
+               ans[ind1]=bit.query(lca.tin[x]+1)+bit.query(lca.tin[y]+1)-2*bit.query(lca.tin[lca.lca(x,y)])-(store[lca.lca(x,y)]<=val-1);
                ans[ind1]=-ans[ind1];
           }
           while(ind<n and v[ind].F==val){
@@ -187,7 +187,7 @@ void dk(){
                ind++;
           }
           for(auto [x,y,ind1]:arr){
-               ans[ind1]+=bit.query(lca.tin[x])+bit.query(lca.tin[y])-2*bit.query(lca.tin[lca.lca(x,y)])+(store[lca.lca(x,y)]<=val);
+               ans[ind1]+=bit.query(lca.tin[x]+1)+bit.query(lca.tin[y]+1)-2*bit.query(lca.tin[lca.lca(x,y)])-(store[lca.lca(x,y)]<=val);
           }
      }
      for(int i=0;i<Q;i++){

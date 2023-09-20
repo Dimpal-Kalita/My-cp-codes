@@ -27,18 +27,34 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-ll n,x,y;
-vector<vl>dp;
-vector<pll>v;
 
-ll calc(ll ind,ll mod){
-     if(ind==n) return y;
-
-     ll ans=v[ind].S;
-}
 void dk(){
-     dp.resize(n+1,vl(9,0));     
-
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     vl rev=v;
+     reverse(all(rev));
+     if(!is_sorted(all(rev))){
+          cout<<0<<endl;
+          return;
+     }
+     for(int i=n-1;i>=0;i--){
+          if(rev[i]>i+1){
+               cout<<0<<endl;
+               return;
+          }
+     }
+     ll ans=1,ct=n;
+     for(int i=1;i<n;i++){
+          // cout<<ct-v[i]<<endl;
+          if(v[i]==v[i-1]){
+               ans*=(ct-v[i]);
+               ans%=md;
+          }
+          ct--;
+     }
+     cout<<ans<<endl;
 }
 
 
