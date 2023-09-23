@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,9 +22,33 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+     ll n,k;
+     cin>>n>>k;
+     vl v(n);
+     inp(v);
+     vl h(n);
+     inp(h);
+
+     ll mx=0,ct=1,sum=v[0];
+     if(sum<=k) mx=max(mx,ct);
+
+     for(int i=1,j=0;i<n;i++){
+          if(h[i-1]%h[i]==0){
+               ct++;
+               sum+=v[i];
+               while(j<i and sum>k){
+                    sum-=v[j];
+                    ct--;
+                    j++;
+               }
+          }else{
+               ct=1;
+               j=i;
+               sum=v[i];
+          }
+          if(sum<=k) mx=max(mx,ct);
+     }
+     cout<<mx<<endl;
 }
 
 
@@ -40,9 +57,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

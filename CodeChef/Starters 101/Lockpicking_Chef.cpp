@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
  * 
  */
 
@@ -29,9 +28,19 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+     ll n,m;
+     cin>>n>>m;
+     string s,t;
+     cin>>s>>t;
+     ll ans=1e9;
+     for(int i=0;i<n-m+1;i++){
+        ll mn=0;
+        for(int j=0;j<m;j++){
+            mn+=min(abs(s[i+j]-t[j]),10-abs(s[i+j]-t[j]));
+        }
+        ans=min(ans,mn);
+     } 
+     cout<<ans<<endl;
 }
 
 
@@ -40,9 +49,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

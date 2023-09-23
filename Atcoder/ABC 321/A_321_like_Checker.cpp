@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -27,11 +20,16 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-
 void dk(){
-      string s;
-      cin>>s;
-      
+     string s;
+     cin>>s;
+     for(int i=0;i<sz(s)-1;i++){
+          if(s[i]<=s[i+1]){
+               cout<<"No"<<endl;
+               return;
+          }
+     }     
+     cout<<"Yes"<<endl; 
 }
 
 
@@ -40,9 +38,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

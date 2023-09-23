@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,10 +21,28 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+
+ll recur(ll n,ll x,ll k,ll extra){
+     if(x==0) return 0;
+     if(k==0) return 1;
+
+     ll branchlow=x*(1ll<<k);
+     ll branchhigh=branchlow+(1ll<<k)-1;
+     ll val=max(0LL,min(n,branchhigh)-branchlow+1);
+     if(extra){
+          val=max(0LL,val-(1ll<<(k-1)));
+     }
+     ll ans=val;
+     // cout<<x<<" "<<branchhigh<<" "<<branchlow<<" "<<val<<" "<<ans<<" "<<extra<<endl;
+     return ans+recur(n,x/2,k-1,1); 
+
+}
+
 void dk(){
-      string s;
-      cin>>s;
-      
+     ll n,x,k;
+     cin>>n>>x>>k;
+     
+     cout<<recur(n,x,k,0)<<endl;
 }
 
 
@@ -40,9 +51,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
  * 
  */
 
@@ -29,9 +28,20 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+    ll a,b;
+    cin>>a>>b;  
+    if(b>a) swap(a,b);
+    ll x=0,t=1;
+    for(int i=31;i>=0;i--){
+        if((a&(1<<i)) && !(b&(1<<i))){
+            if(t==1){
+                t=0;
+                continue;
+            }
+            x|=(1<<i);
+        }
+    }
+    cout<<x<<endl;
 }
 
 
@@ -40,9 +50,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

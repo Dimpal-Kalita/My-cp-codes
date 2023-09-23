@@ -1,6 +1,12 @@
 # My-cp-codes
 Storing solutions i have written during practicing and giving contests
 
+## Command to increase stack size for a instant of bash shell
+```
+ulimit -s unlimited 
+
+```
+
 ## Pending Questions
 - [ ] Mo's On Trees 
   - [ ] [Codeforces 375D](https://codeforces.com/problemset/problem/375/D)
@@ -19,3 +25,6 @@ Storing solutions i have written during practicing and giving contests
 
 - [ ] Atcoder
   - [ ] [abc319_e](https://atcoder.jp/contests/abc319/tasks/abc319_e) 
+
+- [ ] Codechef
+  - [ ] [PIARQ](https://www.codechef.com/problems/PIARQ?tab=statement)

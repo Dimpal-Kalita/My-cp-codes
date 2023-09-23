@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,9 +22,22 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+     ll n,s;
+     cin>>n>>s;
+     vl v(n-1);
+     inp(v);
+     for(int x=0;x<=100;x++){
+          vl tt=v;
+          tt.push_back(x);
+          sort(all(tt));
+          ll sum=0;
+          rep(i,1,n-1) sum+=tt[i];
+          if(sum>=s){
+               cout<<x<<endl;
+               return;
+          }
+     }
+     cout<<-1<<endl;
 }
 
 
@@ -40,9 +46,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,9 +22,14 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+     string s;
+     cin>>s;
+     if(s[0]=='a' || s[1]=='b' || s[2]=='c'){
+          cout<<"YES"<<endl;
+          return;
+     } 
+     cout<<"NO"<<endl;
+
 }
 
 
@@ -40,9 +38,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

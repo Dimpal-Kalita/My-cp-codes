@@ -26,35 +26,33 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-
-
+template<class T, int... Ns> struct BIT {
+  T val = 0;
+  void update(T v) { val += v; }
+  T query() { return val; }
+};
+template<class T, int N, int... Ns> struct BIT<T, N, Ns...> {
+  BIT<T, Ns...> bit[N + 1];
+  // map<int, BIT<T, Ns...>> bit; // if the mem use is too high
+  template<class... Args> void update(int i, Args... args) {
+    for (i++; i <= N; i += i & -i) bit[i].update(args...);
+  }
+  template<class... Args> T query(int i, Args... args) {
+    T ans = 0;
+    for (i++; i; i -= i & -i) ans += bit[i].query(args...);
+    return ans;
+  }
+  template<class... Args,
+    enable_if_t<(sizeof...(Args) == 2 * sizeof...(Ns))>* =
+      nullptr>
+  T query(int l, int r, Args... args) {
+    return query(r, args...) - query(l - 1, args...);
+  }
+};
 
 void dk(){
-     ll n;
-     cin>>n;
-     string s,t;
-     cin>>s>>t;
-     ll ans=0;
-     for(int a=0;a<n;a++){
-          for(int b=a;b<n;b++){
-               for(int c=0;c<n;c++){
-                    for(int d=c;d<n;d++){
-                         string temp=s;
-                         for(int i=a;i<=b;i++){
-                              temp[i]=(temp[i]=='0'?'1':'0');
-                         }
-                         for(int i=c;i<=d;i++){
-                              temp[i]=(temp[i]=='0'?'1':'0');
-                         }
-                         if(temp==t){
-                              // cout<<a<<" "<<b<<" "<<c<<" "<<d<<endl;
-                              ans++;
-                         }
-                    }
-               }
-          }
-     } 
-     cout<<ans<<endl;
+      BIT<int, 2> bit;
+
 }
 
 
@@ -64,7 +62,7 @@ int main()
     fast_io;
   
     int _=1;
-//     cin>>_;
+    cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

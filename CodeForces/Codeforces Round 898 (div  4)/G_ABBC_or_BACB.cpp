@@ -22,7 +22,42 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     string s;
+     cin>>s;
+     ll n = s.length();
+     if(n==1){
+      cout<<0<<endl;
+      return;
+     }
+     if(count(all(s),'B')==0){
+      cout<<0<<endl;
+      return;
+     }
+     vl dx;
+     ll last=0;
+     for(int i = 0 ; i < n-1 ; i ++){
+      if(s[i] == 'B' && s[i+1] == 'B'){
+        ll an = count(all(s) , 'A');
+        cout << an << endl;
+        return;
+      }
+     }
+     if(s[0]=='B' || s[n-1]=='B') dx.pb(0);
+     for(int i = 0 ; i  < n ; i ++){
+      ll cnt = 0;
+      ll ind = i;
+      while(ind < n && s[ind] == 'A'){
+        ind++;
+        cnt++;
+      }
+      if(cnt){
+        i=ind-1;
+        dx.pb(cnt);
+      }
+     }
+     sort(all(dx));
+     ll an = accumulate(all(dx), 0LL)-dx[0];
+     cout << an << endl;
 
 }
 

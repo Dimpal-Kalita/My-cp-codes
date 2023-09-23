@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
+ * date: 22/09/2023 08:34:44
  * 
  */
 
@@ -18,6 +18,7 @@ using namespace std;
 #define all(x)              (x).begin(), (x).end()
 #define rep(i, a, b)        for (int i = a; i < (b); ++i)
 #define fast_io             cin.tie(0)->sync_with_stdio(0);cin.exceptions(cin.failbit);
+#define file_io             freopen("../input.txt", "r+", stdin);freopen("../output.txt", "w+", stdout);
 
 using ll  = long long;
 using ull = unsigned long long;
@@ -29,9 +30,25 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+     ll n,k;
+     cin>>n>>k;
+     vector<ll> v(n);
+     inp(v);
+     if(n>2*k){
+           cout<<"NO"<<endl;
+           return;
+     }
+     map<ll,ll>mp;
+     for(auto x:v){
+          mp[x]++;
+     }
+     for(auto [x,y]:mp){
+          if(y>2){
+               cout<<"NO"<<endl;
+               return;
+          }
+     }
+     cout<<"YES"<<endl;
 }
 
 
@@ -39,10 +56,14 @@ void dk(){
 int main()
 { 
     fast_io;
+    #ifndef ONLINE_JUDGE
+    file_io;
+    #endif  
   
     int n=1;
-    // cin>>n;
+    cin>>n;
     for(int i=0;i<n;i++){
+     cout<<"Case #"<<i+1<<": ";
     dk();
    }
   return 0;

@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,9 +22,15 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     sort(all(v));
+     v[0]++;
+     ll ans=v[0];
+     rep(i,1,n) ans*=v[i];
+     cout<<ans<<endl;
 }
 
 
@@ -40,9 +39,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

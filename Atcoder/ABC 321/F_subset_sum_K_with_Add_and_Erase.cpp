@@ -1,14 +1,7 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
-#define md                  1000000007
+#define md                  998244353
 #define pb                  push_back
 #define endl                " \n"
 #define F                   first
@@ -29,9 +22,26 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+     ll q,k;
+     cin>>q>>k;
+     vl dp(k+1,0);
+     dp[0]=1;
+     while(q--){
+          char c;
+          ll x;
+          cin>>c>>x;
+          if(c=='+'){
+               for(int i=k;i>=x;i--){
+                    dp[i]=(dp[i]+dp[i-x])%md;
+               }
+          }else{
+                for(int i=x;i<=k;i++){
+                    dp[i]=(dp[i]-dp[i-x]+md)%md;
+               }
+          }
+          cout<<dp[k]<<endl;
+     }
+
 }
 
 
@@ -40,9 +50,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

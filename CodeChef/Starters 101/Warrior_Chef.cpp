@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 23/09/2023 11:27:52
  * 
  */
 
@@ -29,9 +28,34 @@ using vi  = vector<int>;
 
 
 void dk(){
-      string s;
-      cin>>s;
-      
+     ll n,H;
+     cin>>n>>H;
+     vl v(n);
+     inp(v);
+
+     auto check=[&](ll x)->bool{
+        ll h=H;
+        for(auto i:v){
+            if(i>x){
+                if(h<=i) return 0;
+                h-=i;
+            }
+        }
+        return h>0;
+     };
+
+     ll l=0,r=1e14;
+     ll ans=0;
+     while(l<r){
+        ll mid=(l+r)>>1;
+        if(check(mid)){
+            r=mid;
+            ans=mid;
+        }else{
+            l=mid+1;
+        }
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -40,9 +64,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
