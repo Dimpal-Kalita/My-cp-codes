@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/09/2023 15:37:42
+ * date: 28/09/2023 12:09:50
  * 
  */
 
@@ -27,9 +27,22 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+class A{
+     public:
+     A(){
+          cout<<"A";
+     }
+};
+
+class B:public A{
+     public:
+     B(){
+          cout<<"B";
+     }
+};
 
 void dk(){
-
+     B obj;
 }
 
 
@@ -39,9 +52,8 @@ int main()
     fast_io;
   
     int n=1;
-    cin>>n;
+//     cin>>n;
     for(int i=0;i<n;i++){
-      // cout<<"Case #"<<i+1<<": ";
     dk();
    }
   return 0;

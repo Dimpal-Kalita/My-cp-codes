@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 30/09/2023 15:37:42
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +22,28 @@ using vi  = vector<int>;
 
 
 void dk(){
-
+     ll n,m;
+     cin>>n>>m;
+     string s,t;
+     cin>>s>>t; 
+     if(m<n){
+          cout<<3<<endl;
+          return;
+     }
+     bool pre=(t.substr(0,n)==s), suf=(t.substr(m-n)==s);
+     if(pre and suf){
+          cout<<0<<endl;
+          return;
+     }
+     if(pre){
+          cout<<1<<endl;
+          return;
+     }
+     if(suf){
+          cout<<2<<endl;
+          return;
+     }
+     cout<<3<<endl;
 }
 
 
@@ -37,12 +51,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-      // cout<<"Case #"<<i+1<<": ";
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

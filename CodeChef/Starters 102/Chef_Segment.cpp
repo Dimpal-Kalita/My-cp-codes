@@ -22,7 +22,35 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     multiset<ll>st;
+     ll ans=0;
+     for(int i=0,j=0;i<n;i++){
+          auto cond=[&](ll mn, ll mx)->bool{
+               if(v[i]<=mn){
+                    if(mn%v[i]==0) return 1;
+               }
+               if(v[i]>=mx){
+                    if(v[i]%mx==0) return 1;
+               }
+               if(v[i]%mn==0 and mx%v[i]==0) return 1;
+               return 0;
+          };
+          while(st.size() and !cond(*st.begin(),*st.rbegin())){
+               st.erase(st.find(v[j]));
+               j++;
+          }
+          st.insert(v[i]);
+          ll x=st.size()*(*st.begin());
+          if(x==12){
+               cout<<j<<" "<<i<<endl;
+          }
+          ans=max(ans,x);
+     }
+     cout<<ans<<endl;
 
 }
 
@@ -31,11 +59,11 @@ void dk(){
 int main()
 { 
     fast_io;
-    
+  
     int _=1;
     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}   
+}

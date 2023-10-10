@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 30/09/2023 15:37:42
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,8 +21,50 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
 
+
+
+
+
+
+
+ll n,k,p;
+vector<vl>vp;
+map<pair<ll,vl>,ll>mp;
+
+ll recur(ll ind,vl v){
+
+     if(ind==n){
+          for(int i=0;i<k;i++){
+               if(v[i]<p) return 1e18;
+          }
+          return 0;
+     }
+
+     if(mp.count({ind,v})) return mp[{ind,v}];
+     ll np=recur(ind+1,v);
+
+     for(int i=1;i<=k;i++){
+          v[i-1]+=vp[ind][i];
+          v[i-1]=min(v[i-1],p);
+     }
+     ll wp=recur(ind+1,v)+vp[ind][0];
+
+     return mp[{ind,v}]=min(np,wp);
+}
+
+
+void dk(){
+     cin>>n>>k>>p;
+     rep(i,0,n){
+          vl v;
+          v.resize(k+1);
+          inp(v);
+          vp.pb(v);
+     }
+     vl v(k,0);
+     ll ans=recur(0,v);
+     cout<<(ans>=1e18?-1:ans)<<endl;
 }
 
 
@@ -37,12 +72,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-      // cout<<"Case #"<<i+1<<": ";
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

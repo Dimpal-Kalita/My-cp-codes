@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 30/09/2023 15:37:42
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +22,14 @@ using vi  = vector<int>;
 
 
 void dk(){
-
+     ll n;
+     cin>>n;
+     vl v(n);
+     iota(all(v),5);
+     for(auto i:v){
+           cout<<i<<" ";
+     }
+     cout<<endl; 
 }
 
 
@@ -38,10 +38,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-      // cout<<"Case #"<<i+1<<": ";
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

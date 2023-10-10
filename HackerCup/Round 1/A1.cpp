@@ -1,7 +1,6 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 30/09/2023 15:37:42
  * 
  */
 
@@ -29,7 +28,25 @@ using vi  = vector<int>;
 
 
 void dk(){
-
+     ll n;
+     cin>>n;
+     vector<lld> v(n);
+     inp(v);
+     sort(all(v));
+     if(n==5){
+          lld sum1=(v[0]+v[2])/(lld)2;
+          lld sum2=(v[3]+v[4])/(lld)2;
+          lld ans=sum2-sum1;
+          sum1=(v[0]+v[1])/(lld)2;
+          sum2=(v[2]+v[4])/(lld)2;
+          ans=max(ans,sum2-sum1);
+          cout<<fixed<<setprecision(10)<<ans<<endl;
+          return;
+     }
+     lld x=(v[0]+v[1])*0.5;
+     lld y=(v[n-1]+v[n-2])*0.5;
+     lld ans=y-x;
+     cout<<fixed<<setprecision(10)<<ans<<endl;
 }
 
 
@@ -41,8 +58,8 @@ int main()
     int n=1;
     cin>>n;
     for(int i=0;i<n;i++){
-      // cout<<"Case #"<<i+1<<": ";
-    dk();
+      cout<<"Case #"<<i+1<<": ";
+      dk();
    }
   return 0;
 }

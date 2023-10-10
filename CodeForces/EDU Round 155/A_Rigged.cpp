@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 30/09/2023 15:37:42
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +22,21 @@ using vi  = vector<int>;
 
 
 void dk(){
-
+     ll n;
+     cin>>n;
+     vector<pll>v(n);
+     rep(i,0,n){
+          cin>>v[i].F>>v[i].S;
+     }
+     ll mx=v[0].F,mx2=v[0].S;
+     vector<pll>vp;
+     rep(i,1,n){
+          if(v[i].F>=mx and v[i].S>=mx2){
+               cout<<-1<<endl;
+               return;  
+          }
+     }
+     cout<<mx<<endl;
 }
 
 
@@ -38,10 +45,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-      // cout<<"Case #"<<i+1<<": ";
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

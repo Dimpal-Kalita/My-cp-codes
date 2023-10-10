@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 30/09/2023 15:37:42
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +22,38 @@ using vi  = vector<int>;
 
 
 void dk(){
+     ll n,k;
+     cin>>n>>k;
+     vl v(n);
+     for(int i=0;i<n;i+=2){
+          v[i]=1;
+          k--;
+     }
+     for(int i=1;i<n;i+=2){
+          v[i]=2;
+          k-=2;
+     }
+     if(k<0 || k%2){
+          cout<<"-1"<<endl;
+          return;
+     }
 
+     for(int i=1;i<n;i+=2){
+          ll x=min((ll)1e5-2,k);
+          v[i]+=x;
+          k-=x;
+     }
+     for(int i=0;i<n;i+=2){
+          ll x=min(ll(1e5)-2,k);
+          v[i]+=x;
+          k-=x;
+     }
+     if(k>0){
+          cout<<"-1"<<endl;
+          return;
+     }
+     for(auto i:v) cout<<i<<" ";
+     cout<<endl;
 }
 
 
@@ -38,10 +62,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-      // cout<<"Case #"<<i+1<<": ";
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 22/09/2023 08:34:44
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -18,7 +11,6 @@ using namespace std;
 #define all(x)              (x).begin(), (x).end()
 #define rep(i, a, b)        for (int i = a; i < (b); ++i)
 #define fast_io             cin.tie(0)->sync_with_stdio(0);cin.exceptions(cin.failbit);
-#define file_io             freopen("../input.txt", "r+", stdin);freopen("../output.txt", "w+", stdout);
 
 using ll  = long long;
 using ull = unsigned long long;
@@ -30,25 +22,24 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n,k;
-     cin>>n>>k;
-     vector<ll> v(n);
-     inp(v);
-     if(n>2*k){
-           cout<<"NO"<<endl;
-           return;
+     ll n;
+     cin>>n;
+     string s;
+     cin>>s;
+     ll ans=1;
+     for(int i=2;i<n;i+=2){
+          ll x=s[i-2]-'0';
+          ll y=s[i-1]-'0';
+          ll z=s[i]-'0';
+          ll ct=0;
+          if((x|y)==z) ct++;
+          if((x&y)==z) ct++;
+          if((x^y)==z) ct++;  
+          ans=(ans*ct)%md;
+          // cerr<<ct<<" ";
      }
-     map<ll,ll>mp;
-     for(auto x:v){
-          mp[x]++;
-     }
-     for(auto [x,y]:mp){
-          if(y>2){
-               cout<<"NO"<<endl;
-               return;
-          }
-     }
-     cout<<"YES"<<endl;
+     // cerr<<endl;
+     cout<<ans<<endl;
 }
 
 
@@ -56,14 +47,10 @@ void dk(){
 int main()
 { 
     fast_io;
-    #ifndef ONLINE_JUDGE
-    file_io;
-    #endif  
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-     cout<<"Case #"<<i+1<<": ";
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;

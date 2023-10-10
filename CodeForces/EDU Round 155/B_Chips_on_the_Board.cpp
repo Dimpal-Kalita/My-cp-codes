@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 30/09/2023 15:37:42
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +22,15 @@ using vi  = vector<int>;
 
 
 void dk(){
-
+     ll n;
+     cin>>n;
+     vl a(n),b(n);
+     inp(a);
+     inp(b);
+     ll suma=accumulate(all(a),0LL),sumb=accumulate(all(b),0ll); 
+     sort(all(a));
+     sort(all(b));
+     cout<<min(suma+b[0]*n,sumb+a[0]*n)<<endl;
 }
 
 
@@ -38,10 +39,9 @@ int main()
 { 
     fast_io;
   
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
-      // cout<<"Case #"<<i+1<<": ";
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
