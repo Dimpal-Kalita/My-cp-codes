@@ -1,3 +1,10 @@
+/**
+ * 
+ * author: Dimpal Kalita
+ * date: 11/11/2023 07:52:19
+ * 
+ */
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -22,21 +29,20 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
-          }
-     }
-     cout<<ans<<endl;
+      ll n,m;
+      cin>>n>>m;
+      vl v(n);
+      inp(v);
+      ll ans=0;
+      for(int i=1;i<n;i++){
+          ans+=abs(v[i]-v[i-1]);
+      }
+      vl b(m);
+      inp(b);
+      for(int i=1;i<m;i++){
+          ans+=abs(b[i]-b[i-1]);
+      }
+      cout<<ans<<endl;
 }
 
 
@@ -44,11 +50,11 @@ void dk(){
 int main()
 { 
     fast_io;
-    
-    int _=1;
-    cin>>_;
-    for(int i=0;i<_;i++){
+  
+    int n=1;
+//     cin>>n;
+    for(int i=0;i<n;i++){
     dk();
    }
   return 0;
-}   
+}

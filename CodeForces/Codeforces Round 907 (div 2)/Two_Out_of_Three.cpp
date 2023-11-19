@@ -26,17 +26,52 @@ void dk(){
      cin>>n;
      vl v(n);
      inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+     map<ll,ll>mp;
+     for(auto i:v) mp[i]++;
+     if(mp.size()==1){
+          cout<<-1<<endl;
+          return;
+     } 
+     ll ct=0;
+     for(auto [x,y]:mp){
+          if(y>=2) ct++;
+     }
+     if(ct<=1){
+          cout<<-1<<endl;
+          return;
+     }
+     bool flag=0;
+     for(auto &[x,y]:mp){
+          if(y>=2){
+               y=flag;
+               flag=1;
+          }else{
+               y=3;
+          }
+          // cout<<x<<" "<<y<<endl;
+     }
+     int ct0=1,ct1=2;
+     for(auto &i:v){
+          // cout<<mp[i]<<" "<<ct0<<" /";
+          if(mp[i]==0){
+               i=ct0++;
+               ct0=min(ct0,2);
+          }
+          else if(mp[i]==1){
+               i=ct1;
+               ct1++;
+               ct1=min(ct1,3);
+          }
+          else if(mp[i]==3) {
+               i=3;
           }
      }
-     cout<<ans<<endl;
+     // cout<<endl;
+     for(auto i:v){
+          cout<<i<<" "; 
+     }
+     cout<<endl;
+
 }
 
 

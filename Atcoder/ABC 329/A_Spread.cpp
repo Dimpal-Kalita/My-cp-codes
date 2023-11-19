@@ -22,21 +22,13 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
-          }
-     }
-     cout<<ans<<endl;
+     string s;
+     cin>>s;
+     for(auto i:s){
+          cout<<i<<" ";
+     } 
+     cout<<endl;
+
 }
 
 
@@ -46,7 +38,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

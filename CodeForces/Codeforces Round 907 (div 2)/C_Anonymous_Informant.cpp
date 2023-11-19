@@ -22,21 +22,22 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+     ll n,k;
+     cin>>n>>k;
+     vl v(n+1);
+     rep(i,1,n+1) cin>>v[i];
+     ll ind=n;
+     map<ll,ll>mp;
+     while(k-- && mp[ind]<2){
+          if(v[ind]>n){
+               cout<<"NO"<<endl;
+               return;
           }
+          mp[ind]++;
+          ind=(ind-v[ind]+n)%n;
+          if(ind==0) ind=n;
      }
-     cout<<ans<<endl;
+     cout<<"YES"<<endl;
 }
 
 

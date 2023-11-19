@@ -26,17 +26,25 @@ void dk(){
      cin>>n;
      vl v(n);
      inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
-          }
+     map<ll,vl>mp;
+     for(int i=0;i<n;i++){
+          mp[v[i]].push_back(i);
      }
-     cout<<ans<<endl;
+     ll time=1e10,value=1e10;
+
+     for(auto [x,y]:mp){
+          ll tmp=max((y.front()),(n-y.back()-1));
+          for(int i=1;i<y.size();i++){
+               ll dif=y[i]-y[i-1]-1;
+               tmp=max(tmp,(dif+1)/2);
+          }
+          if(time>tmp){
+               time=tmp;
+               value=x;
+          }
+     } 
+     cout<<value<<" "<<time<<endl;
+
 }
 
 

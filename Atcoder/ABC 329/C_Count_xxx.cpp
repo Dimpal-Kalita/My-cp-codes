@@ -22,21 +22,27 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
-          }
-     }
-     cout<<ans<<endl;
+      ll n;
+      cin>>n;
+      string s;
+      cin>>s;
+      char ch='#';
+      map<char,ll>mp;
+      ll ct=0;
+      for(auto i:s){
+           if(i==ch){
+                ct++;
+           }else{
+               ch=i;
+               ct=1;
+           }
+           mp[i]=max(mp[i],ct);
+      }
+      ll ans=0;
+      for(auto i:mp){
+          ans+=i.S;
+      }
+      cout<<ans<<endl;
 }
 
 
@@ -46,7 +52,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

@@ -26,17 +26,22 @@ void dk(){
      cin>>n;
      vl v(n);
      inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+     ll mn=*min_element(all(v)); 
+     ll ind=0;
+
+     for(int i=0;i<n;i++){
+          if(v[i]==mn){
+               ind=i;
+               break;
           }
      }
-     cout<<ans<<endl;
+     for(int i=ind;i<n-1;i++){
+          if(v[i+1]<v[i]){
+               cout<<-1<<endl;
+               return;
+          }
+     }
+     cout<<ind<<endl;
 }
 
 

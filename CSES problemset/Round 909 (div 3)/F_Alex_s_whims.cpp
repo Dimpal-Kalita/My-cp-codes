@@ -24,19 +24,25 @@ using vi  = vector<int>;
 void dk(){
      ll n;
      cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
-          }
+     rep(i,0,n-1){
+          cout<<i+1<<" "<<i+2<<endl;
      }
-     cout<<ans<<endl;
+     ll q;
+     cin>>q;
+     ll last=n-1;
+     ll a=n,b=n-1;
+     while(q--){
+          ll d;
+          cin>>d;
+          if(last==d){
+               cout<<-1<<" "<<-1<<" "<<-1<<endl;
+               continue;
+          }
+          cout<<a<<" "<<b<<" ";
+          cout<<d-1<<endl;
+          a=d;
+          last=d;
+     }
 }
 
 

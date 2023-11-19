@@ -22,21 +22,32 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+     ll n,m;
+     cin>>n>>m;
+     string s;
+     cin>>s;
+     string t;
+     cin>>t;
+
+     function<bool(ll,ll)> func=[&](ll i,ll j)->bool{
+          if(i==n){
+               return 1;
           }
-     }
-     cout<<ans<<endl;
+          j%=m;
+          bool ans=0;
+          if(s[i]==t[j])  ans|=func(i+1,j+1);
+          for(int k=0;k<m;k++){
+               if(k==j){
+                    continue;
+               }
+               if(s[i]==t[k]){
+                    ans|=func(i+1,k+1);
+               }
+          }
+          return ans;
+     }; 
+
+     cout<<(func(0,0)?"Yes":"No")<<endl;
 }
 
 
@@ -46,7 +57,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

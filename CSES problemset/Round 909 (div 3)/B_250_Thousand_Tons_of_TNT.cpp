@@ -26,15 +26,39 @@ void dk(){
      cin>>n;
      vl v(n);
      inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+     ll ans=0;
+     for(int i=1;i*i<=n;i++){
+          if(n%i!=0) continue;
+          ll x=n/i;
+          ll mx=0,mn=1e18;
+          ll sum=0;
+          ll ct=x;
+          for(int j=0;j<n;j++){
+               sum+=v[j];
+               ct--;
+               if(ct==0){
+                    mx=max(mx,sum);
+                    mn=min(mn,sum);
+                    sum=0;
+                    ct=x;
+               }
           }
+          if(x!=n) ans=max(ans,mx-mn);
+          x=i;
+          mx=0,mn=1e18;
+          sum=0;
+          ct=x;
+          for(int j=0;j<n;j++){
+               sum+=v[j];
+               ct--;
+               if(ct==0){
+                    mx=max(mx,sum);
+                    mn=min(mn,sum);
+                    sum=0;
+                    ct=x;
+               }
+          }
+          ans=max(ans,mx-mn);
      }
      cout<<ans<<endl;
 }

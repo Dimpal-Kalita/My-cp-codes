@@ -20,23 +20,40 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+struct Tree {
+     typedef ll T;
+     static constexpr T unit = 1;
+     T f(T a, T b) { ll x=(a*b); if(x>1e9) return 1e9; return x;} 
+     vector<T> s;
+     int n;
+     Tree(int n = 0, T def = unit): s(2 * n, def), n(n) {}
+     void update(int pos, T val) {
+          for (s[pos += n] = val; pos /= 2;)
+               s[pos] = f(s[pos * 2], s[pos * 2 + 1]);
+     }
+     T query(int b, int e) { // query [b, e)
+          T ra = unit, rb = unit;
+          for (b += n, e += n; b < e; b /= 2, e /= 2) {
+               if (b % 2) ra = f(ra, s[b++]);
+               if (e % 2) rb = f(s[--e], rb);
+          }
+          return f(ra, rb);
+     }
+};
 
 void dk(){
      ll n;
      cin>>n;
      vl v(n);
      inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
-          }
+     set<ll>st;
+     Tree tree(n+1);
+     rep(i,0,n){
+          tree.update(i,v[i]);
      }
-     cout<<ans<<endl;
+     for(int i=0;i<n;i++){
+          
+     }
 }
 
 

@@ -24,19 +24,19 @@ using vi  = vector<int>;
 void dk(){
      ll n;
      cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+     string s;
+     cin>>s;
+     reverse(all(s));
+     ll zero=0,one=0;
+     for(auto i:s){
+          if(i=='1') one++;
+          else zero++;
+          if(abs(one-zero)>1){
+               cout<<"NO"<<endl;
+               return;
           }
      }
-     cout<<ans<<endl;
+     cout<<"YES"<<endl;
 }
 
 

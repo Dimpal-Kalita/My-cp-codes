@@ -21,22 +21,35 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+bool poweroftwo(ll n){
+     return (n && !(n & (n - 1)));
+}
+
 void dk(){
-     ll n;
-     cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+      ll n;
+      cin>>n;
+      vl v(n);
+      map<ll,ll>mp;
+      ll ct=0;
+      for(auto &i:v){
+          cin>>i;
+          mp[i]++;
+      }
+      ll ans=0;
+      for(auto [x,y]:mp){
+          ans+= (y*(y-1))/2;
+      }
+      for(ll i=0;i<31;i++){
+          for(ll j=i+1;j<31;j++){
+               ll x=1ll<<i;
+               ll y=1ll<<j;
+               if(x*j==y*i){
+                    ans+= mp[i]*mp[j];
+               }
           }
-     }
-     cout<<ans<<endl;
+      }
+      cout<<ans<<endl;
+
 }
 
 

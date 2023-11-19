@@ -22,19 +22,34 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+     string s;
+     cin>>s;
+     stack<char>st;
+     reverse(all(s));
+     for(auto i:s){
+          st.push(i);
+          while(st.size()>=3){
+              char ff=st.top();
+              st.pop();
+              char ss=st.top();
+              st.pop();
+              char th=st.top();
+              st.pop();
+              if(ff=='A' and ss=='B' and th=='C'){
+
+              }else{
+               st.push(th);
+               st.push(ss);
+               st.push(ff);
+               break;
+              }
           }
+     }
+     // cout<<st.size()<<endl;
+     string ans="";
+     while(!st.empty()){
+          ans+=st.top();
+          st.pop();
      }
      cout<<ans<<endl;
 }
@@ -46,7 +61,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

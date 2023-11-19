@@ -22,21 +22,42 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
+     ll n,m,k;
+     cin>>n>>m>>k;
+     vector<vl>v(n+1,vl(m+1));
+     rep(i,0,m){
+          ll x,y,w;
+          cin>>x>>y>>w;
+          x--,y--;
+          v[x][y]=w;
+          v[y][x]=w;
+     }
+     map<pll,ll>mp;
+     ll ans=1e18;
+     function<void(ll,ll)> dp=[&](ll mask,ll val){
+
+          if(mask==(1<<n)-1){
+               ans=min(ans,val);
+               return;
           }
+          if(mp.count({mask,val})) return;
+          mp[{mask,val}]=1;
+          
+          rep(i,0,n){
+               if((mask&(1<<i))){
+                    rep(j,0,n){
+                         if(!(mask&(1<<j)) and v[i][j]){
+                              dp(mask|(1<<j),(val+v[i][j])%k);
+                         }
+                    }
+               }
+          }
+     };
+     rep(i,0,n){
+          dp(1<<i,0);
      }
      cout<<ans<<endl;
+
 }
 
 
@@ -46,7 +67,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

@@ -24,19 +24,7 @@ using vi  = vector<int>;
 void dk(){
      ll n;
      cin>>n;
-     vl v(n);
-     inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
-               ans++;
-          }
-     }
-     cout<<ans<<endl;
+     cout<<(n%3?"First":"Second")<<endl;
 }
 
 

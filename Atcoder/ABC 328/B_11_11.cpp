@@ -21,19 +21,28 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+
+bool all_equal(ll n){
+     string s=to_string(n);
+     for(int i=1;i<s.length();i++) {
+          if(s[i]!=s[i-1]) return 0;
+     }
+     return 1;
+}
+
 void dk(){
      ll n;
      cin>>n;
      vl v(n);
      inp(v);
-     sort(all(v),greater<ll>());
-     ll sum=accumulate(all(v),0LL);
-     ll ans=(sum+1)/2;
-     sum=sum-ans;
-     for(auto i:v){
-          if(sum>0){
-               sum-=i;
+     ll ans=0;
+     for(int i=1;i<=n;i++){
+          if(!all_equal(i)) continue;
+          ll x=i%10;
+          ll digit=x;
+          while(x<=v[i-1]){
                ans++;
+               x=(x*10+digit);
           }
      }
      cout<<ans<<endl;
@@ -46,7 +55,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }
