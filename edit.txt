@@ -1,0 +1,107 @@
+Problem statement:
+     You have 'm' stores that need to be supplied with candles. There are 'n' varieties of candles available, each with a certain quantity represented by the array 'qty'. Your goal is to distribute all the candles to the stores following the rules mentioned. You want to minimize the maximum number of candles in any given store ('k').
+
+Hint 1:
+     Can you determine if it is possible to distribute the colors if maximum number of candles is given.
+
+
+Hint 2:
+     if maximum number of candles is K, can you determine if it is possible to distribute the colors for K+1,K+2,.... what can you infer from it?
+
+
+Hint 3:
+     Can you think of applying binary search on answer from the above two hints?
+
+
+Full editorial:
+     If you know the value of 'k' then it is possible to count the number of stores required to distribute the colors. for each color number of required store will be ceil(qty[i]/k). total number of stores required to distribute the colors for a given k will be sum of this value i.e. sum(ceil(qty[i]/k)) for 0<=i<need
+
+     
+     Now, if the total number of stores required is less than equal to 'm'. Than we are sure that the colors can be distributed among the stores for that given 'k' as some stores may have 0 colors also as mentioned in the question.
+
+     Brute Force Approach:
+          iterate throught i from 0 to infinity. if it is possible to distribute the candles that will be answer. But this can be O(n^2) which will not work for the given constraints
+
+
+     From the above we can also notice that if is possible to distribute for a given 'k' than it will always be possible to distribute the colors for k+1,k+2....  as maximum candles increases so stores can have more number of candles, less stores will be required only
+     
+     so we have to check for values less than k. if it is possible for some k-x than that will be a better answer than 'k'. Now as we figured out that the given function is monotonic, we can use binary search to find the lowest value where it will be possible.
+
+
+
+
+
+prerequisite:
+     Binary Search
+
+
+Editorial:
+Problem Understanding:
+
+The problem requires distributing candles among 'm' stores, each with 'n' varieties available in quantities represented by the array 'qty'. The objective is to distribute the candles to the stores while minimizing the maximum number of candles in any given store, denoted as 'k'.
+
+Hint 1: 
+     Can you determine if it is possible to distribute the candles if maximum number of candles for any store is given.
+
+
+Hint 2:
+     if maximum number of candles is K, can you determine if it is possible to distribute the colors for K+1,K+2,.... Do you find any kind of monotonicity?
+
+Hint 3:
+     Try using binary search on K.
+
+
+
+
+
+Firstly, let's consider whether it is possible to distribute colors when the maximum number of candles is fixed at 'k'. To achieve this, we can calculate the number of stores needed for each color, where the count for each color is given by ceil(qty[i]/k). The total number of stores required for a given 'k' is the sum of these counts, i.e., sum(ceil(qty[i]/k)) for all colors.
+
+Now, if the total number of stores required for a specific 'k' is less than or equal to 'm', we can be certain that colors can be distributed among the stores, even considering that some stores may receive zero colors. 
+
+A brute-force approach would be to iterate from 'i = 0' to 'i = infinity' and check if it is possible to distribute the candles for each 'i'. However, this method has a time complexity of O(n*k), which may not be efficient for the given constraints.
+
+Instead, we can notice that if it is possible to distribute for a given 'k', it will always be possible for 'k+1', 'k+2', and so on. As the maximum number of candles increases, stores can accommodate more candles, and fewer stores will be needed. Therefore, we need to check for values less than 'k'. If it is possible for some 'k-x', that will be a better answer than 'k'. 
+
+
+Binary Search Implementation:
+
+With the understanding that the given function is monotonic (as higher 'k' leads to fewer required stores), we can use binary search to efficiently find the lowest value where it is possible to distribute the colors. The binary search is implemented in the provided code.
+
+
+Code Explanation:
+
+- ll stores = 0;: Initializes a variable to track the total number of stores needed.
+- for(int i = 0; i < qty.size(); i++) { stores += (qty[i] + k - 1) / k; }: Calculates the total number of stores needed for each color based on the distribution rules.
+- return stores <= m;: Checks if the total number of stores needed is less than or equal to 'm', indicating that the current distribution with a maximum of 'mid' candles in each store is possible.
+
+
+
+#define ll long long
+
+// checks if it is possible to distribute for a given value of 'k'
+bool check(ll k,vector<int>&qty){
+     ll stores=0;
+     for(int i=0;i<qty.size();i++){
+          stores+=(qty[i]+k-1)/k; 
+     }
+     return stores<=m;
+}
+
+int candleStore(int n,int m,vector<int> &qty){
+    ll l=0,r=1e10; // left and right pointer for binary search
+
+    ll ans=0;
+    while(l<r){
+        ll mid=(l+r)/2;
+        if(check(mid)) r=mid;
+        else l=mid+1;
+    }
+
+    return r;
+}
+
+
+Time Complexity:
+
+The time complexity of this solution is O(n log K), where 'n' is the number of candle types and 'K' is the range of values for 'k' (maximum candles in a store).
+

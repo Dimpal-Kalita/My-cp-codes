@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 09/12/2023 20:16:40
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,29 +21,22 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-bool is_Palidrome(vector<ll>v){
-    int n=sz(v);
-    for(int i=0;i<n/2;i++){
-        if(v[i]!=v[n-i-1]) return false;
-    }
-    return true;
-}
 void dk(){
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>v(n);
-    iota(all(v),1);
-    do{
-        if(v[0]!=x) continue;
-        vector<ll>dif;
-        for(int i=0;i<n-1;i++){
-            dif.pb(v[i+1]-v[i]);
-        }
-        if(is_Palidrome(dif)){
-            for(auto i:v) cout<<i<<" ";
-            cout<<endl;
-        }
-    }while(next_permutation(all(v)));
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     vl vp=v;
+     sort(all(v));
+     vl ps(n+1);
+     for(int i=1;i<=n;i++){
+         ps[i]=ps[i-1]+v[i-1];
+     }
+     for(auto i:vp){
+           int idx=upper_bound(all(v),i)-v.begin();
+           ll ans=ps[n]-ps[idx];
+           cout<<ans<<" ";
+     }
 }
 
 
@@ -58,11 +44,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

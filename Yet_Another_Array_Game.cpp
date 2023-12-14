@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 09/12/2023 20:16:40
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,41 +21,51 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-bool is_Palidrome(vector<ll>v){
-    int n=sz(v);
-    for(int i=0;i<n/2;i++){
-        if(v[i]!=v[n-i-1]) return false;
-    }
-    return true;
-}
 void dk(){
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>v(n);
-    iota(all(v),1);
-    do{
-        if(v[0]!=x) continue;
-        vector<ll>dif;
-        for(int i=0;i<n-1;i++){
-            dif.pb(v[i+1]-v[i]);
-        }
-        if(is_Palidrome(dif)){
-            for(auto i:v) cout<<i<<" ";
-            cout<<endl;
-        }
-    }while(next_permutation(all(v)));
+     ll n;
+     cin>>n;
+     vector<ll>v(n);
+     inp(v);
+     sort(all(v));
+     ll ans=0;
+     for(int i=0,j=n-1;i<=j;i++,j--){
+          if(i==j-1){
+               ans+=v[i]+v[j];
+               ans-=v[0];     
+               continue;
+          }
+          ans+=v[i];
+     } 
+     cout<<ans<<endl;
 }
 
+void dk1(){
+     ll n;
+     cin>>n;
+     vector<ll>v(n);
+     inp(v);
+     sort(all(v));
+     vector<ll>ps(n+1);
+     for(int i=1;i<=n;i++) ps[i]=ps[i-1]+v[i-1];
+     ll ans=0;
+     for(int i=n-1,x=1;i-x+1>=0;i--,x++){
+          ans=max(ans,ps[i+1]-ps[i-x+1]);
+     }
+     cout<<ans<<endl;
+}
 
 
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
-    dk();
+    
+    int _=1;
+    cin>>_;
+    ll s;
+    cin>>s;
+    for(int i=0;i<_;i++){
+     if(s==0) dk();
+     else dk1();
    }
   return 0;
-}
+}   
