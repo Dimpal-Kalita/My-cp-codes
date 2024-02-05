@@ -2,6 +2,16 @@
 using namespace std;
 
 
+/*---------------------------- Debugging Template starts---------------------------------*/
+#ifndef ONLINE_JUDGE
+#include ".vscode/debug.hpp";
+#else
+#define debug(...)
+#define debugArr(arr, n)
+#endif
+/*---------------------------- Debugging Template ends---------------------------------*/
+
+
 
 int main(){
     int n,m;
