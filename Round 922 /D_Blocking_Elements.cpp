@@ -21,84 +21,58 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-/*--------------------------------------------Debug Starts---------------------------------------------------------------------*/
 #ifndef ONLINE_JUDGE
-#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
+#include ".vscode/debug.hpp";
 #else
-#define debug(x)
+#define debug(...)
+#define debugArr(arr, n)
 #endif
 
 
-void _print(long long t) {cerr << t;}
-void _print(int t) {cerr << t;}
-void _print(string t) {cerr << t;}
-void _print(char t) {cerr << t;}
-void _print(lld t) {cerr << t;}
-void _print(double t) {cerr << t;}
-void _print(ull t) {cerr << t;}
-
-
-template <class T, class V> void _print(pair <T, V> p);
-template <class T> void _print(vector <T> v);
-template <class T> void _print(set <T> v);
-template <class T, class V> void _print(map <T, V> v);
-template <class T> void _print(multiset <T> v);
-template <class T> void _print(stack<T> v);
-template <class T> void _print(list<T> v);
-template <class T> void _print(stack<T> v){cerr<< "[" ; while(!v.empty()){_print(v.top()); cerr<< " " ; v.pop();} cerr<< "]" ;}
-template <class T> void _print(list<T> v) {cerr << "["; for(auto i: v){_print(i);cerr << " " ;} cerr<< "]";}
-template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.first); cerr << ","; _print(p.second); cerr << "}";}
-template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
-/*-----------------------------------------------Debug Ends--------------------------------------------------------------------*/
-
-
-
+struct Tree {
+     typedef long long T;
+     static constexpr T unit = 0;
+     T f(T a, T b) { return a+b;} // (any associative fn)
+     vector<T> s;
+     int n;
+     Tree(int n = 0, T def = unit): s(2 * n, def), n(n) {}
+     void update(int pos, T val) {
+          for (s[pos += n] = val; pos /= 2;)
+               s[pos] = f(s[pos * 2], s[pos * 2 + 1]);
+     }
+     T query(int b, int e) { // query [b, e)
+          T ra = unit, rb = unit;
+          for (b += n, e += n; b < e; b /= 2, e /= 2) {
+               if (b % 2) ra = f(ra, s[b++]);
+               if (e % 2) rb = f(s[--e], rb);
+          }
+          return f(ra, rb);
+     }
+};
 
 void dk(){
      ll n;
      cin>>n;
      vl v(n);
      inp(v);
-     ll sum=accumulate(all(v),0ll);
-     auto check=[&](ll x){
-          vector<pll>ps(n+1),ss(n+1);
-          ll pipe=0,cur=0;
-          for(int i=0;i<n;i++){
-               if(cur+v[i]>x){
-                    pipe+=v[i];
-                    cur=0;
-               }else{
-                    cur+=v[i];
-               }
-               ps[i+1]={pipe,cur};
+     v.pb(0);
+     Tree t(n+2);
+     rep(i,0,n+1){
+          t.update(i,v[i]);
+     }
+     auto check=[&](ll mid)->bool{
+          vl dp(n+2,0);
+          dp[0]=0;
+          deque<ll> dq;
+          for(int i=0;i<=n;i++){
+               while(!dq.empty() and dp[dq.back()]>=dp[i]) dq.pop_back();
+               dq.pb(i);
+               while(!dq.empty() and t.query(dq.front(),i)>mid) dq.pop_front();
+               dp[i+1]=dp[dq.front()]+v[i];
           }
-          pipe=0,cur=0;
-          for(int i=n-1;i>=0;i--){
-               if(cur+v[i]>x){
-                    pipe+=v[i];
-                    cur=0;
-               }else{
-                    cur+=v[i];
-               }
-               ss[i]={pipe,cur};
-          }
-          // debug(ps);
-          // debug(ss);
-          for(int i=0;i<n;i++){
-               if(ps[i+1].F+ss[i+1].F<=x and ps[i+1].S+ss[i+1].S<=x) return true;
-          }
-          for(int i=0;i<n;i++){
-               if(ps[i].F+ss[i].F<=x and ps[i].S+ss[i].S<=x) return true;
-          }
-          return false;
+          return dp[n+1]<=mid;
      };
-     ll l=*max_element(all(v)),r=sum+1;
+     ll l=*max_element(all(v)),r=1e15;
      while(l<r){
           ll mid=(l+r)/2;
           if(check(mid)){
