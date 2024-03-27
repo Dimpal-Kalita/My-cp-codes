@@ -1,0 +1,16 @@
+{
+    "C++ snippet for dugging functions": {
+        "prefix": "hack_debugging",
+        "body": [
+            "#ifndef ONLINE_JUDGE",
+            "#include \".vscode/debug.hpp\";",
+            "#else",
+            "#define debug(...)",
+            "#define debugArr(arr, n)",
+            "#endif",
+            "",
+            ""
+        ],
+        "description": "C++ snippet for dugging functions"
+    }
+}
