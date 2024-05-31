@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -27,40 +20,49 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+#ifndef ONLINE_JUDGE
+#include ".vscode/debug.hpp";
+#else
+#define debug(...)
+#define debugArr(arr, n)
+#endif
 
 
 
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
 
 void dk(){
-  solve();
+     ll n,k;
+     cin>>n>>k;
+     ll K=k,N=n;
+     vl ans;
+     for(ll i=0;i<=60;i++){
+          if(k<=0 or n<=0) break;
+          ll x=k;
+          ll price=(n+x-1)/x;
+          ll bought=min(k,n/price);
+          ll spent= bought*price;
+          n-=spent;
+          k-=bought;
+          ans.pb(price);
+     }
+     
+     ll ct=0;
+     for(auto i:ans){
+          ll x=N/i;
+          N-=(x*i);
+          ct+=x;
+     }
+     if(K!=ct){
+          cout<<"NO"<<endl;
+          return;
+     }
+     cout<<"YES"<<endl;
+     cout<<ans.size()<<endl;
+     for(auto i:ans){
+          cout<<i<<" ";
+     }
+     cout<<endl;
+
 }
 
 
@@ -68,11 +70,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

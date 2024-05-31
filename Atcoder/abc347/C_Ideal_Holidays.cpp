@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,26 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     ll n,a,b;
+     cin>>n>>a>>b;
+     vl v(n);
+     bool first=1,second=1;
+     set<ll>st;
+     for(auto &it:v){
+          cin>>it;
+          it%=(a+b);
+          st.insert(it);
+     }
+     v=vector<ll>(all(st));
+     v.pb(v[0]+a+b);
+     rep(i,0,sz(v)-1){
+          if((v[i+1]-v[i]-1)>=b){
+               cout<<"Yes";
+               return;
+          }
+     }
+     cout<<"No";
 }
 
 
@@ -68,11 +48,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

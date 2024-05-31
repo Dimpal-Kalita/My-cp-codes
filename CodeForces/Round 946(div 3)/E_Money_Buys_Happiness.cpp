@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,32 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     ll n,x;
+     cin>>n>>x;
+     ll N=1;
+     vector<pll>vp;
+     rep(i,0,n){
+          ll u,v;
+          cin>>u>>v;
+          vp.pb({u,v});
+          N+=v;
+     } 
+     vl dp(N,1e12);
+     dp[0]=0;
+     ll ans=0;
+     for(int i=0;i<n;i++){
+          vl ndp=dp;
+          ll cur=x*i;
+          for(int j=0;j<N;j++){
+             if(dp[j]+vp[i].F<=cur) {
+                 ndp[j+vp[i].S]=min(ndp[j+vp[i].S],dp[j]+vp[i].F);
+                 ans=max(ans,(ll)j+vp[i].S);
+             }
+          }
+          dp=ndp;
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -68,11 +54,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

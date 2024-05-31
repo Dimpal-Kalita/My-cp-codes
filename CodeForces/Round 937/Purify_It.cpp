@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,35 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
+vl ans(1e6,0);
+void solve(){
+     ll n=1e5;
+     vl vis(n+1,0);
+     ans[1]=1;
+     map<ll,ll>mp;
+     for(ll i=2;i<=n;i++){
+          ans[i]+=ans[i-1];
+          ll mn=i;
+          // for(ll j=2;j*j<=i;j++){
+          //      if(i%j==0){
+          //           if(lcm(j,i/j)==i){
+          //                mn=min(mn,max(j,i/j));    
+          //           }
+          //      }
+          // }
+          for(ll j=2;j<i;j++){
+               if(lcm(i,j)==i){
+                    mn=min(mn,max(j,j));
+               }
+          }
+          ans[i]+=mn;
+     }
 }
 
 void dk(){
-  solve();
+     ll l,r;
+     cin>>l>>r;
+     cout<<ans[r]<<endl;
 }
 
 
@@ -68,11 +57,12 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    solve();
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

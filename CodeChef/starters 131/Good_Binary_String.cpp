@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,28 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     ll n;
+     cin>>n;
+     string s;
+     cin>>s;
+     ll cur=0;
+     vl ans;
+     for(int i=0;i<n;i+=2){
+          if(s[i]==s[i+1]) continue;
+          if(cur==0){
+               if(s[i]=='0') ans.pb(i);
+               else ans.pb(i+1);
+               cur=1;
+          }else{
+               if(s[i]=='1') ans.pb(i);
+               else ans.pb(i+1);
+               cur=0;
+          }
+     }
+     cout<<sz(ans)<<"\n";
+     for(auto x: ans) cout<<x+1<<" ";
+     cout<<"\n";
 }
 
 
@@ -68,11 +50,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

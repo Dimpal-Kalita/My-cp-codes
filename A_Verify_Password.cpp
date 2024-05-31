@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,42 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     ll n;
+     cin>>n;
+     string s;
+     cin>>s;
+     vl num;
+     ll ind=0;
+     for(int i=0;i<n;i++){
+         if(s[i]>='0' && s[i]<='9'){
+             num.pb(s[i]-'0');
+             ind=i;
+         }else{
+             break;
+         }
+     }
+     for(int i=ind+1;i<n;i++){
+         if(s[i]>='0' && s[i]<='9'){
+               cout<<"NO"<<endl;
+               return;   
+         }
+     } 
+     if(!is_sorted(all(num))){
+         cout<<"NO"<<endl;
+         return;
+     }
+     vl alpha;
+     for(int i=0;i<n;i++){
+         if(s[i]>='a' && s[i]<='z'){
+             alpha.pb(s[i]-'a');
+         }
+     }
+     if(!is_sorted(all(alpha))){
+          cout<<"NO"<<endl;
+          return;
+     }
+     cout<<"YES"<<endl;
 }
 
 
@@ -68,11 +64,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

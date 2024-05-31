@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -27,40 +20,37 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
+#ifndef ONLINE_JUDGE
+#include ".vscode/debug.hpp";
+#else
+#define debug(...)
+#define debugArr(arr, n)
+#endif
 
 
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
 
 void dk(){
-  solve();
+     ll a,b,c;
+     cin>>a>>b>>c;
+     ll leaf=(a+1);
+     if(c!=leaf){
+          cout<<-1<<endl;
+          return;
+     }
+     if(a==0){
+          cout<<b<<endl;
+          return;
+     }
+     ll x=log2(a);
+     ll val=(1<<x);
+     ll rem=0;
+     if((1<<x)!=a+1){
+          a-=(1<<x);
+          a++;
+          rem=(1<<x)-a;
+          b-=rem;
+     }
+     cout<<(b+c+leaf-1)/leaf+x<<endl;
 }
 
 
@@ -68,11 +58,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

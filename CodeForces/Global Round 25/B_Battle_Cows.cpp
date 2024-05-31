@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -30,37 +23,41 @@ using vi  = vector<int>;
 
 
 
+ll calc(ll ind,ll k,vl v){
+     ll cur=0;
+     ll n=v.size();
+     swap(v[ind],v[k]);
 
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
+     ll last=v[0];
+     for(int i=1;i<n;i++){
+          if(v[i]>v[ind]) break;
+          if(v[i]>last){
+               cur=1;
+               last=v[i];
+          }else{
+               cur++;
+          }
+     }
+     return (last==v[ind]?cur:0);
 }
 
 void dk(){
-  solve();
+     ll n,k;
+     cin>>n>>k;
+     vl v(n);
+     inp(v);
+     ll x=v[k-1];
+     ll ind=k-1;
+     for(int i=0;i<k;i++){
+          if(v[i]>=x){
+               ind=i;
+               break;
+          }
+     }
+     ll ans1=calc(ind,k-1,v);
+     ll ans2=calc(k-1,k-1,v);
+     ll ans=calc(0,k-1,v);
+     cout<<max({ans1,ans2,ans})<<endl;
 }
 
 
@@ -68,11 +65,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

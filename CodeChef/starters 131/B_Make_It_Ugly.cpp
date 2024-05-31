@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,35 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
+bool all_equal(vl &v){
+     ll x=v[0];
+     for(auto i:v) if(i!=x) return 0;
+     return 1;
 }
 
 void dk(){
-  solve();
+
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+
+     if(all_equal(v)){
+          cout<<"-1"<<endl;
+          return;
+     }
+ 
+     vl index;
+     ll ans=n-1;
+     for(int i=0;i<n;i++){
+          if(v[0]!=v[i]) index.pb(i);
+     }
+     for(int i=1;i<index.size();i++){
+          ans=min(ans,index[i]-index[i-1]-1);
+     }
+     ans=min(ans,index.front());
+     ans=min(ans,n-index.back()-1);
+     cout<<ans<<endl;
 }
 
 
@@ -68,11 +57,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

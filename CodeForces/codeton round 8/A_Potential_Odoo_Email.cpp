@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,37 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     string s;
+     cin>>s;
+     string title="",domain="";
+     ll ind=0;
+     while(ind<sz(s) and s[ind]!='@'){
+          title+=s[ind];
+          ind++;
+     }
+     if(ind==sz(s)){
+          cout<<"no"<<endl;
+          return;
+     }
+     domain=s.substr(ind+1);
+     if(domain!="odoo.com"){
+          cout<<"no"<<endl;
+          return;
+     }
+     if(sz(title)==2 or sz(title)==3 or sz(title)==4){
+          for(auto i:title){
+               if(i>='a' and i<= 'z') continue;
+               cout<<"no"<<endl;
+               return;
+          }
+          cout<<"yes"<<endl;
+          return;
+     }else{
+          cout<<"no"<<endl;
+          return;
+     }
+     // cout<<title<<" "<<domain<<endl;
 }
 
 
@@ -68,11 +59,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

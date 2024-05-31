@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,38 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     ll sum=accumulate(all(v),0LL);
+     ll minsum=sum,ct=0,cur=0;
+     for(int i=0;i<n;i++){
+         if(cur>0){
+             minsum=min(minsum,cur+v[i]);
+             cur=v[i];
+             ct=1;
+         }else{
+          cur+=v[i];
+          ct++;
+         }
+         if(ct>=2){
+               minsum=min(minsum,cur);
+         }
+     }
+     if(n==1){
+          cout<<v[0]<<"\n";
+          return;
+     }
+     for(int i=0;i<n-1;i++){
+          minsum=min(minsum,v[i]+v[i+1]);
+     }
+     for(int i=0;i<n-2;i++){
+          minsum=min(minsum,v[i]+v[i+1]+v[i+2]);
+     }
+     ll extra=sum-minsum;
+     cout<<abs(extra)+abs(minsum)<<"\n";
 }
 
 
@@ -68,11 +60,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

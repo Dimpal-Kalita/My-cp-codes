@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,34 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     ll n;
+     cin>>n;
+     string a,b;
+     cin>>a>>b;
+     ll neq=0,can=0;
+     rep(i,0,n){
+          if(a[i]=='a' and b[i]=='c') neq++;
+          else if(a[i]=='b' and b[i]=='b'){
+               can+=neq;
+               neq=0;
+          }
+          else if(a[i]=='c' and b[i]=='a'){
+               if(can==0){
+                    cout<<"No"<<endl;
+                    return;
+               }
+               can--;
+          }else if(a[i]!=b[i]){
+               cout<<"No"<<endl;
+               return;
+          }
+     } 
+     if(can or neq){
+          cout<<"No"<<endl;
+          return;
+     }
+     cout<<"Yes"<<endl;
 }
 
 
@@ -68,11 +56,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

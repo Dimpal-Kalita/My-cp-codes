@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,33 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     ll n,t;
+     cin>>n>>t;
+     vl v(n);
+     inp(v);
+     auto check=[&](ll k)->bool{
+          priority_queue<ll,vector<ll>,greater<ll>> pq;
+          rep(i,0,k) pq.push(0);
+          for(auto i:v){
+               ll x=pq.top();
+               pq.pop();
+               if(x+i>t) return 0;
+               pq.push(x+i);
+          }
+          return 1;
+     };
+     ll l=1,r=n+1,ans=-1;
+     while(l<r){
+          ll m=(l+r)/2;
+          if(check(m)){
+               ans=m;
+               r=m;
+          }else{
+               l=m+1;
+          }
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -68,11 +55,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

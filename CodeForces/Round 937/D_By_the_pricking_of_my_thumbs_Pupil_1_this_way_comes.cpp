@@ -1,10 +1,3 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 28/05/2024 20:12:59
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,39 +21,33 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-
-
-
-void solve(){ 
-  ll n;
-  cin>>n;
-  vector<ll>degree(n+1);
-  for(int i=0;i<n-1;i++){
-    ll x,y;
-    cin>>x>>y;
-    degree[x]++;
-    degree[y]++;
-  }
-  vector<set<ll>>v(n+1);
-  v[0].insert(0);
-  for(ll i=1;i<=n;i++){
-    for(ll j=i;j>=1;j--){
-      for(auto x:v[j-1]){
-        v[j].insert(x+degree[i]);
-      }
-    }
-  }
-  ll sum=0;
-  for(ll i=0;i<=n;i++){
-    sum+=v[i].size();
-  }
-  cout<<sum<<endl;
-  return;
-}
-
 void dk(){
-  solve();
+     ll n;
+     cin>>n;
+     vl v(n+1);
+     rep(i,1,n+1) cin>>v[i];
+     vector<vl>adj(n+1);
+     rep(i,1,n){
+          ll u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
+          adj[v].pb(u);
+     }
+     ll count=0;
+     function<ll(ll,ll)>dfs=[&](ll node, ll par){
+          ll ans=0;
+          for(auto x:adj[node]){
+               if(x==par) continue;
+               ans=max(ans,dfs(x,node));
+          }
+          if(ans and node!=1){
+               count++;
+          }
+          ans|=(v[node]>=v[1]);
+          return ans;
+     };
+     dfs(1,0);
+     cout<<count<<endl;
 }
 
 
@@ -68,11 +55,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    // cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   
