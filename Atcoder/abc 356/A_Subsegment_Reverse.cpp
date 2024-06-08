@@ -1,3 +1,10 @@
+/**
+ * 
+ * author: Dimpal Kalita
+ * date: 01/06/2024 17:32:29
+ * 
+ */
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -22,20 +29,18 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl a(n);
-     inp(a);
-     vl b(n+1);
-     inp(b);
-     ll mn=1e12,ans=0;
-     rep(i,0,n){
-          mn=min(mn,abs(a[i]-b.back())+1);
-          mn=min(mn,abs(b[i]-b.back())+1);
-          ans+=abs(a[i]-b[i]);
-          if((b.back()<=a[i] and b.back()>=b[i]) or (b.back()>=a[i] and b.back()<=b[i])) mn=min(mn,1LL);
-     }
-     cout<<ans+mn<<endl;
+      ll n,l,r;
+      cin>>n>>l>>r;
+      for(int i=1;i<l;i++){
+          cout<<i<<" ";
+      }
+      for(int i=r;i>=l;i--){
+          cout<<i<<" ";
+      }
+      for(int i=r+1;i<=n;i++){
+          cout<<i<<" ";
+      }
+      cout<<endl;
 }
 
 
@@ -43,11 +48,11 @@ void dk(){
 int main()
 { 
     fast_io;
-    
-    int _=1;
-    cin>>_;
-    for(int i=0;i<_;i++){
+  
+    int n=1;
+//     cin>>n;
+    for(int i=0;i<n;i++){
     dk();
    }
   return 0;
-}   
+}

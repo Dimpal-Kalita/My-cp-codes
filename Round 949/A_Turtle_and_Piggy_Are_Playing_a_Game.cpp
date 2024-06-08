@@ -22,41 +22,10 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n;
-     cin>>n;
-     string s;
-     cin>>s;
-     vl num;
-     ll ind=0;
-     for(int i=0;i<n;i++){
-         if(s[i]>='0' && s[i]<='9'){
-             num.pb(s[i]-'0');
-             ind=i;
-         }else{
-             break;
-         }
-     }
-     for(int i=ind+1;i<n;i++){
-         if(s[i]>='0' && s[i]<='9'){
-               cout<<"NO"<<endl;
-               return;   
-         }
-     } 
-     if(!is_sorted(all(num))){
-         cout<<"NO"<<endl;
-         return;
-     }
-     vl alpha;
-     for(int i=0;i<n;i++){
-         if(s[i]>='a' && s[i]<='z'){
-             alpha.pb(s[i]-'a');
-         }
-     }
-     if(!is_sorted(all(alpha))){
-          cout<<"NO"<<endl;
-          return;
-     }
-     cout<<"YES"<<endl;
+     ll l,r;
+     cin>>l>>r;
+     ll x=log2(r);
+     cout<<x<<endl;
 }
 
 

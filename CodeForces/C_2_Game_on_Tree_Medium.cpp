@@ -3,7 +3,7 @@ using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -22,9 +22,28 @@ using vi  = vector<int>;
 
 
 void dk(){
-     ll n,m;
-     cin>>n>>m; 
-     cout<<((n>=m && (n-m)%2==0)?"Yes":"No")<<endl;
+     ll n,t;
+     cin>>n>>t;
+     vector<vl>adj(n+1);
+     rep(i,0,n-1){
+          ll u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
+          adj[v].pb(u);
+     }
+     function<ll(ll,ll,bool)>dfs=[&](ll node, ll par,bool mark)->ll{
+          ll ans=!mark;
+          for(auto x:adj[node]){
+               if(x==par) continue;
+               ll y=dfs(x,node,mark^1);
+               if(mark==y) ans=mark;
+          }
+          return ans;
+     };
+     ll node;
+     cin>>node;
+     bool val=dfs(node,0,1); 
+     cout<<(val?"Ron":"Hermione")<<endl;
 }
 
 
@@ -34,7 +53,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

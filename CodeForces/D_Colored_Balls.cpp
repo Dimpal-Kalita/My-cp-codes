@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define md                  1000000007
+#define md                  998244353
 #define pb                  push_back
 #define endl                "\n"
 #define F                   first
@@ -21,11 +21,33 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
+const int N=5e3+10;
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     sort(all(v));
+     vl dp(N+1,0);
+     ll ans=0;
+     dp[0]=1;
+     for(int i=0;i<n;i++){
+          vl ndp=dp;
+          ndp[0]=1;
+          for(ll j=v[i];j<N;j++){
+               ndp[j]=(ndp[j]+dp[j-v[i]])%md;
+          }
+          vl temp(N+1,0);
+          for(ll j=v[i];j<N;j++){
+               temp[j]=dp[j-v[i]];
+          }
+          for(ll j=v[i];j<N;j++){
+               ans=(ans+max(v[i],(j+1)/2)*temp[j]%md)%md;
+          }
+          dp=ndp;
+     }
+     cout<<ans%md<<endl;
 }
-
 
 
 int main()
@@ -33,7 +55,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

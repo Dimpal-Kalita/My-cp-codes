@@ -3,7 +3,7 @@ using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -20,50 +20,34 @@ using pll = pair<ll,ll>;
 using vl  = vector<ll>;
 using vi  = vector<int>;
 
-#ifndef ONLINE_JUDGE
-#include ".vscode/debug.hpp";
-#else
-#define debug(...)
-#define debugArr(arr, n)
-#endif
-
-
 
 void dk(){
-     ll n;
-     cin>>n;
-     vl v;
-     for(ll i=0;i<31;i++){
-          if(n&(1LL<<i)){
-               v.pb(1);
-          }else{
-               v.pb(0);
-          }
+     ll n,f,k;
+     cin>>n>>f>>k;
+     vl v(n);
+     rep(i,0,n){
+          ll x;
+          cin>>x;
+          v[i]=x;
      }
-     v.pb(0);
-     ll last=0;
-     vl ans(32);
-     for(ll i=0;i<31;i++){
-          if(v[i]==0){
-               continue;
-          }
-          ll ind=i;
-          while(ind<v.size() and v[ind]==1) ind++;
-          if(ind-i==1){
-               ans[i]=1;
-               i=ind;
-               continue;
-          }
-          ans[ind]=1;
-          ans[i]=-1;
-          i=ind-1;
-          v[ind]=1;
+     ll x=v[f-1];
+     sort(all(v),greater<ll>());
+     ll l=0,t=0;
+     for(int i=0;i<n;i++){
+          if(v[i]!=x) continue;
+          if(i<k) l++;
+          else t++;
      }
-     cout<<ans.size()<<endl;
-     for(auto x: ans){
-          cout<<x<<" ";
+     // cout<<l<<" "<<t<<endl;
+     if(l!=0 and t!=0){
+          cout<<"MAYBE"<<endl;
+          return;
      }
-     cout<<endl;
+     if(l==0){
+          cout<<"NO"<<endl;
+          return;
+     }
+     cout<<"YES"<<endl;
 }
 
 

@@ -22,8 +22,28 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n,m;
+     cin>>n>>m;
+     vector<vl>a(n,vl(m));
+     map<ll,ll>x,y;
+     rep(i,0,n){
+          rep(j,0,m){
+               cin>>a[i][j];
+               x[a[i][j]]=i;
+               y[a[i][j]]=j;
+          }
+     } 
+     vector<vl>b(n,vl(m));
+     bool flag=1;
+     rep(i,0,n){
+          rep(j,0,m){
+               cin>>b[i][j];
+               if(!x.count(b[i][j]) or x[b[i][j]]!=x[b[i][0]] or y[b[i][j]]!=y[b[0][j]]){
+                    flag=0;
+               }
+          }
+     }
+     cout<<(flag?"YES":"NO")<<endl;
 }
 
 

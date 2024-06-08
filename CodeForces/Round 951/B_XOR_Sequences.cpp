@@ -22,8 +22,17 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll x,y;
+     cin>>x>>y; 
+     string a=bitset<32>(x).to_string();
+     string b=bitset<32>(y).to_string();
+     // cout<<a<<" "<<b<<endl;
+     ll ct=0;
+     for(int i=31;i>=0;i--){
+          if(a[i]==b[i]) ct++;
+          else break;
+     }
+     cout<<(1LL<<ct)<<endl;
 }
 
 

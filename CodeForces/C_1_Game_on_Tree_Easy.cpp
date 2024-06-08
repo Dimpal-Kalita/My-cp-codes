@@ -22,8 +22,36 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n,t;
+     cin>>n>>t;
+     vector<vl>adj(n+1);
+     rep(i,0,n-1){
+          ll u,v;
+          cin>>u>>v;
+          adj[u].pb(v);
+          adj[v].pb(u);
+     }
+     function<ll(ll,ll)>dfs=[&](ll node, ll par)->ll{
+          ll ans=0;
+          for(auto x:adj[node]){
+               if(x==par) continue;
+               ans=dfs(x,node);
+          }
+          return ans+1;
+     };
+     ll node;
+     cin>>node;
+     vl tt;
+     for(auto x:adj[node]){
+          tt.pb(dfs(x,node));
+     }
+     for(auto i:tt){
+          if(i%2){
+               cout<<"Ron"<<endl;
+               return;
+          }
+     }
+     cout<<"Hermione"<<endl;
 }
 
 
@@ -33,7 +61,7 @@ int main()
     fast_io;
     
     int _=1;
-    cin>>_;
+//     cin>>_;
     for(int i=0;i<_;i++){
     dk();
    }

@@ -4,5 +4,7 @@
     },
     "peacock.color": "#ff3d00",
     // "C_Cpp.errorSquiggles": "disabled",
-    "editor.tabSize": 5
+    "editor.tabSize": 5,
+    "cph.general.defaultLanguage": "cpp",
+    "cph.general.defaultLanguageTemplateFileLocation": "template.cpp"
 }

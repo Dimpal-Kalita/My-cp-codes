@@ -22,8 +22,19 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n,m;
+     cin>>n>>m;
+     int count[50]={0};
+     string s;
+     cin>>s;
+     for(auto i:s){
+          count[i-'A']++;
+     } 
+     int ans=0;
+     for(int i=0;i<7;i++){
+          ans+=max(0LL,m-count[i]);
+     }
+     cout<<ans<<endl;
 }
 
 

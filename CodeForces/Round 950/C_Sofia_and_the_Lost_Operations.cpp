@@ -22,8 +22,41 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n;
+     cin>>n;
+     vl a(n);
+     map<ll,ll>mp,mpb;
+     for(auto &i:a){
+          cin>>i;
+     }
+     vl b(n);
+     for(auto &i:b){
+          cin>>i;
+          mpb[i]++;
+     }
+     ll m;
+     cin>>m;
+     vl d(m);
+     for(auto &i:d){
+          cin>>i;
+          mp[i]++;
+     }
 
+     if(mpb[d.back()]==0){
+          cout<<"NO"<<endl;
+          return;
+     }
+
+     rep(i,0,n){
+          if(a[i]==b[i])  continue;
+          if(mp[b[i]]==0){
+               cout<<"NO"<<endl;
+               return;
+          }
+          mp[b[i]]--;
+     }
+     
+     cout<<"YES"<<endl;
 }
 
 

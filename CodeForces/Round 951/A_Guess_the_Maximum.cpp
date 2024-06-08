@@ -3,7 +3,7 @@ using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -22,28 +22,15 @@ using vi  = vector<int>;
 
 
 void dk(){
-     string s;
-     cin>>s;
-     ll n=sz(s);
-     ll ct=0;
-     map<ll,ll>mp;
-     ll ans=0;
-     vl ss(n+1);
-     for(int i=0;i<n;i++){
-          s[i]==')' ? ct++ : ct--;
-          if(ct<0){
-               ct=0;
-          }
+     ll n;
+     cin>>n;
+     vl v(n);
+     inp(v);
+     ll mn=1e9+10;
+     rep(i,0,n-1){
+          mn=min(mn,max(v[i],v[i+1]));
      }
-     for(int i=n-1;i>=0;i--){
-          ss[i]=max(ss[i+1],ct); 
-     }
-     ct=0;
-     for(int i=0;i<n;i++){
-          s[i]==')' ? ct++ : ct--;
-          if(ct<=ss[i+1]/2) ans++;
-     }
-     cout<<ans<<endl;
+     cout<<mn-1<<endl;
 }
 
 
