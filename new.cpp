@@ -1,7 +1,7 @@
 /**
  * 
  * author: Dimpal Kalita
- * date: 02/06/2024 08:02:13
+ * date: 08/06/2024 17:11:26
  * 
  */
 
@@ -10,6 +10,7 @@ using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
+#define endl                " \n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -27,60 +28,54 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-
-struct Tree {
-     typedef ll T;
-     static constexpr T unit = 2^31-1;
-     T f(T a, T b) { return a&b; } // (any associative fn)
-     vector<T> s;
-     int n;
-     Tree(int n = 0, T def = unit): s(2 * n, def), n(n) {}
-     void update(int pos, T val) {
-          for (s[pos += n] = val; pos /= 2;)
-               s[pos] = f(s[pos * 2], s[pos * 2 + 1]);
-     }
-     T query(int b, int e) { // query [b, e)
-          T ra = unit, rb = unit;
-          for (b += n, e += n; b < e; b /= 2, e /= 2) {
-               if (b % 2) ra = f(ra, s[b++]);
-               if (e % 2) rb = f(s[--e], rb);
-          }
-          return f(ra, rb);
-     }
-};
-
 class Solution {
 public:
-    int minimumDifference(vector<int>& nums, int k) {
-     
-     int n=nums.size();
-     Tree t(n+1);
-     rep(i,0,n){
-          t.update(i,nums[i]);
-     }
-     ll ans=1e12;
-     for(int i=0;i<n;i++){
-          ll l=i,r=n+1;
-          while(l<r){
-               ll m=(l+r)/2;
-               ll x=t.query(i,m);
-               ans=min(ans,abs(x-k));
-               if(x>=k){
-                    r=m;
-               }else{
-                    l=m+1;
+    int maximumLength(vector<int>& nums, int k) {
+        vector<pair<int,int>>vp;
+        int n=nums.size();
+        for(int i=0;i<n;){
+               int j=i,cnt=0;
+               while(j<n && nums[j]==nums[i]){
+                    j++;
+                    cnt++;
                }
-          }
-          ans=min(ans,abs(t.query(i,l)-(ll)k));
-          ans=min(ans,abs(t.query(i,r)-(ll)k));
-     }
-     return ans;
+               vp.push_back({nums[i],cnt});
+               i=j;
+        }
+        n=vp.size();
+        vector<vector<vector<int>>> dp(n,vector<vector<int>>(n,vector<int>(2,-1)));
+        function<vector<int>(int,int)> solve=[&](int ind,int last)->vector<int>{
+                 if(ind==n) return {0,0};
+                 if(dp[ind][last]!=vi{-1,-1}) return dp[ind][last];
+                 vector<int> np=solve(ind+1,last);
+                 vector<int> p= solve(ind+1,ind);
+                 p[0]+=vp[ind].second;
+                 if(vp[ind].first!=vp[last].first) p[1]+=1;
+                 if(p[1]<=k and p[0]>np[0]){
+                    dp[ind][last]=p;
+                 }else{
+                     dp[ind][last]=np;
+                 }
+                 return dp[ind][last];
+        };
+        int ans=0;
+        for(int i=0;i<n;i++){
+               auto x=solve(i+1,i);
+               ans=max(ans,x[0]+vp[i].second);
+        }
+            return ans;
     }
 };
 
-
-
 void dk(){
+     ll n;
+     cin>>n;
+     vi v(n);
+     inp(v);
+     ll k;
+     cin>>k;
+     Solution s;
+     cout<<s.maximumLength(v,k)<<endl;
 }
 
 
