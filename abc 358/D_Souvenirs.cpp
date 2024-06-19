@@ -1,16 +1,9 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 08/06/2024 17:11:26
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -28,23 +21,25 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-class Solution {
-public:
-    bool judgeSquareSum(int c) {
-        for (long a = 0; a * a <= c; a++) {
-            double b = sqrt(c - a * a);
-            if (b == (int) b) {
-                return true;
-            }
-        }
-        return false;      
-    }
-};
 void dk(){
-     ll n;
-     cin>>n;
-     Solution s;
-     cout<<s.judgeSquareSum(n)<<endl;
+     ll n,m;
+     cin>>n>>m;
+     vl a(n),b(m);
+     inp(a);
+     inp(b);
+     sort(all(a));
+     sort(all(b));
+     ll ans=0;
+     for(int i=0,j=0;i<m;i++){
+          while(j<n and a[j]<b[i]) j++;
+          if(j>=n){
+               cout<<"-1"<<endl;
+               return;
+          }
+          ans+=a[j];
+          j++;
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -52,11 +47,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-//     cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   
