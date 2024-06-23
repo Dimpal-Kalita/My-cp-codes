@@ -1,16 +1,9 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 22/06/2024 20:00:20
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+// #define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -28,9 +21,33 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
+ll query(ll n){
+     cout<<"? "<<n<<endl;
+     ll x;
+     cin>>x;
+     return x;
+}
 
+void dk(){
+     ll n;
+     cin>>n;
+     vector<ll>vis(n+1);
+     vl ans(n+1);
+     for(int i=0;i<n;i++){
+          if(vis[i+1]) continue;
+          ll x=query(i+1);
+          while(!vis[x]){
+               ll y=query(i+1);
+               ans[x]=y;
+               vis[x]=1;
+               x=y;
+          }
+     }
+     cout<<"! ";
+     for(int i=1;i<=n;i++){
+          cout<<ans[i]<<" ";
+     }
+     cout<<endl;
 }
 
 
@@ -38,11 +55,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

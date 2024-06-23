@@ -1,16 +1,9 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 22/06/2024 20:00:20
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
-#define md                  1000000007
+#define md                  998244353
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -29,8 +22,34 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
+     ll n,m;
+     cin>>n>>m; 
+     vl a(n);
+     inp(a);
+     vl b(m);
+     inp(b);
+     vl mn(n+1,1e9);
+     for(int i=n-1;i>=0;i--){
+          mn[i]=min(mn[i+1],a[i]);
+     }
+     vl dp(m+1);
 
+     if(mn[0]==b[0]) dp[0]=1;
+     else dp[0]=0;
+
+     ll j=0;
+
+     while(mn[j]<=b[0] and j<n) j++;
+     
+     for(int i=1;i<m;i++){
+          dp[i]=dp[i-1];
+          ll last=j;
+          while(mn[last]<b[i] and last<n) last++;
+          while(mn[j]<=b[i] and j<n) j++;
+          dp[i]=((j-last)*dp[i-1])%md;
+
+     }
+     cout<<dp[m-1]<<endl;
 }
 
 
@@ -38,11 +57,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

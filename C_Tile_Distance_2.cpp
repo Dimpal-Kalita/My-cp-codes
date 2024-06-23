@@ -1,16 +1,9 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 22/06/2024 20:00:20
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -29,8 +22,24 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll sx,sy;
+     cin>>sx>>sy;
+     ll tx,ty;
+     cin>>tx>>ty;
+     ll costx;
+     if(tx<sx){
+          ll ntx=tx,nsx=sx;
+          if((tx+ty)%2==0) ntx++;
+          if((sx+sy)%2) nsx--;
+          costx=abs(ntx-nsx)/2;
+     }else{
+          ll ntx=tx,nsx=sx;
+          if((tx+ty)%2) ntx--;
+          if((sx+sy)%2==0) nsx++;
+          costx=abs(ntx-nsx)/2;
+     }
+     ll costy=abs(ty-sy);
+     cout<<max(costx,costy)<<endl;
 }
 
 
@@ -38,11 +47,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

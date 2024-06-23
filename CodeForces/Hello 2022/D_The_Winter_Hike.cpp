@@ -1,16 +1,9 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 22/06/2024 20:00:20
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -29,8 +22,20 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n;
+     ll sum=0;
+     vector<vl> v(2*n,vl(2*n));
+     for(int i=0;i<2*n;i++){
+          for(int j=0;j<2*n;j++){
+               ll x;
+               cin>>x;
+               v[i][j]=x;
+               if(i>=n and j>=n) sum+=x;
+          }
+     } 
+     ll ans=min({v[0][2*n-1],v[0][n],v[n-1][n],v[n-1][2*n-1],v[2*n-1][0],v[2*n-1][n-1],v[n][0],v[n][n-1]});
+     cout<<sum+ans<<endl;
 }
 
 
@@ -38,11 +43,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

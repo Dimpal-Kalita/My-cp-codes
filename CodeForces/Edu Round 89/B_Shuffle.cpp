@@ -1,16 +1,9 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 22/06/2024 20:00:20
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -29,8 +22,17 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n,m,x;
+     cin>>n>>x>>m;
+     ll l=x,r=x;
+     rep(i,0,m){
+          ll a,b;
+          cin>>a>>b;
+          if(a<=l and b>=r) l=a,r=b;
+          else if(a<=l and b>=l) l=a;
+          else if(a<=r and b>=r) r=b;
+     }
+     cout<<r-l+1<<endl;
 }
 
 
@@ -38,11 +40,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

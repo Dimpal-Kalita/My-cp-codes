@@ -1,16 +1,9 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 22/06/2024 20:00:20
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -28,9 +21,32 @@ using vl  = vector<ll>;
 using vi  = vector<int>;
 
 
-void dk(){
-      
 
+
+void dk(){
+     ll n,m;
+     cin>>n>>m;
+     vector<vl>v(n,vl(m));
+     ll N=n+m-1;
+     vl cnt(N+1,0);
+     vl total(N+1,0);
+     rep(i,0,n){
+          rep(j,0,m){
+               cin>>v[i][j];
+               cnt[i+j]+=v[i][j];
+               total[i+j]++;
+          }
+     }
+     ll ans=0;
+     for(int i=0;i<N/2;i++){
+          ll zerol=total[i]-cnt[i];
+          ll onel=cnt[i];
+          ll zeror=total[N-i-1]-cnt[N-i-1];
+          ll oner=cnt[N-i-1];
+          ans+=min(zerol+zeror,onel+oner);
+          // cout<<zerol<<" "<<zeror<<" "<<onel<<" "<<oner<<endl;
+     }
+     cout<<ans<<endl;
 }
 
 
@@ -38,11 +54,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+    cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   

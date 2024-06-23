@@ -1,16 +1,9 @@
-/**
- * 
- * author: Dimpal Kalita
- * date: 22/06/2024 20:00:20
- * 
- */
-
 #include<bits/stdc++.h>
 using namespace std;
 
 #define md                  1000000007
 #define pb                  push_back
-#define endl                " \n"
+#define endl                "\n"
 #define F                   first
 #define S                   second
 #define sz(x)               (int)(x).size()   
@@ -29,8 +22,26 @@ using vi  = vector<int>;
 
 
 void dk(){
-      
-
+     ll n;
+     cin>>n; 
+     vl v(n);
+     inp(v);
+     stack<array<ll,3>>st;
+     ll ans=0;
+     rep(i,0,n){
+          while(!st.empty() and st.top()[0]<=v[i]){
+               st.pop();
+          }
+          ll ind=0;
+          if(!st.empty()){
+               ind=st.top()[1]+1;
+               ans=(i-ind+1)*v[i]+st.top()[2];
+          }else{
+               ans=(i+1)*v[i]+1;
+          }
+          cout<<ans<<" ";
+          st.push({v[i],i,ans});
+     }
 }
 
 
@@ -38,11 +49,11 @@ void dk(){
 int main()
 { 
     fast_io;
-  
-    int n=1;
-    cin>>n;
-    for(int i=0;i<n;i++){
+    
+    int _=1;
+//     cin>>_;
+    for(int i=0;i<_;i++){
     dk();
    }
   return 0;
-}
+}   
